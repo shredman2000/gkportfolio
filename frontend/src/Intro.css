@@ -1,0 +1,88 @@
+.light-purple { 
+	background: #f4eeff; 
+}
+	
+.purple { 
+	background: #dcd6f7; 
+}
+
+.light-blue { 
+	background: #a6b1e1; 
+}
+
+.blue { 
+	background: #424874; 
+}
+
+body {
+  background-color: #dcd6f7;
+  margin: 0;
+  padding: 0;
+}
+#root {
+  
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#background {
+  max-width: 100vw;
+  max-height: 100vh;
+  
+}
+
+@keyframes slide-right {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+@keyframes enlarge {
+  0% {
+    font-size: 100%;
+  }
+  70% {
+    font-size: 200%;
+  }
+  100% {
+    font-size: 350%;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#name {
+  text-align: center;
+  position: relative;
+  animation-fill-mode: forwards;
+  animation: slide-right 1.2s forwards, enlarge 1.4s forwards;
+}
+
+#view-portfolio-button {
+  position: relative;
+  opacity: 0;
+  animation: fade-in 1s 2s forwards;
+  outline-color: #424874;
+
+  transition: transform 0.4s ease, background-color 0.2s ease;
+}
+
+#view-portfolio-button:hover {
+  transform: scale(1.05);
+  background-color: #a6b1e1; 
+}
