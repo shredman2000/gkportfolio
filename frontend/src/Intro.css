@@ -70,7 +70,7 @@ body {
   text-align: center;
   position: relative;
   animation-fill-mode: forwards;
-  animation: slide-right 1.2s forwards, enlarge 1.4s forwards;
+  animation: slide-right 1.2s forwards, enlarge 1.4s forwards, fade-in 1 forwards;
 }
 
 #view-portfolio-button {
