@@ -1,0 +1,50 @@
+.layout {
+    width: 100vw;
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+    height: 100vh;
+
+}
+
+.header {
+    grid-area: header;
+    
+    justify-self: start;
+}
+
+.main {
+    grid-area: main;
+    width: 100%;
+    justify-items: center;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-areas:
+        "top"
+        "middle"
+        "bottom";
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.top {
+    grid-area: top;
+    font-size: 2em;
+}
+
+.middle {
+    grid-area: middle;
+    width: 80vw;
+    overflow: hidden;
+    border-radius: 8px;
+    border-color:aliceblue;
+}

@@ -1,0 +1,13 @@
+
+
+/* Logo for typing game */
+.typing-logo {
+    position: relative;
+    transform: scale(.3);
+    overflow: hidden;
+    display: inline-block;
+}
+
+.typing-logo:hover {
+    transform: scale(.32);
+}
