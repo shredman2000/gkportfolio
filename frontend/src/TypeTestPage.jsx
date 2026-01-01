@@ -1,35 +1,169 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './TypeTestPage.css'
 
 function TypeTestPage() {
     const navigate = useNavigate();
+    const inputRef = useRef(null);
+    const [input, setInput] = useState("");
+    const [text] = useState(() => getText(words))
+    const [timeLeft, setTimeLeft] = useState(60);
+    const [running, setRunning] = useState(false);
+    const [wordsToType, setWordsToType] = useState(() => getText(words).split(" "));
+    const [numWordsTyped, setNumWordsTyped] = useState(0);
+    const [errors, setNumErrors] = useState(0);
+    const [showResults, setShowResults] = useState(false);
+    //const shuffledWords = getText(words);
+    const [testOver, setTestOver] = useState(false);
+    const [lettersTyped, setLettersTyped] = useState(0);
 
-    const shuffledWords = getText(words);
-    return (
-        <section className='layout'>
-            <div className='header'>
-                <img src="/back-button.png" draggable="false" onClick={() => navigate('/home')}/> 
-            </div>
-            <div className='main'>
-                <p className='top'>WPM Typing Test</p>
-                <div className='middle'>{words}</div>
+    {/* start timer on first input or update on each input*/}
+    const handleChange = (e) => {
+        if (timeLeft === 0) return;
+        if (!running) {
+            setRunning(true);
+        }
+        const value = e.target.value;
+
+        if (value.endsWith(" ")) {
+            const typedWord = value.trim();
+            const firstWord = wordsToType[0];
+
+            if (typedWord === firstWord) {
+                setWordsToType(wordsToType.slice(1));
+                setNumWordsTyped(numWordsTyped + 1);
+            }
+            else {
+                setWordsToType(wordsToType.slice(1));
+                setNumWordsTyped(numWordsTyped + 1);
                 
+                let wordErrors = 0;
+                for (let i = 0; i < typedWord.length; i++) {
+                    if (typedWord[i] !== firstWord[i]) {
+                        wordErrors++;
+                    }
+                }
+                // count missing letters as an error
+                if (typedWord.length < firstWord.length) {
+                    wordErrors += firstWord.length - typedWord.length;
+                }
+                setNumErrors(errors + wordErrors);
+            }
+            setLettersTyped(lettersTyped + typedWord.length);
+            setInput("");
+        }
+        else {
+            setInput(value);
+        }
+    }
+
+    
+
+    {/* reset test listener */}
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                resetTest();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+    const resetTest = () => {
+        setInput("");
+        setWordsToType(getText(words).split(" "));
+        setTimeLeft(60);
+        setRunning(false);
+        setNumWordsTyped(0);
+        setNumErrors(0);
+        setShowResults(false);
+        setLettersTyped(0);
+    }
+
+    useEffect(() => {
+        if (!running) {
+            return;
+        }
+        const timer = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    setTestOver(true);
+                    setShowResults(true);
+                    clearInterval(timer);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [running]);
+
+    const textRef = useRef(null);
+
+    useEffect(() => {
+        if (!textRef.current) {
+            return
+        }
+        textRef.current.scrollLeft = 0;
+    }, [wordsToType]);
+
+
+    return (
+        <div>
+
+            <p className='title'>Typing Test</p>
+            <button className="back-button" onClick={() => navigate('/home')}>
+                <img src="/back-button.png" draggable="false" ></img>
+            </button>
+            <div className="timer">Time left: {timeLeft}s</div>
+            <div className="text" ref={textRef}>
+                {wordsToType.map((word, i) => {
+                    // highlight the first word
+                    const isCurrent = i === 0;
+                    let display = word.split("").map((char, j) => {
+                        let className = "";
+                        if (isCurrent) {
+                        if (j < input.length) className = char === input[j] ? "correct" : "error";
+                        else if (j === input.length) className = "cursor";
+                        }
+                        return <span key={j} className={className}>{char}</span>;
+                    });
+                    return <span key={i}>{display}&nbsp;</span>;
+                })}
             </div>
-            <div className='footer'>
-                3
-            </div>
-        </section>
+
+                {/*  silently handles input to update the text div */}
+                <input ref={inputRef} className="input" value={input} onChange={handleChange} />
+        
+            {showResults && (
+                <div className="resultsmodal">
+                    <div className="modalcontent">
+                        <h2>Test Complete!</h2>
+                        <p>WPM: {Math.round(numWordsTyped)}</p>
+                        <p>Accuracy: {(((lettersTyped - errors) / lettersTyped) * 100).toFixed(2)}%</p>
+
+                        <button className="reset-button-modal" onClick={(resetTest)}>Reset Test</button>
+                    </div>
+                </div>
+            
+            )}
+        </div>
+        
     )
 }
 
 function getText(words) {
-    for (let i = words.length -1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+    const shuffled = [...words]; // create copy
 
-        [words[i], words[j]] = [words[j], words[i]];
+
+    // shuffle words
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return words;
+
+    return shuffled.slice(0, shuffled.length).join(" ");
 }
 
 const words = [
@@ -56,7 +190,7 @@ const words = [
     "plum","berry","melon","kiwi","mango","lemon","lime","coconut","avocado","pineapple","papaya","fig","date","pomegranate","passionfruit","guava","nectarine","tangerine",
     "clementine","starfruit","kumquat","olive","prune","walnut","almond","cashew","pistachio","hazelnut","macadamia","pecan","peanut","sesame",
     "chia","flax","sunflower","pumpkin","squash","cucumber","tomato","pepper","carrot","broccoli","cauliflower","spinach","kale","lettuce","celery",
-    "radish","onion","garlic","ginger","beet","turnip","parsnip","leek","chard","endive","arugula","brussels","sprout"
+    "radish","onion","garlic","ginger","beet","turnip","parsnip","leek","chard","arugula","brussels","sprout"
 ]
 
 export default TypeTestPage
