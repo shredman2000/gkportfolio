@@ -80,7 +80,7 @@
   font-size: 1.5rem;
   border: none;
   outline: none;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .resultsmodal {

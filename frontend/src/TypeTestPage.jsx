@@ -16,6 +16,8 @@ function TypeTestPage() {
     //const shuffledWords = getText(words);
     const [testOver, setTestOver] = useState(false);
     const [lettersTyped, setLettersTyped] = useState(0);
+    const [wpm, setWpm] = useState(0);
+    const [rank, setRank] = useState(null);
 
     {/* start timer on first input or update on each input*/}
     const handleChange = (e) => {
@@ -89,6 +91,27 @@ function TypeTestPage() {
             setTimeLeft(prev => {
                 if (prev <= 1) {
                     setTestOver(true);
+
+                    const username = "Player"; // _____________Place Holder______________ find players username
+                    const calculatedWpm = ((lettersTyped - errors) / lettersTyped) * 100;
+                    setWpm(numWordsTyped);
+                    (async () => {
+                        try {
+                    
+                            await fetch("http://localhost:8080/api/scores", {
+                                method: "POST",
+                                headers: {"Content-Type": "application/json"},
+                                body: JSON.stringify({ username, wpm: Math.round(numWordsTyped) })
+                            })
+
+                            const response = await fetch(`http://localhost:8080/api/scores/rank?wpm=${Math.round(numWordsTyped)}`);
+                            const rankData = await response.json();
+                            setRank(rankData.rank * 100);
+                        }
+                        catch (error) {
+                            console.error("error submitting score/fetching rank");
+                        }
+                    })();
                     setShowResults(true);
                     clearInterval(timer);
                     return 0;
@@ -141,8 +164,8 @@ function TypeTestPage() {
                     <div className="modalcontent">
                         <h2>Test Complete!</h2>
                         <p>WPM: {Math.round(numWordsTyped)}</p>
-                        <p>Accuracy: {(((lettersTyped - errors) / lettersTyped) * 100).toFixed(2)}%</p>
-
+                        <p>Accuracy: {wpm}%</p>
+                        <p>You are in the {rank}% of typists!</p>
                         <button className="reset-button-modal" onClick={(resetTest)}>Reset Test</button>
                     </div>
                 </div>
