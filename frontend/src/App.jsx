@@ -3,8 +3,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import Intro from './Intro.jsx'
-import HomePage from './HomePage.jsx'
+import ProjectsPage from './ProjectsPage.jsx'
 import TypeTestPage from './TypeTestPage.jsx'
+import HomePage from './HomePage.jsx'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Intro />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/typetest" element={<TypeTestPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
       </Routes>
     </Router>
   )

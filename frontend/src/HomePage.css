@@ -1,13 +1,45 @@
+.home-page {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url('/BackgroundSnowboard.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-
-/* Logo for typing game */
-.typing-logo {
-    position: relative;
-    transform: scale(.3);
+    
     overflow: hidden;
-    display: inline-block;
 }
 
-.typing-logo:hover {
-    transform: scale(.32);
+.season-pass-sticker-wrapper {
+    position: absolute;
+    top: 25%;
+    left: 38%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.season-pass-sticker-wrapper:hover {
+    transform: scale(1.1);
+}
+.season-pass-sticker {
+    width: 250px;
+    rotate: -5deg;
+    animation: sticker-bounce 3.5s ease-in-out infinite;
+}
+.season-pass-sticker:hover {
+    animation-play-state: paused;
+}
+
+@keyframes sticker-bounce {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.4deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
