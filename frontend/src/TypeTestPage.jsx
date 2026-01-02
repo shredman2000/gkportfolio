@@ -81,46 +81,49 @@ function TypeTestPage() {
         setNumErrors(0);
         setShowResults(false);
         setLettersTyped(0);
+        setTestOver(false);
     }
 
     useEffect(() => {
-        if (!running) {
-            return;
-        }
+        if (!running) return;
+
         const timer = setInterval(() => {
             setTimeLeft(prev => {
                 if (prev <= 1) {
-                    setTestOver(true);
-
-                    const username = "Player"; // _____________Place Holder______________ find players username
-                    const calculatedWpm = ((lettersTyped - errors) / lettersTyped) * 100;
-                    setWpm(numWordsTyped);
-                    (async () => {
-                        try {
-                    
-                            await fetch("http://localhost:8080/api/scores", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({ username, wpm: Math.round(numWordsTyped) })
-                            })
-
-                            const response = await fetch(`http://localhost:8080/api/scores/rank?wpm=${Math.round(numWordsTyped)}`);
-                            const rankData = await response.json();
-                            setRank(rankData.rank * 100);
-                        }
-                        catch (error) {
-                            console.error("error submitting score/fetching rank");
-                        }
-                    })();
-                    setShowResults(true);
                     clearInterval(timer);
+                    setTestOver(true);
+                    setShowResults(true);
                     return 0;
                 }
                 return prev - 1;
             });
         }, 1000);
+
         return () => clearInterval(timer);
     }, [running]);
+
+    useEffect(() => {
+        if (!testOver) return;
+
+        const username = "Player-testing 10wpm"; // TODO: replace with real username
+        const wpm = numWordsTyped; // latest value
+
+        (async () => {
+            try {
+                await fetch("http://localhost:8080/api/scores", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, wpm })
+                });
+
+                const response = await fetch(`http://localhost:8080/api/scores/rank?wpm=${wpm}`);
+                const rankData = await response.json();
+                setRank(rankData.rank * 100);
+            } catch (err) {
+                console.error("Error submitting score/fetching rank", err);
+            }
+        })();
+    }, [testOver, numWordsTyped]); // maybe can delete numWordsTyped, test it _______________________________________________________________________
 
     const textRef = useRef(null);
 
@@ -165,7 +168,7 @@ function TypeTestPage() {
                         <h2>Test Complete!</h2>
                         <p>WPM: {Math.round(numWordsTyped)}</p>
                         <p>Accuracy: {wpm}%</p>
-                        <p>You are in the {rank}% of typists!</p>
+                        <p>You are in the top {rank}% of typists!</p>
                         <button className="reset-button-modal" onClick={(resetTest)}>Reset Test</button>
                     </div>
                 </div>
