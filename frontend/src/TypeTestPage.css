@@ -31,11 +31,10 @@
   height: 10vh;
   min-height: 50px;
   box-sizing: border-box;
-  font-size: 1.5rem;
   line-height: 1.5;
   cursor: text;
   background-color: #f9f9f9;
-  font-size: clamp(1rem, 2vw + 1vh, 2.5rem);
+  font-size: clamp(1rem, 1.25rem, 1.5rem);
   align-items: center;
 }
 

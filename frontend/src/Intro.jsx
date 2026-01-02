@@ -8,7 +8,7 @@ function Intro() {
 
   return (
     <>
-      <div className="title">
+      <div className='intro-title'>
         <p id="name">Gunnar Knox</p>
         <button id="view-portfolio-button" onClick={() => navigate('/home')}>Visit Portfolio</button>
       </div>

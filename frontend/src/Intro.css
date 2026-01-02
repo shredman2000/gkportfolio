@@ -24,7 +24,7 @@ body {
   flex-direction: column; 
   justify-content: center;
   align-items: center; 
-  min-height: 100vh; 
+  min-height: 70vh; 
   text-align: center; 
   margin: 0 auto; 
 }
@@ -46,13 +46,13 @@ body {
 
 @keyframes enlarge {
   0% {
-    font-size: 100%;
+    transform: scale(1.0);
   }
   70% {
-    font-size: 200%;
+    transform: scale(2.0);
   }
   100% {
-    font-size: 350%;
+    transform: scale(3.0);
   }
 }
 
@@ -71,6 +71,7 @@ body {
 #name {
   text-align: center;
   position: relative;
+  font-size: 1rem;
   animation-fill-mode: forwards;
   animation: slide-right 1.2s forwards, enlarge 1.4s forwards, fade-in 1 forwards;
 }
