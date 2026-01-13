@@ -9,7 +9,7 @@ function MoviePage() {
 
     const fetchMovies = async () => {
         try {
-            const response = await fetch('https://gunnarknox.com/api/movies/searchMovies', {
+            const response = await fetch('/api/movies/searchMovies', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ genres: ['War']})

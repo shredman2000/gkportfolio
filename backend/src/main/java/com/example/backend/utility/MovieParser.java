@@ -107,12 +107,9 @@ public class MovieParser implements CommandLineRunner {
                         JsonNode apiMovie = results.get(0); // use the first match
                         movie.setRating(apiMovie.get("vote_average").asDouble());
                         JsonNode posterNode = apiMovie.get("poster_path");
-                        System.out.println("Raw poster_path from API: " + posterNode);
                         if (posterNode != null && !posterNode.isNull()) {
-                            System.out.println("reached first if statement past he null checks");
                             String posterPath = posterNode.asText(); 
                             if (posterPath != null && !posterPath.isEmpty()) {
-                                System.out.println("reached second if statement, should be setting poster url");
                                 movie.setPosterURL("https://image.tmdb.org/t/p/w500" + posterPath);
                             }
                         }
