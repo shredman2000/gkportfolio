@@ -18,6 +18,7 @@ function HomePage() {
             <div className='content'>
                 <p>HomePage</p>
                 {/* <button className='navigate-projects-button' onClick={() => navigate('/projects')}>Projects</button> */}
+                <button className='navigate-movie-page-button' onClick={() => navigate('/movies')}>Movies</button>
             </div>
         </div>
 

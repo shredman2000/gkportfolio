@@ -1,0 +1,29 @@
+.movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* space between cards */
+    margin-top: 2rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    justify-content: flex-start;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(16.66% - 1rem); /* 6 per row minus gap */
+    text-align: center;
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.movie-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+}

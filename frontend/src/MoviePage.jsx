@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import '/MoviePage.css'
+import './MoviePage.css'
 
 function MoviePage() {
     const navigate = useNavigate();
@@ -9,37 +9,41 @@ function MoviePage() {
 
     const fetchMovies = async () => {
         try {
-            const response = await fetch('https://gunnarknox.com/api/searchMovies', {
+            const response = await fetch('https://gunnarknox.com/api/movies/searchMovies', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({ genres: ['war']})
+                body: JSON.stringify({ genres: ['War']})
             });
             const data = await response.json();
-            setMovies(data.slice(0,10));
+            console.log(data);
+            setMovies(data.results.slice(0,18));
         } catch (e) {
             console.error(e);
         }
     }
 
     return (
-        <div style={{padding: "2rem"}}> 
+        <div style={{ padding: "2rem" }}>
             <h1>Movies</h1>
-            <button onClick={fetchMovies}>Movies war movies for now</button>
-            
-            <ul>
+            <button onClick={fetchMovies}>Movies war placeholder</button>
+
+            <div className="movie-grid">
                 {movies.map((movie) => (
-                    <li key={movie.id} style={{marginBottom: '1rem'}}>
+                    <div key={movie.id} className="movie-card">
                         <img 
-                            src={movie.posterURL}
+                            src={movie.posterURL || '/placeholder.png'}
                             alt={movie.title}
-                            style={{width: '100px', marginRight: '1rem', verticalAlign: 'middle'}}
+                            className="movie-poster"
                         />
-                        <strong>{movie.title}</strong> ({movie.year})
-                    </li>
+                        <div className="movie-info">
+                            <strong>{movie.title}</strong> ({movie.year})
+                            <p>Gunnar's Rating: {movie.gunnarsRating}</p>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
-    )
+    );
 
 
 }

@@ -24,7 +24,7 @@ public class MovieService {
 
     public Page<Movie> searchMovies(MovieFilterRequest filters, Pageable pageable) {
         Specification<Movie> specification = Specification
-            .where(MovieSpecification.hasGenre(filters.getGenre()))
+            .where(MovieSpecification.hasGenre(filters.getGenres()))
             .and(MovieSpecification.minRating(filters.getMinRating()))
             .and(MovieSpecification.gunnarsMinRating(filters.getGunnarsMinRating()));
 

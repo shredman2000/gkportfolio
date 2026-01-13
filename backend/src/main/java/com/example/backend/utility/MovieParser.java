@@ -29,8 +29,8 @@ import com.example.backend.repositories.GenreRepository;
 import com.example.backend.repositories.MovieRepository;
 import com.opencsv.CSVReader;
 
-import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class MovieParser implements CommandLineRunner {
@@ -84,7 +84,7 @@ public class MovieParser implements CommandLineRunner {
         for(Movie movie : movies) {
 
             // end if already has fields
-            if (movie.getRating() != null && movie.getGenres() != null) { continue; }
+            if (movie.getRating() != null && movie.getGenres() != null && movie.getPosterURL() != null) { continue; }
 
             String query = URLEncoder.encode(movie.getTitle(), StandardCharsets.UTF_8);
             String url = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&query=" + query + "&year=" + movie.getYear();
@@ -107,9 +107,12 @@ public class MovieParser implements CommandLineRunner {
                         JsonNode apiMovie = results.get(0); // use the first match
                         movie.setRating(apiMovie.get("vote_average").asDouble());
                         JsonNode posterNode = apiMovie.get("poster_path");
+                        System.out.println("Raw poster_path from API: " + posterNode);
                         if (posterNode != null && !posterNode.isNull()) {
-                            String posterPath = posterNode.asString(); 
+                            System.out.println("reached first if statement past he null checks");
+                            String posterPath = posterNode.asText(); 
                             if (posterPath != null && !posterPath.isEmpty()) {
+                                System.out.println("reached second if statement, should be setting poster url");
                                 movie.setPosterURL("https://image.tmdb.org/t/p/w500" + posterPath);
                             }
                         }
@@ -157,6 +160,11 @@ public class MovieParser implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        if (movieRepository.count() > 0) {
+            System.out.println("Movies already populated, skipping");
+            return;
+        }
 
         // parse data with gunnars ratings
         InputStream input = getClass().getResourceAsStream("/data/ratings.csv");

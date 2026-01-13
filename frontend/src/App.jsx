@@ -6,6 +6,7 @@ import Intro from './Intro.jsx'
 import ProjectsPage from './ProjectsPage.jsx'
 import TypeTestPage from './TypeTestPage.jsx'
 import HomePage from './HomePage.jsx'
+import MoviePage from './MoviePage.jsx';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/typetest" element={<TypeTestPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/movies" element={<MoviePage/>} /> 
       </Routes>
     </Router>
   )

@@ -1,7 +1,12 @@
 package com.example.backend.specifications;
 
+import java.util.Set;
+
+import jakarta.persistence.criteria.Join;
+
 import org.springframework.data.jpa.domain.Specification;
 
+import com.example.backend.models.Genre;
 import com.example.backend.models.Movie;
 
 
@@ -15,8 +20,14 @@ import com.example.backend.models.Movie;
 public class MovieSpecification {
     
     /* Movies with the selected genre tag */
-    public static Specification<Movie> hasGenre(String genre) {
-        return(root, query, cb) -> genre == null ? null : cb.equal(root.get("genre"), genre);
+    public static Specification<Movie> hasGenre(Set<String> genres) {
+        return (root, query, cb) -> {
+            if (genres == null || genres.isEmpty()) {
+                return cb.conjunction(); // no filter
+            }
+            Join<Movie, Genre> genreJoin = root.join("genres");
+            return genreJoin.get("name").in(genres);
+        };
     }
 
     /* Movies at or above a selected minimum rating */
