@@ -1,5 +1,6 @@
 package com.example.backend.DTO;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class MovieDTO{
     private Double rating;
     private Double gunnarsRating;
     private int year;
-    private String dateRated;
+    private LocalDate dateRated;
     private String posterURL;
 
 
@@ -57,7 +58,7 @@ public class MovieDTO{
     public int getYear() {
         return year;
     }
-    public String getDateRated() {
+    public LocalDate getDateRated() {
         return dateRated;
     }
     public String getPosterURL() {

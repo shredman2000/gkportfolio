@@ -1,5 +1,6 @@
 package com.example.backend.models;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +38,14 @@ public class Movie {
     private Double rating;
     private Double gunnarsRating;
     private int year;
-    private String dateRated;
+
+    @Column(name = "date_rated", columnDefinition = "date")
+    private LocalDate dateRated;
     private String posterURL;
 
     public Movie() {}
 
-    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, String dateRated, String posterURL) {
+    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, LocalDate dateRated, String posterURL) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -59,7 +62,7 @@ public class Movie {
     public Double getRating() { return rating; }
     public Double getGunnarsRating() { return gunnarsRating; }
     public int getYear() { return year; }
-    public String getDateRated() { return dateRated; }
+    public LocalDate getDateRated() { return dateRated; }
     public String getPosterURL() { return posterURL; }
 
 
@@ -68,6 +71,6 @@ public class Movie {
     public void setRating(Double rating) { this.rating = rating; }
     public void setGunnarsRating(Double gunnarsRating) { this.gunnarsRating = gunnarsRating; }
     public void setYear(int year) { this.year = year; }
-    public void setDateRated(String dateRated) { this.dateRated = dateRated; }
+    public void setDateRated(LocalDate dateRated) { this.dateRated = dateRated; }
     public void setPosterURL(String posterURL) { this.posterURL = posterURL; }
 }

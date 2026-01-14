@@ -36,7 +36,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping("/searchMovies")
+    @PostMapping("/searchmovies")
     public ResponseEntity<MovieListResponse> getMovies(@RequestBody MovieFilterRequest filters, Pageable pageable) {
 
         Page<Movie> page = movieService.searchMovies(filters, pageable);
@@ -44,6 +44,17 @@ public class MovieController {
         List<MovieDTO> movieDTOList = page.getContent().stream().map(MovieDTO::new).toList();
 
         MovieListResponse response = new MovieListResponse(movieDTOList, page.getTotalElements());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/recentlywatched")
+    public ResponseEntity<MovieListResponse> getRecentlyWatched() {
+        List<Movie> moviesList = movieService.getRecentlyWatched(15);
+
+        List<MovieDTO> movieDTOList = moviesList.stream().map(MovieDTO::new).toList();
+
+        MovieListResponse response = new MovieListResponse(movieDTOList, 15);
 
         return ResponseEntity.ok(response);
     }

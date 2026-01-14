@@ -11,6 +11,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -172,7 +173,7 @@ public class MovieParser implements CommandLineRunner {
         csvreader.readNext();
         while((line = csvreader.readNext()) != null) {
             Movie movie = new Movie();
-            movie.setDateRated(line[0]);
+            movie.setDateRated(LocalDate.parse(line[0]));
             movie.setTitle(line[1]);
             movie.setYear(Integer.parseInt(line[2]));
             movie.setRating(null);
