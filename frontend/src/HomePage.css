@@ -13,6 +13,13 @@
     overflow: hidden;
 }
 
+.navigate-movie-page-button {
+    position: absolute;
+    top: 75%;
+    left: 70%;
+    background-color: red;
+}
+
 .season-pass-sticker-wrapper {
     position: absolute;
     top: 25%;
