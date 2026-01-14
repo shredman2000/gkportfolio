@@ -9,6 +9,9 @@ function MoviePage() {
     const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [recentlyWatched, setRecentlyWatched] = useState([]);
+    const [visibleRecentlyWatched, setVisibleRecentlyWatched] = useState([]);
+    const [recentlyWatchedIndex, setRecentlyWatchedIndex] = useState(0);
+    const numberVisible = 5;
 
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
@@ -47,8 +50,16 @@ function MoviePage() {
             }
             const result = await response.json();
             setRecentlyWatched(result.results || [])
+            setVisibleRecentlyWatched(recentlyWatched.slice(recentlyWatchedIndex, numberVisible));
         } catch (e) {
             console.error(e);
+        }
+    }
+    const shuffleCardsRight = () => {
+        if (recentlyWatchedIndex <= recentlyWatched.length - numberVisible) {
+            setRecentlyWatchedIndex(prev => prev + 1);
+            const newFive = recentlyWatched.slice(recentlyWatchedIndex, recentlyWatchedIndex + numberVisible);
+            setVisibleRecentlyWatched(newFive);
         }
     }
 
@@ -61,12 +72,18 @@ function MoviePage() {
                 </div>
             
                 <div className="recent-watches-container">
-                    <div className="recent-watches">
-                        {(recentlyWatched.length > 0 ? recentlyWatched : placeholderMovies).map(movie => (
-                            <div key={movie.id} className="movie-card">
-                                <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
-                            </div>
-                        ))}
+                    <div className='recent-watches-row'>
+                        <div className="recent-watches">
+                            {(recentlyWatched.length > 0 ? recentlyWatched : placeholderMovies).map(movie => (
+                                <div key={movie.id} className="movie-card">
+                                    <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+                                    
+                                </div>
+                                
+                            ))}
+                            
+                        </div>
+                        <img className="right-arrow" src={'/rightarrow.png'} onClick={shuffleCardsRight}/>
                     </div>
                     <p className="recently-watched-text">Recently watched</p>
                 </div>
