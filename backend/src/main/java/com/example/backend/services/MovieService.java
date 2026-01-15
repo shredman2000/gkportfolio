@@ -63,4 +63,11 @@ public class MovieService {
             return page.getContent();
     }
 
+    public List<Movie> getFavoriteMovies(int num) {
+        Pageable pageable = PageRequest.of(0, num, Sort.by(Sort.Direction.DESC, "gunnarsRating"));
+
+        Page<Movie> page = movieRepository.findAll(pageable);
+        return page.getContent();
+    }
+
 }

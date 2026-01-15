@@ -11,6 +11,9 @@ function MoviePage() {
     const [recentlyWatched, setRecentlyWatched] = useState([]);
     const [visibleRecentlyWatched, setVisibleRecentlyWatched] = useState([]);
     const [recentlyWatchedIndex, setRecentlyWatchedIndex] = useState(0);
+    const [favoriteMovies, setFavoriteMovies] = useState([]);
+    const [visibleFavoriteMovies, setVisibleFavoriteMovies] = useState([]);
+    const [favoriteMoviesIndex, setFavoriteMoviesIndex] = useState(0);
     const numberVisible = 5;
 
     const placeholderMovies = [
@@ -23,6 +26,7 @@ function MoviePage() {
     //on mount
     useEffect(() => {
         fetchRecentlyWatched();
+        fetchFavoriteMovies();
     }, []);
 
     const fetchMovies = async () => {
@@ -50,18 +54,38 @@ function MoviePage() {
             }
             const result = await response.json();
             setRecentlyWatched(result.results || [])
-            setVisibleRecentlyWatched(recentlyWatched.slice(recentlyWatchedIndex, numberVisible));
+            setVisibleRecentlyWatched(result.results.slice(recentlyWatchedIndex, numberVisible));
         } catch (e) {
             console.error(e);
         }
     }
     const shuffleCardsRight = () => {
-        if (recentlyWatchedIndex <= recentlyWatched.length - numberVisible) {
-            setRecentlyWatchedIndex(prev => prev + 1);
-            const newFive = recentlyWatched.slice(recentlyWatchedIndex, recentlyWatchedIndex + numberVisible);
+
+        const nextIndex = recentlyWatchedIndex + 1;
+        if (nextIndex <= recentlyWatched.length - numberVisible) {
+            setRecentlyWatchedIndex(nextIndex);
+            const newFive = recentlyWatched.slice(nextIndex, nextIndex + numberVisible);
             setVisibleRecentlyWatched(newFive);
         }
     }
+
+    const fetchFavoriteMovies = async () => {
+        try {
+            const response = await fetch('/api/movies/favoritemovies', {
+                method: "GET"
+            });
+            if (!response.ok) {
+                throw new Error(`Error status: ${response.status}`)
+            }
+            const result = await response.json();
+            setFavoriteMovies(response.results || []);
+            setVisibleFavoriteMovies(result.results.slice(favoriteMoviesIndex, numberVisible))
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+
 
     return (
         <div>
@@ -70,11 +94,12 @@ function MoviePage() {
                 <div className='movie-page-title'>
                     <h1>Gunnar's Movie Recs</h1>
                 </div>
-            
+
                 <div className="recent-watches-container">
+                    <h1 className='normal-text'>I Recently Watched...</h1>
                     <div className='recent-watches-row'>
                         <div className="recent-watches">
-                            {(recentlyWatched.length > 0 ? recentlyWatched : placeholderMovies).map(movie => (
+                            {(visibleRecentlyWatched.length > 0 ? visibleRecentlyWatched : placeholderMovies).map(movie => (
                                 <div key={movie.id} className="movie-card">
                                     <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
                                     
@@ -86,6 +111,20 @@ function MoviePage() {
                         <img className="right-arrow" src={'/rightarrow.png'} onClick={shuffleCardsRight}/>
                     </div>
                     <p className="recently-watched-text">Recently watched</p>
+                </div>
+                <div className='favorite-movies-container'>
+                        <h1 className='normal-text'>My Favorites...</h1>
+                        <div className='recent-watches-row'>
+                            <div className='recent-watches'>
+                                {(visibleFavoriteMovies > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
+                                    <div key={movie.id} className='movie-card'>
+                                        <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+                                    </div>
+                                ))}
+
+                            </div>
+                        </div>
+
                 </div>
 
 

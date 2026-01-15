@@ -58,4 +58,17 @@ public class MovieController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/favoritemovies")
+    public ResponseEntity<MovieListResponse> getFavoriteMovies() {
+        List<Movie> moviesList = movieService.getFavoriteMovies(15);
+        
+        List<MovieDTO> movieDTOList = moviesList.stream().map(MovieDTO::new).toList();
+
+        MovieListResponse response = new MovieListResponse(movieDTOList, 15);
+
+        return ResponseEntity.ok(response);
+    }
+
+    
 }
