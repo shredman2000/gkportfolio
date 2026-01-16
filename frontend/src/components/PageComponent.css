@@ -1,0 +1,32 @@
+.page-buttons .ellipsis {
+    padding: 6px 12px; /* same as buttons for alignment */
+    color: #E7F6F2;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-buttons button {
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #395B64;
+    cursor: pointer;
+    font-weight: normal;
+    color: #A5C9CA;
+}
+
+.page-buttons button:hover {
+    background-color: #283f46;
+}
+
+.page-buttons button.active-page {
+    background-color: #2C3333;
+    color: #fff;
+    font-weight: bold;
+    border-color: #395B64;
+}
+
+.page-buttons button:focus {
+    outline: none; 
+}

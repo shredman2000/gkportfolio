@@ -5,6 +5,7 @@ import Select from 'react-select';
 import './MoviePage2.css'
 import MovieSelect from './components/SelectComponent';
 import BarComponent from './components/BarComponent';
+import PageComponent from './components/PageComponent';
 
 
 
@@ -49,7 +50,7 @@ function MoviePage() {
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     page,
-                    limit: 30,
+                    limit: 33,
                     genre: selectedGenre?.value ?? null,
                     minRating: minRating,
                     gunnarsMinRating: gunnarsMinRating,
@@ -189,7 +190,17 @@ function MoviePage() {
                             </div>
                         ))}
                     </div>
+
+                    <div className='page-container'>
+                        <PageComponent 
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={(pageNum) => fetchMovies(pageNum)}
+                            maxButtons={2}
+                            />
+                    </div>
                 </div>
+                
 
 
 
