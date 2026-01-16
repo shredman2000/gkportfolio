@@ -36,15 +36,19 @@ public class MovieService {
 
     /**
      * Search movies by genre
-     * @param filters selected genres from user
+     * @param genre a string for selected genre from user
+     * @param minRating the minimum audience score to search for
+     * @param gunnarsMinRating the minimum gunnars rating to search for
+     * @param seed a seed used to shuffle movies, using a seed for stopping duplicates for current user
      * @param pageable a pageable object
      * @return return a pageable list of movies 
      */
-    public Page<Movie> searchMovies(String genre, Double minRating, Double gunnarsMinRating, Pageable pageable) {
+    public Page<Movie> searchMovies(String genre, Double minRating, Double gunnarsMinRating, Pageable pageable, long seed) {
         Specification<Movie> specification = Specification
             .where(MovieSpecification.hasGenre(genre))
             .and(MovieSpecification.minRating(minRating))
-            .and(MovieSpecification.gunnarsMinRating(gunnarsMinRating));
+            .and(MovieSpecification.gunnarsMinRating(gunnarsMinRating))
+            .and(MovieSpecification.shuffle(seed));
 
         return movieRepository.findAll(specification, pageable);
     }

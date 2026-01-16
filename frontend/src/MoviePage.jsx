@@ -24,6 +24,7 @@ function MoviePage() {
     const [minRating, setMinRating] = useState(0);
     const [gunnarsMinRating, setGunnarsMinRating] = useState(0);
     const [selectedGenre, setSelectedGenre] = useState(null);
+    const [seed] = useState(Date.now());
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
     { id: 2, title: "Movie 2", year: 2025, gunnarsRating: 4, posterURL: "/MoviePoster.png" },
@@ -51,7 +52,8 @@ function MoviePage() {
                     limit: 30,
                     genre: selectedGenre?.value ?? null,
                     minRating: minRating,
-                    gunnarsMinRating: gunnarsMinRating
+                    gunnarsMinRating: gunnarsMinRating,
+                    seed
                 })
             });
             const data = await response.json();
@@ -133,7 +135,7 @@ function MoviePage() {
 
                 </div>
 
-
+                <div className='favorite-movies-text'>My Favorites</div>             
                 <div className='favorite-movies-container'>
 
                     <div className='recent-watches-row'>
@@ -154,7 +156,19 @@ function MoviePage() {
                     <div className='search-movies-search-box'>
                         <div className='inner-wrapper-search'>
                             <div className='select-wrapper'>
-                                <MovieSelect value={selectedGenre} onChange={(option) => setSelectedGenre(option)}/> {/* rename this its the genre dropdown menu */}
+                                
+                                {/* rename this its the genre dropdown menu */}
+                                <MovieSelect 
+                                    value={selectedGenre} 
+                                    onChange={(option) => {
+                                        if(selectedGenre?.value === option?.value) {
+                                            setSelectedGenre(null);
+                                        }
+                                        else {
+                                            setSelectedGenre(option);
+                                        }
+                                    }}
+                                /> 
                                 
                                 <div className='select-button-custom'></div>
                             </div>

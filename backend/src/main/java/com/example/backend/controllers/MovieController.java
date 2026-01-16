@@ -45,13 +45,14 @@ public class MovieController {
         String genre = params.get("genre") != null ? params.get("genre").toString() : null;
         Double minRating = params.containsKey("minRating") ? ((Number) params.get("minRating")).doubleValue() : null;
         Double gunnarsMinRating = params.containsKey("gunnarsMinRating") ? ((Number) params.get("gunnarsMinRating")).doubleValue() : null;
-
         int page = params.containsKey("page") ? ((Number) params.get("page")).intValue() : 1;
         int limit = params.containsKey("limit") ? ((Number) params.get("limit")).intValue() : 30;
 
+        long seed = params.containsKey("seed") ? ((Number) params.get("seed")).longValue() : System.currentTimeMillis();
+
         Pageable pageable = PageRequest.of(page - 1, limit);
 
-        Page<Movie> moviePage = movieService.searchMovies(genre, minRating, gunnarsMinRating, pageable);
+        Page<Movie> moviePage = movieService.searchMovies(genre, minRating, gunnarsMinRating, pageable, seed);
 
         
         List<MovieDTO> movieDTOList = moviePage.getContent().stream().map(MovieDTO::new).toList();
