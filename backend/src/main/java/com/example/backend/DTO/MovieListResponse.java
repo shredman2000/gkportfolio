@@ -8,19 +8,23 @@ import java.util.List;
  */
 public class MovieListResponse {
     private List<MovieDTO> results;
-    private long total;
+    private long totalElements;
+    private int totalPages;
 
 
 
-    public MovieListResponse (List<MovieDTO> results, long total) {
+    public MovieListResponse (List<MovieDTO> results, long totalElements, int totalPages) {
         this.results = results;
-        this.total = total;
+        this.totalElements = totalElements;
     }
 
     public List<MovieDTO> getResults() {
         return results;
     }
-    public long getTotal() {
-        return total;
+    public long getTotalElements() {
+        return totalElements;
+    }
+    public int getTotalPages() {
+        return totalPages;
     }
 }

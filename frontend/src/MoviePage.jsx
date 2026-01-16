@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 
-import './MoviePage.css'
+import './MoviePage2.css'
+import MovieSelect from './components/SelectComponent';
+import BarComponent from './components/BarComponent';
 
 
 
 function MoviePage() {
     const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     const [movies, setMovies] = useState([]);
     const [recentlyWatched, setRecentlyWatched] = useState([]);
     const [visibleRecentlyWatched, setVisibleRecentlyWatched] = useState([]);
@@ -14,8 +20,10 @@ function MoviePage() {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const [visibleFavoriteMovies, setVisibleFavoriteMovies] = useState([]);
     const [favoriteMoviesIndex, setFavoriteMoviesIndex] = useState(0);
-    const numberVisible = 5;
-
+    const numberVisible = 6;
+    const [minRating, setMinRating] = useState(0);
+    const [gunnarsMinRating, setGunnarsMinRating] = useState(0);
+    const [selectedGenre, setSelectedGenre] = useState(null);
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
     { id: 2, title: "Movie 2", year: 2025, gunnarsRating: 4, posterURL: "/MoviePoster.png" },
@@ -29,16 +37,29 @@ function MoviePage() {
         fetchFavoriteMovies();
     }, []);
 
-    const fetchMovies = async () => {
+    useEffect(() => {
+        fetchMovies(1);
+    }, [selectedGenre, minRating, gunnarsMinRating]);
+
+    const fetchMovies = async (page = 1) => { // 1 is initial value
         try {
             const response = await fetch('/api/movies/searchmovies', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({ genres: ['War']})
+                body: JSON.stringify({
+                    page,
+                    limit: 30,
+                    genre: selectedGenre.value || null,
+                    minRating: minRating,
+                    gunnarsMinRating: gunnarsMinRating
+                })
             });
             const data = await response.json();
             console.log(data);
-            setMovies(data.results.slice(0,18));
+
+            setMovies(data.results);
+            setCurrentPage(page);
+            setTotalPages(data.totalPages || 1);
         } catch (e) {
             console.error(e);
         }
@@ -59,15 +80,18 @@ function MoviePage() {
             console.error(e);
         }
     }
-    const shuffleCardsRight = () => {
+    const shuffleCardsRight = (items, setIndex, setVisible) => {
 
-        const nextIndex = recentlyWatchedIndex + 1;
-        if (nextIndex <= recentlyWatched.length - numberVisible) {
-            setRecentlyWatchedIndex(nextIndex);
-            const newFive = recentlyWatched.slice(nextIndex, nextIndex + numberVisible);
-            setVisibleRecentlyWatched(newFive);
+        setIndex(prevIndex => {
+            const nextIndex = prevIndex + 1;
+            if (nextIndex <= items.length - numberVisible) {
+            setVisible(items.slice(nextIndex, nextIndex + numberVisible));
+            return nextIndex;
         }
-    }
+        return prevIndex;
+        });
+        
+    };
 
     const fetchFavoriteMovies = async () => {
         try {
@@ -78,7 +102,7 @@ function MoviePage() {
                 throw new Error(`Error status: ${response.status}`)
             }
             const result = await response.json();
-            setFavoriteMovies(response.results || []);
+            setFavoriteMovies(result.results || []);
             setVisibleFavoriteMovies(result.results.slice(favoriteMoviesIndex, numberVisible))
         } catch (e) {
             console.error(e)
@@ -89,61 +113,72 @@ function MoviePage() {
 
     return (
         <div>
-            
             <div className="grid">
                 <div className='movie-page-title'>
                     <h1>Gunnar's Movie Recs</h1>
                 </div>
 
+
                 <div className="recent-watches-container">
-                    <h1 className='normal-text'>I Recently Watched...</h1>
                     <div className='recent-watches-row'>
                         <div className="recent-watches">
                             {(visibleRecentlyWatched.length > 0 ? visibleRecentlyWatched : placeholderMovies).map(movie => (
                                 <div key={movie.id} className="movie-card">
                                     <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
-                                    
-                                </div>
-                                
+                                </div> 
                             ))}
-                            
                         </div>
-                        <img className="right-arrow" src={'/rightarrow.png'} onClick={shuffleCardsRight}/>
+                        <img className="right-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsRight(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}/>
                     </div>
-                    <p className="recently-watched-text">Recently watched</p>
+
                 </div>
+
+
                 <div className='favorite-movies-container'>
-                        <h1 className='normal-text'>My Favorites...</h1>
-                        <div className='recent-watches-row'>
-                            <div className='recent-watches'>
-                                {(visibleFavoriteMovies > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
-                                    <div key={movie.id} className='movie-card'>
-                                        <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
-                                    </div>
-                                ))}
 
-                            </div>
+                    <div className='recent-watches-row'>
+                        <div className='recent-watches'>
+                            {(visibleFavoriteMovies.length > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
+                                <div key={movie.id} className='movie-card'>
+                                    <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+                                </div>
+                            ))}
+
                         </div>
-
+                        <img className="right-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsRight(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}/>
+                    </div>
                 </div>
 
 
                 <div className="search-movies-box">
-                    <button onClick={fetchMovies}>Movies war placeholder</button>
-                    {movies.map((movie) => (
-                        <div key={movie.id} className="movie-card">
-                            <img 
-                                src={movie.posterURL || '/placeholder.png'}
-                                alt={movie.title}
-                                className="movie-poster"
-                            />
-                            <div className="movie-info">
-                                <strong>{movie.title}</strong> ({movie.year})
-                                <p>Gunnar's Rating: {movie.gunnarsRating}</p>
+                    <div className='search-movies-search-box'>
+                        <div className='inner-wrapper-search'>
+                            <div className='select-wrapper'>
+                                <MovieSelect value={selectedGenre} onChange={(option) => setSelectedGenre(option)}/> {/* rename this its the genre dropdown menu */}
+                                
+                                <div className='select-button-custom'></div>
+                            </div>
+                            
+                            <div className='slider-wrapper'>
+                                <BarComponent className='audience-rating-bar' onChange={setMinRating} value={minRating} title='Minimum Audience Rating'/>
+                                <BarComponent className='gunnar-rating-bar' onChange={setGunnarsMinRating} value={gunnarsMinRating} title='Minimum Gunnar Rating'></BarComponent>
                             </div>
                         </div>
-                    ))}
+                    </div>
                 </div>
+                
+                <div className='movie-search-results-box'>
+                    <div className='search-results-grid'>
+                        {movies.map(movie => (
+                            <div key={movie.id} className='search-result-card'>
+                                <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     );

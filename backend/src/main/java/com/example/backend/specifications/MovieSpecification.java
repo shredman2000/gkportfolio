@@ -20,13 +20,13 @@ import com.example.backend.models.Movie;
 public class MovieSpecification {
     
     /* Movies with the selected genre tag */
-    public static Specification<Movie> hasGenre(Set<String> genres) {
+    public static Specification<Movie> hasGenre(String genre) {
         return (root, query, cb) -> {
-            if (genres == null || genres.isEmpty()) {
+            if (genre == null || genre.isEmpty()) {
                 return cb.conjunction(); // no filter
             }
             Join<Movie, Genre> genreJoin = root.join("genres");
-            return genreJoin.get("name").in(genres);
+            return genreJoin.get("name").in(genre);
         };
     }
 

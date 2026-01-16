@@ -40,14 +40,13 @@ public class MovieService {
      * @param pageable a pageable object
      * @return return a pageable list of movies 
      */
-    public Page<Movie> searchMovies(MovieFilterRequest filters, Pageable pageable) {
+    public Page<Movie> searchMovies(String genre, Double minRating, Double gunnarsMinRating, Pageable pageable) {
         Specification<Movie> specification = Specification
-            .where(MovieSpecification.hasGenre(filters.getGenres()))
-            .and(MovieSpecification.minRating(filters.getMinRating()))
-            .and(MovieSpecification.gunnarsMinRating(filters.getGunnarsMinRating()));
+            .where(MovieSpecification.hasGenre(genre))
+            .and(MovieSpecification.minRating(minRating))
+            .and(MovieSpecification.gunnarsMinRating(gunnarsMinRating));
 
         return movieRepository.findAll(specification, pageable);
-
     }
 
     /**

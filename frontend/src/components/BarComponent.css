@@ -1,0 +1,62 @@
+.bar-slider .rc-slider-rail {
+  height: 20px;
+  background-color: #395B64;
+  border-radius: 6px;
+}
+
+.bar-slider.rc-slider {
+  padding: 0;
+  margin: 0;
+}
+
+.bar-slider .rc-slider-track {
+  height: 20px;
+  background: linear-gradient(90deg, #E7F6F2, #A5C9CA); /* gradient fill */
+  border-radius: 6px;
+}
+
+.bar-slider .rc-slider-handle {
+  display: none; /* remove the dot handle */
+}
+
+.bar-wrapper {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: -5;
+}
+
+.bar-label {
+  font-weight: 600;
+  color: #A5C9CA;
+  margin-bottom: 0;
+  line-height: 1;
+  text-align: left;
+}
+
+.bar-value {
+  font-size: 0.9rem;
+  color: #A5C9CA;
+  text-align: right;
+}
+
+.bar-slider-container {
+  width: 100%;
+
+}
+.bar-info-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.bar-label-wrapper {
+  align-items: left;
+  padding-left: 5px;
+}
+.bar-value-wrapper {
+  align-items: right;
+}
