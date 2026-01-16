@@ -6,6 +6,7 @@ import './MoviePage2.css'
 import MovieSelect from './components/SelectComponent';
 import BarComponent from './components/BarComponent';
 import PageComponent from './components/PageComponent';
+import MovieModal from './components/MovieModal';
 
 
 
@@ -26,6 +27,8 @@ function MoviePage() {
     const [gunnarsMinRating, setGunnarsMinRating] = useState(0);
     const [selectedGenre, setSelectedGenre] = useState(null);
     const [seed] = useState(Date.now());
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedModalMovie, setSelectedModalMovie] = useState(null);
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
     { id: 2, title: "Movie 2", year: 2025, gunnarsRating: 4, posterURL: "/MoviePoster.png" },
@@ -126,7 +129,10 @@ function MoviePage() {
                     <div className='recent-watches-row'>
                         <div className="recent-watches">
                             {(visibleRecentlyWatched.length > 0 ? visibleRecentlyWatched : placeholderMovies).map(movie => (
-                                <div key={movie.id} className="movie-card">
+                                <div key={movie.id} className="movie-card" onClick={() => {
+                                   setIsModalOpen(true);
+                                   setSelectedModalMovie(movie);
+                                }}>
                                     <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
                                 </div> 
                             ))}
@@ -202,12 +208,17 @@ function MoviePage() {
                 </div>
                 
 
-
+            
 
             </div>
+            {isModalOpen && selectedModalMovie && (
+                    <MovieModal isOpen={isModalOpen} movie={selectedModalMovie} onClose={() => setIsModalOpen(false)}/>
+                )
+            }
         </div>
+        
     );
-
+    
 
 }
 
