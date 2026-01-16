@@ -99,6 +99,7 @@ const MovieSelect = ({ value, onChange }) => {
       components={{ MenuList: CustomMenuList }}
       placeholder=''
       isSearchable={false}
+      controlShouldRenderValue={false}
     />
   );
 };

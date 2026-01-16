@@ -49,7 +49,7 @@ function MoviePage() {
                 body: JSON.stringify({
                     page,
                     limit: 30,
-                    genre: selectedGenre.value || null,
+                    genre: selectedGenre?.value ?? null,
                     minRating: minRating,
                     gunnarsMinRating: gunnarsMinRating
                 })
@@ -118,7 +118,7 @@ function MoviePage() {
                     <h1>Gunnar's Movie Recs</h1>
                 </div>
 
-
+                <div className='recently-watched-text'>Recently Watched...</div>
                 <div className="recent-watches-container">
                     <div className='recent-watches-row'>
                         <div className="recent-watches">

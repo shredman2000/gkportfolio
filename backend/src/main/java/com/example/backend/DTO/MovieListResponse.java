@@ -16,6 +16,7 @@ public class MovieListResponse {
     public MovieListResponse (List<MovieDTO> results, long totalElements, int totalPages) {
         this.results = results;
         this.totalElements = totalElements;
+        this.totalPages = totalPages;
     }
 
     public List<MovieDTO> getResults() {

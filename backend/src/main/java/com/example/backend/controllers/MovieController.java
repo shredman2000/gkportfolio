@@ -42,7 +42,7 @@ public class MovieController {
     @PostMapping("/searchmovies")
     public ResponseEntity<MovieListResponse> getMovies(@RequestBody Map<String, Object> params) {
 
-        String genre = params.containsKey("genre") ? params.get("genre").toString() : null;
+        String genre = params.get("genre") != null ? params.get("genre").toString() : null;
         Double minRating = params.containsKey("minRating") ? ((Number) params.get("minRating")).doubleValue() : null;
         Double gunnarsMinRating = params.containsKey("gunnarsMinRating") ? ((Number) params.get("gunnarsMinRating")).doubleValue() : null;
 
