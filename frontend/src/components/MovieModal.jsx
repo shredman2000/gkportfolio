@@ -10,7 +10,7 @@ const MovieModal = ({isOpen, onClose, movie}) => {
     useEffect(() => {
         if (isOpen) {
         setFlipped(false); // reset when modal opens
-        const timer = setTimeout(() => setFlipped(true), 500); // flip after 0.5s
+        const timer = setTimeout(() => setFlipped(true), 300); // flip after 0.5s
         return () => clearTimeout(timer);
         }
     }, [isOpen]);
@@ -26,9 +26,14 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                 </div>
                 {/*info side*/}
                 <div className='card-face card-back'>
-                    <h2 className='movie-title'>{movie.title}</h2>
-                    <p>Year: {movie.year}</p>
-                    <p>Gunnar Rating: {movie.gunnarsRating}</p>
+                    <div className='card-back-wrapper'>
+                        <h2 className='movie-title'>{movie.title}</h2>
+                        <p className='year'>{movie.year}</p>
+                        <p>Gunnar Rating: {movie.gunnarsRating}</p>
+                        <div className='synopsis'>
+                            {movie.synopsis}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>,

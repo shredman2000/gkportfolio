@@ -20,6 +20,7 @@ public class MovieDTO{
     private int year;
     private LocalDate dateRated;
     private String posterURL;
+    private String synopsis;
 
 
 
@@ -33,6 +34,7 @@ public class MovieDTO{
         this.year = movie.getYear();
         this.dateRated = movie.getDateRated();
         this.posterURL = movie.getPosterURL();
+        this.synopsis = movie.getSynopsis();
 
         this.genres = movie.getGenres().stream()
                        .map(Genre::getGenre)
@@ -63,5 +65,8 @@ public class MovieDTO{
     }
     public String getPosterURL() {
         return posterURL;
+    }
+    public String getSynopsis() {
+        return synopsis;
     }
 }

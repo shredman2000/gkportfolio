@@ -128,6 +128,7 @@ public class MovieParser implements CommandLineRunner {
                                 movie.addGenre(genre);
                             }
                         }
+                        movie.setSynopsis(apiMovie.get("overview").asText());
 
                         batch.add(movie);
 
