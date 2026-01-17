@@ -21,6 +21,7 @@ public class MovieDTO{
     private LocalDate dateRated;
     private String posterURL;
     private String synopsis;
+    private String backdropURL;
 
 
 

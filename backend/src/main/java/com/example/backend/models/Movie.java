@@ -45,10 +45,11 @@ public class Movie {
     @Column(name = "date_rated", columnDefinition = "date")
     private LocalDate dateRated;
     private String posterURL;
+    private String backdropURL;
 
     public Movie() {}
 
-    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, LocalDate dateRated, String posterURL, String synopsis) {
+    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, LocalDate dateRated, String posterURL, String synopsis, String backdropURL) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -58,6 +59,7 @@ public class Movie {
         this.dateRated = dateRated;
         this.posterURL = posterURL;
         this.synopsis = synopsis;
+        this.backdropURL = backdropURL;
     }
 
     public Long getId() { return id; }
@@ -69,6 +71,7 @@ public class Movie {
     public LocalDate getDateRated() { return dateRated; }
     public String getPosterURL() { return posterURL; }
     public String getSynopsis() { return synopsis; }
+    public String getBackdropURL() { return backdropURL; }
 
 
     public void setId(Long id) { this.id = id; }
@@ -79,4 +82,5 @@ public class Movie {
     public void setDateRated(LocalDate dateRated) { this.dateRated = dateRated; }
     public void setPosterURL(String posterURL) { this.posterURL = posterURL; }
     public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
+    public void setBackdropURL(String backdropURL) {this.backdropURL = backdropURL; }
 }

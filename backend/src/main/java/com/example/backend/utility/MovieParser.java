@@ -114,6 +114,13 @@ public class MovieParser implements CommandLineRunner {
                                 movie.setPosterURL("https://image.tmdb.org/t/p/w500" + posterPath);
                             }
                         }
+                        JsonNode backdropNode = apiMovie.get("backdrop_path");
+                        if (backdropNode != null && !backdropNode.isNull()) {
+                            String backdropPath = backdropNode.asText();
+                            if (backdropPath != null && !backdropPath.isEmpty()) {
+                                movie.setBackdropURL("https://image.tmdb.org/t/p/w500" + backdropPath);
+                            }
+                        }
 
                         JsonNode genreIds = apiMovie.get("genre_ids");
                         
