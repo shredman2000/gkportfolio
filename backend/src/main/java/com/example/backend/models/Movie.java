@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,9 +49,14 @@ public class Movie {
     private String posterURL;
     private String backdropURL;
 
+    private int movieId;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<StreamingService> services = new HashSet<>();
+
     public Movie() {}
 
-    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, LocalDate dateRated, String posterURL, String synopsis, String backdropURL) {
+    public Movie(Long id, String title, Set<Genre> genres, Double rating, Double gunnarsRating, int year, LocalDate dateRated, String posterURL, String synopsis, String backdropURL,int movieId, Set<StreamingService> services) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -60,6 +67,8 @@ public class Movie {
         this.posterURL = posterURL;
         this.synopsis = synopsis;
         this.backdropURL = backdropURL;
+        this.movieId = movieId;
+        this.services = services;
     }
 
     public Long getId() { return id; }
@@ -72,6 +81,8 @@ public class Movie {
     public String getPosterURL() { return posterURL; }
     public String getSynopsis() { return synopsis; }
     public String getBackdropURL() { return backdropURL; }
+    public int getMovieId() { return movieId; }
+    public Set<StreamingService> getStreamingServices() { return services; } 
 
 
     public void setId(Long id) { this.id = id; }
@@ -83,4 +94,7 @@ public class Movie {
     public void setPosterURL(String posterURL) { this.posterURL = posterURL; }
     public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
     public void setBackdropURL(String backdropURL) {this.backdropURL = backdropURL; }
+    public void setMovieId(int movieId) { this.movieId = movieId; }
+    public void setStreamingServices(Set<StreamingService> services) { this.services = services; }
+    public void addStreamingService(StreamingService service) { services.add(service); }
 }

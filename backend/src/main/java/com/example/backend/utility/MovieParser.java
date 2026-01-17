@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,8 +27,10 @@ import org.springframework.stereotype.Component;
 
 import com.example.backend.models.Genre;
 import com.example.backend.models.Movie;
+import com.example.backend.models.StreamingService;
 import com.example.backend.repositories.GenreRepository;
 import com.example.backend.repositories.MovieRepository;
+import com.example.backend.repositories.StreamingServiceRepository;
 import com.opencsv.CSVReader;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -41,6 +44,9 @@ public class MovieParser implements CommandLineRunner {
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    private StreamingServiceRepository streamingServiceRepository;
 
     // for TMBD
     @Value("${TMBD_KEY}")
@@ -107,6 +113,7 @@ public class MovieParser implements CommandLineRunner {
                     if (results != null && results.size() > 0) {
                         JsonNode apiMovie = results.get(0); // use the first match
                         movie.setRating(apiMovie.get("vote_average").asDouble());
+                        movie.setMovieId(apiMovie.get("id").asInt());
                         JsonNode posterNode = apiMovie.get("poster_path");
                         if (posterNode != null && !posterNode.isNull()) {
                             String posterPath = posterNode.asText(); 
@@ -155,12 +162,99 @@ public class MovieParser implements CommandLineRunner {
                 e.printStackTrace();
             }
         }
+        
         if (!batch.isEmpty()) {
             movieRepository.saveAll(batch);
         }
 
         // TODO: remove
         System.out.println("Movie data update complete");
+
+    }
+
+    public void fetchStreamingServices() throws Exception {
+        List<Movie> movies = movieRepository.findAll();
+        HttpClient client = HttpClient.newHttpClient();
+
+        List<Movie> batch = new ArrayList<>();
+        int batchSize = 50;
+
+        for(Movie movie : movies) {
+            if (movie.getStreamingServices().isEmpty()) { continue; }
+
+            String query = URLEncoder.encode(movie.getTitle(), StandardCharsets.UTF_8);
+            String url = "https://api.themoviedb.org/3/movie/"+ movie.getMovieId() + "/watch/providers?region=us&api_key=" + apiKey;
+            try {
+                HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() == 429) {
+                    Thread.sleep(1000);
+                    response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                }
+                if (response.statusCode() == 200) {
+                    ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(response.body());
+                    JsonNode results = root.get("results");
+                    
+                    if (results != null && results.has("US")) {
+                        JsonNode usNode = results.get("US");
+
+                        List<String> types = List.of("flatrate", "buy", "rent");
+                        Set<Integer> trustedProviderIDs = Set.of(8, 9, 2, 10, 531, 2100, 15, 384, 386, 387, 337, 119, 350);
+                        for (String type : types) {
+                            if (!usNode.has(type)) { continue; }
+
+                            JsonNode providers = usNode.get(type);
+                            for (JsonNode provider : providers) {
+                                int providerId = provider.get("provider_id").asInt();
+
+                                if (!trustedProviderIDs.contains(providerId)) { continue; }
+
+                                String name = provider.get("provider_name").asText();
+                                String logoPath = provider.has("logo_path") && !provider.get("logo_path").isNull() ?
+                                    provider.get("logo_path").asText() : null;
+
+                                String logoURL = logoPath != null ? "https://image.tmdb.org/t/p/w92" + logoPath : null;
+
+                                StreamingService service = new StreamingService();
+                                movie.addStreamingService(service);
+                                service.setMovie(movie);
+                                service.setStreamingService(name);
+                                service.setPaymentType(type);
+                                service.setLogoURL(logoURL);
+
+
+
+                                
+
+                                
+                            }
+                            if (batch.size() >= batchSize) {
+                                movieRepository.saveAll(batch);
+                                //streamingServiceRepository.saveAll(batch); already saved via cascade type all
+                                batch.clear();
+                            }
+                            Thread.sleep(150);
+                        }
+
+                        if (!batch.isEmpty()) {
+                            movieRepository.saveAll(batch);
+                        }
+
+                    }
+
+                    
+                
+                
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
@@ -195,6 +289,7 @@ public class MovieParser implements CommandLineRunner {
         generateGenreMap();
 
         addFields();
+        fetchStreamingServices();
     }
     
 

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.example.backend.models.Genre;
 import com.example.backend.models.Movie;
+import com.example.backend.models.StreamingService;
 
 /**
  * Single movie object to be returned
@@ -15,6 +16,7 @@ public class MovieDTO{
     private Long id;
     private String title;
     private Set<String> genres = new HashSet<>();
+    private Set<StreamingService> streamingServices = new HashSet<>();
     private Double rating;
     private Double gunnarsRating;
     private int year;
@@ -22,6 +24,7 @@ public class MovieDTO{
     private String posterURL;
     private String synopsis;
     private String backdropURL;
+    private int movieId;
 
 
 
@@ -37,7 +40,8 @@ public class MovieDTO{
         this.posterURL = movie.getPosterURL();
         this.synopsis = movie.getSynopsis();
         this.backdropURL = movie.getBackdropURL();
-
+        this.movieId = movie.getMovieId();
+        this.streamingServices = movie.getStreamingServices();
         this.genres = movie.getGenres().stream()
                        .map(Genre::getGenre)
                        .collect(Collectors.toSet());
@@ -73,5 +77,12 @@ public class MovieDTO{
     }
     public String getBackdropURL() {
         return backdropURL;
+    }
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public Set<StreamingService> getStreamingServices() {
+        return streamingServices;
     }
 }
