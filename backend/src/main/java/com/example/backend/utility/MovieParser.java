@@ -180,7 +180,7 @@ public class MovieParser implements CommandLineRunner {
         int batchSize = 50;
 
         for(Movie movie : movies) {
-            if (movie.getStreamingServices().isEmpty()) { continue; }
+            if (!movie.getStreamingServices().isEmpty()) { continue; }
 
             String query = URLEncoder.encode(movie.getTitle(), StandardCharsets.UTF_8);
             String url = "https://api.themoviedb.org/3/movie/"+ movie.getMovieId() + "/watch/providers?region=us&api_key=" + apiKey;
@@ -228,23 +228,16 @@ public class MovieParser implements CommandLineRunner {
 
                                 movie.addStreamingService(service);
 
-                                
-
-                                
                             }
-                            movieRepository.save(movie);
-                            Thread.sleep(150);
                         }
-
-                        if (!batch.isEmpty()) {
+                        batch.add(movie);
+                        if (batch.size() >= batchSize) {
                             movieRepository.saveAll(batch);
+                            batch.clear();
                         }
+                        Thread.sleep(150);
 
                     }
-
-                    
-                
-                
                 }
             } catch (Exception e) {
                 e.printStackTrace();
