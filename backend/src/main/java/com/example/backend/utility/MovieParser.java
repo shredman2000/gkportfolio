@@ -220,23 +220,19 @@ public class MovieParser implements CommandLineRunner {
                                 String logoURL = logoPath != null ? "https://image.tmdb.org/t/p/w92" + logoPath : null;
 
                                 StreamingService service = new StreamingService();
-                                movie.addStreamingService(service);
+                                
                                 service.setMovie(movie);
                                 service.setStreamingService(name);
                                 service.setPaymentType(type);
                                 service.setLogoURL(logoURL);
 
-
+                                movie.addStreamingService(service);
 
                                 
 
                                 
                             }
-                            if (batch.size() >= batchSize) {
-                                movieRepository.saveAll(batch);
-                                //streamingServiceRepository.saveAll(batch); already saved via cascade type all
-                                batch.clear();
-                            }
+                            movieRepository.save(movie);
                             Thread.sleep(150);
                         }
 
