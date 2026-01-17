@@ -38,6 +38,8 @@ public class Movie {
     private Double rating;
     private Double gunnarsRating;
     private int year;
+
+    @Column(columnDefinition = "TEXT")
     private String synopsis;
 
     @Column(name = "date_rated", columnDefinition = "date")
