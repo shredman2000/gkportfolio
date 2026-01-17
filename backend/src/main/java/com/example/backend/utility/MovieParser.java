@@ -250,33 +250,31 @@ public class MovieParser implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (movieRepository.count() > 0) {
-            System.out.println("Movies already populated, skipping");
-            return;
+        if (movieRepository.count() == 0) {
+            System.out.println("Populating movies from CSV");
+
+            InputStream input = getClass().getResourceAsStream("/data/ratings.csv");
+            CSVReader csvreader = new CSVReader(new InputStreamReader(input));
+
+            List<Movie> ratedMovies = new ArrayList<>();
+            String[] line;
+            csvreader.readNext();
+            while ((line = csvreader.readNext()) != null) {
+                Movie movie = new Movie();
+                movie.setDateRated(LocalDate.parse(line[0]));
+                movie.setTitle(line[1]);
+                movie.setYear(Integer.parseInt(line[2]));
+                movie.setRating(null);
+                movie.setGunnarsRating(Double.parseDouble(line[4]) * 2);
+                ratedMovies.add(movie);
+            }
+            movieRepository.saveAll(ratedMovies);
+            csvreader.close();
+        } else {
+            System.out.println("Movies already exist, skipping CSV import");
         }
 
-        // parse data with gunnars ratings
-        InputStream input = getClass().getResourceAsStream("/data/ratings.csv");
-        CSVReader csvreader = new CSVReader(new InputStreamReader(input));
-
-        List<Movie> ratedMovies = new ArrayList<>();
-        String[] line;
-        csvreader.readNext();
-        while((line = csvreader.readNext()) != null) {
-            Movie movie = new Movie();
-            movie.setDateRated(LocalDate.parse(line[0]));
-            movie.setTitle(line[1]);
-            movie.setYear(Integer.parseInt(line[2]));
-            movie.setRating(null);
-            movie.setGunnarsRating(Double.parseDouble(line[4]) * 2);
-
-            ratedMovies.add(movie);
-
-        }
-        movieRepository.saveAll(ratedMovies);
-        csvreader.close();
         generateGenreMap();
-
         addFields();
         fetchStreamingServices();
     }
