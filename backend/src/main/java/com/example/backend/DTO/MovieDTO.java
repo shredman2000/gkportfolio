@@ -36,6 +36,7 @@ public class MovieDTO{
         this.dateRated = movie.getDateRated();
         this.posterURL = movie.getPosterURL();
         this.synopsis = movie.getSynopsis();
+        this.backdropURL = movie.getBackdropURL();
 
         this.genres = movie.getGenres().stream()
                        .map(Genre::getGenre)
@@ -69,5 +70,8 @@ public class MovieDTO{
     }
     public String getSynopsis() {
         return synopsis;
+    }
+    public String getBackdropURL() {
+        return backdropURL;
     }
 }

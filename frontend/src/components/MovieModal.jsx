@@ -28,6 +28,7 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                 <div className='card-face card-back'>
                     <div className='card-back-wrapper'>
                         <h2 className='movie-title'>{movie.title}</h2>
+                        <img className="movie-backdrop">{movie.backdropURL}</img>
                         <p className='year'>{movie.year}</p>
                         <p>Gunnar Rating: {movie.gunnarsRating}</p>
                         <div className='synopsis'>
