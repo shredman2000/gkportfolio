@@ -28,11 +28,21 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                 <div className='card-face card-back'>
                     <div className='card-back-wrapper'>
                         <h2 className='movie-title'>{movie.title}</h2>
-                        <img className="movie-backdrop">{movie.backdropURL}</img>
+                        <img className="movie-backdrop" src={movie.backdropURL}></img>
+                        <div className='audience-rating-wrapper'>
+                            <img src={'./AudienceScore.png'} className='audience-rating-img'></img>
+                            <p className='audience-rating-text'>{movie.rating.toFixed(1)}</p>
+                        </div>
                         <p className='year'>{movie.year}</p>
-                        <p>Gunnar Rating: {movie.gunnarsRating}</p>
-                        <div className='synopsis'>
-                            {movie.synopsis}
+                        <div className='genre-wrapper'>
+                            {movie.genres.map((genre) => (
+                                <span key={genre} className='genre'> {genre}</span>
+                            ))}
+                        </div>
+                        <div className='synopsis-wrapper'>
+                            <div className='synopsis'>
+                                {movie.synopsis}
+                            </div>
                         </div>
                     </div>
                 </div>
