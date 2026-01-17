@@ -203,7 +203,7 @@ public class MovieParser implements CommandLineRunner {
                         JsonNode usNode = results.get("US");
 
                         List<String> types = List.of("flatrate", "buy", "rent");
-                        Set<Integer> trustedProviderIDs = Set.of(8, 9, 2, 10, 531, 2100, 15, 384, 386, 387, 337, 119, 350);
+                        Set<String> allowedProviders = Set.of("Netflix", "Amazon Video", "Apple TV", "Hulu");
                         for (String type : types) {
                             if (!usNode.has(type)) { continue; }
 
@@ -211,7 +211,7 @@ public class MovieParser implements CommandLineRunner {
                             for (JsonNode provider : providers) {
                                 int providerId = provider.get("provider_id").asInt();
 
-                                if (!trustedProviderIDs.contains(providerId)) { continue; }
+                                if (!allowedProviders.contains(provider.get("provider_name").asText())) { continue; }
 
                                 String name = provider.get("provider_name").asText();
                                 String logoPath = provider.has("logo_path") && !provider.get("logo_path").isNull() ?
