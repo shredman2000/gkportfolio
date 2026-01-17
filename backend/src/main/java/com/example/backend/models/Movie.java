@@ -51,7 +51,7 @@ public class Movie {
 
     private int movieId;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<StreamingService> services = new HashSet<>();
 
     public Movie() {}
