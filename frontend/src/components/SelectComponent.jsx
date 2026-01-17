@@ -33,6 +33,7 @@ const MovieSelect = ({ value, onChange }) => {
             gridTemplateColumns: 'repeat(3, 1fr)', 
             gap: '8px',
             padding: '8px',
+            zIndex: 1000,
         }}>{props.children}</div>
     </components.MenuList>
   )
@@ -69,7 +70,8 @@ const MovieSelect = ({ value, onChange }) => {
       backgroundColor: state.isSelected ? '#2C3333' : state.isFocused ? '#D1ECE9' : '#E7F6F2',
       color: state.isSelected ? '#E7F6F2' : state.isFocused ? '#2C3333' : '#2C3333',
       padding: 10,
-      borderRadius: 5
+      borderRadius: 5,
+      textAlign: 'center',
     }),
     menu: (provided) => ({
       ...provided,
@@ -80,6 +82,7 @@ const MovieSelect = ({ value, onChange }) => {
       padding: 10,
       left: '50%',
       transform: 'translateX(-50%)',
+      zIndex: 9999
       
     }),
     menuList: (provided) => ({
@@ -87,7 +90,11 @@ const MovieSelect = ({ value, onChange }) => {
         maxHeight: 'none',
         maxWidth: 'none',
         overflow: 'visible'
-    })
+    }),
+    menuPortal: (provided) => ({ 
+      ...provided,
+      zIndex: 9999,
+    }),
   };
 
   return (
@@ -100,6 +107,7 @@ const MovieSelect = ({ value, onChange }) => {
       placeholder=''
       isSearchable={false}
       controlShouldRenderValue={false}
+      menuPortalTarget={document.body}
     />
   );
 };

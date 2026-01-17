@@ -148,7 +148,10 @@ function MoviePage() {
                     <div className='recent-watches-row'>
                         <div className='recent-watches'>
                             {(visibleFavoriteMovies.length > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
-                                <div key={movie.id} className='movie-card'>
+                                <div key={movie.id} className='movie-card' onClick={() => {
+                                   setIsModalOpen(true);
+                                   setSelectedModalMovie(movie);
+                                }}>
                                     <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
                                 </div>
                             ))}
@@ -191,8 +194,20 @@ function MoviePage() {
                 <div className='movie-search-results-box'>
                     <div className='search-results-grid'>
                         {movies.map(movie => (
-                            <div key={movie.id} className='search-result-card'>
-                                <img src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+                            <div key={movie.id} className="search-result-wrapper" onClick={() => {
+                                   setIsModalOpen(true);
+                                   setSelectedModalMovie(movie);
+                                }}>                                
+                                <div className='search-result-card'>
+                                    
+                                    <img className="search-result-movie-card" src={movie.posterURL || '/MoviePoster.png'} alt={movie.title}/>
+
+                                    <div className='audience-score-wrapper'>
+                                        <p className='audience-rating-on-img'>{movie.rating.toFixed(1)}</p>
+                                        <img className='audience-score-img' src={'/AudienceScore.png'}></img>
+                                    </div>
+                                </div>
+
                             </div>
                         ))}
                     </div>

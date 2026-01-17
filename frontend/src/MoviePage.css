@@ -146,7 +146,6 @@
 }
 
 .slider-wrapper {
-
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -166,4 +165,32 @@
 .movie-search-results-box {
     grid-column: 1/3;
     grid-row: 4/5;
+}
+
+.audience-score-img {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 32px !important;
+    height: 32px !important;
+    z-index: 10;
+    object-fit: contain; /* Add this */
+}
+.search-result-card {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    width: 100%;
+
+}
+.search-result-movie-card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 9;
+}
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
 }

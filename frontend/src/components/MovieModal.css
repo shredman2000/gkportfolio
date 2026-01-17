@@ -43,8 +43,17 @@
 
 .card-front {
     background-color: #1e1e2f;
-    padding: 20px;
-    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
 }
 
 .card-back {
