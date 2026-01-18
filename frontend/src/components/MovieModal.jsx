@@ -44,6 +44,12 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                                 {movie.synopsis}
                             </div>
                         </div>
+                        <div className='streaming-wrapper'>
+                            {movie.streamingServices.map((service) => (
+                                <div key={service} className='streaming-service'>
+                                    {service.paymentType}: <a className='service-link' href={service.URL}>{service.streamingService}</a></div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
