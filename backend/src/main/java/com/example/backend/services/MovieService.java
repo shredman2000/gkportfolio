@@ -43,12 +43,28 @@ public class MovieService {
      * @param pageable a pageable object
      * @return return a pageable list of movies 
      */
-    public Page<Movie> searchMovies(String genre, Double minRating, Double gunnarsMinRating, Pageable pageable, long seed) {
+    public Page<Movie> searchMovies(String genre, Double minRating, Double gunnarsMinRating, int page, int size, long seed, String sortingMethod, Boolean sortingUp) {
         Specification<Movie> specification = Specification
             .where(MovieSpecification.hasGenre(genre))
             .and(MovieSpecification.minRating(minRating))
             .and(MovieSpecification.gunnarsMinRating(gunnarsMinRating))
             .and(MovieSpecification.shuffle(seed));
+
+
+        Pageable pageable;
+        if (sortingMethod != null) {
+            String sortingProp = switch (sortingMethod) {
+                case "audience-rating" -> "rating";
+                case "gunnar-rating" -> "gunnarsRating";
+                default -> "id";
+            };
+
+            Sort sort = sortingUp != null && sortingUp ? Sort.by(sortingProp).ascending() : Sort.by(sortingProp).descending();
+
+            pageable = PageRequest.of(page - 1, size, sort);
+        } else {
+            pageable = PageRequest.of(page - 1, size);
+        }
 
         return movieRepository.findAll(specification, pageable);
     }

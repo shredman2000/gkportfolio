@@ -1,16 +1,19 @@
 
-
+body.modal-open {
+    overflow: hidden;
+}
 .modal-background {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0,0,0,0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    overflow: hidden;
 }
 
 .modal-card {
@@ -115,6 +118,9 @@
     border: 2px solid #A5C9CA;
     border-radius: 10px;
     justify-content: start;
+    overflow-y: auto;
+    max-height: 100%;
+    scrollbar-width: none;
 }
 .synopsis {
     margin: 3px;
@@ -140,8 +146,33 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* center text on image */
-    font-size: .75em;   /* relative to wrapper size */
+    transform: translate(-50%, -50%);
+    font-size: .8rem;   
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.gunnar-rating-wrapper {
+    position: absolute;
+    top: 37%;
+    z-index: 3;
+    height: 10%;
+    right: 5px;
+    transform: translateY(-100%);
+    width: auto;
+}
+.gunnar-rating-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.gunnar-rating-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -169,10 +200,13 @@
 .streaming-service {
     margin-left: 5px;
     color: #A5C9CA;
+    font-size: .75rem;
 }
 .service-link {
     cursor: pointer;
 }
+
+
 
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }

@@ -7,6 +7,12 @@ const MovieModal = ({isOpen, onClose, movie}) => {
     const [flipped, setFlipped] = useState(false);
     if (!isOpen) return null;
 
+    const paymentTypeLabel = {
+        flatrate: 'Subscription',
+        rent: 'Rent',
+        buy: 'Buy',
+    };
+
     useEffect(() => {
         if (isOpen) {
         setFlipped(false); // reset when modal opens
@@ -14,7 +20,17 @@ const MovieModal = ({isOpen, onClose, movie}) => {
         return () => clearTimeout(timer);
         }
     }, [isOpen]);
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
 
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+    }, [isOpen]);
     return createPortal(
         <div className='modal-background' onClick={onClose}>
             <div className={`modal-card ${flipped ? 'flipped' : ''}`}
@@ -33,6 +49,10 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                             <img src={'./AudienceScore.png'} className='audience-rating-img'></img>
                             <p className='audience-rating-text'>{movie.rating.toFixed(1)}</p>
                         </div>
+                        <div className='gunnar-rating-wrapper'>
+                            <img src={'./LogoNew.png'} className='gunnar-rating-img'></img>
+                            <p className='gunnar-rating-text'>{movie.gunnarsRating.toFixed(0)}</p>
+                        </div>
                         <p className='year'>{movie.year}</p>
                         <div className='genre-wrapper'>
                             {movie.genres.map((genre) => (
@@ -46,8 +66,8 @@ const MovieModal = ({isOpen, onClose, movie}) => {
                         </div>
                         <div className='streaming-wrapper'>
                             {movie.streamingServices.map((service) => (
-                                <div key={service} className='streaming-service'>
-                                    {service.paymentType}: <a className='service-link' href={service.URL}>{service.streamingService}</a></div>
+                                <div key={`${service.streamingService}-${service.paymentType}`} className='streaming-service'>
+                                    {paymentTypeLabel[service.paymentType] ?? service.paymentType}: {' '}<a className='service-link' href={service.URL}>{service.streamingService}</a></div>
                             ))}
                         </div>
                     </div>

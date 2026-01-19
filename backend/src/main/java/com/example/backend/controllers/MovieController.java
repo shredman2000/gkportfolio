@@ -47,12 +47,12 @@ public class MovieController {
         Double gunnarsMinRating = params.containsKey("gunnarsMinRating") ? ((Number) params.get("gunnarsMinRating")).doubleValue() : null;
         int page = params.containsKey("page") ? ((Number) params.get("page")).intValue() : 1;
         int limit = params.containsKey("limit") ? ((Number) params.get("limit")).intValue() : 30;
-
+        String sortingMethod = params.containsKey("selectedSortMethod") ? params.get("selectedSortMethod").toString() : null;
+        Boolean sortingUp = params.containsKey("sortingUp") ? Boolean.valueOf(params.get("sortingUp").toString()) : null;
         long seed = params.containsKey("seed") ? ((Number) params.get("seed")).longValue() : System.currentTimeMillis();
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
+        Page<Movie> moviePage = movieService.searchMovies(genre, minRating, gunnarsMinRating, page, limit, seed, sortingMethod, sortingUp);
 
-        Page<Movie> moviePage = movieService.searchMovies(genre, minRating, gunnarsMinRating, pageable, seed);
 
         
         List<MovieDTO> movieDTOList = moviePage.getContent().stream().map(MovieDTO::new).toList();

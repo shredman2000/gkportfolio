@@ -7,6 +7,7 @@ import MovieSelect from './components/SelectComponent';
 import BarComponent from './components/BarComponent';
 import PageComponent from './components/PageComponent';
 import MovieModal from './components/MovieModal';
+import SortBySelectComponent from './components/SortBySelectComponent';
 
 
 
@@ -29,6 +30,8 @@ function MoviePage() {
     const [seed] = useState(Date.now());
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedModalMovie, setSelectedModalMovie] = useState(null);
+    const [selectedSortMethod, setSelectedSortMethod] = useState(null);
+    const [sortingUp, setSortingUp] = useState(false);
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
     { id: 2, title: "Movie 2", year: 2025, gunnarsRating: 4, posterURL: "/MoviePoster.png" },
@@ -46,7 +49,7 @@ function MoviePage() {
         fetchMovies(1);
     }, [selectedGenre, minRating, gunnarsMinRating]);
 
-    const fetchMovies = async (page = 1) => { // 1 is initial value
+    const fetchMovies = async (page = 1) => { 
         try {
             const response = await fetch('/api/movies/searchmovies', {
                 method: "POST",
@@ -57,7 +60,9 @@ function MoviePage() {
                     genre: selectedGenre?.value ?? null,
                     minRating: minRating,
                     gunnarsMinRating: gunnarsMinRating,
-                    seed
+                    seed,
+                    selectedSortMethod,
+                    sortingUp,
                 })
             });
             const data = await response.json();
@@ -186,6 +191,29 @@ function MoviePage() {
                             <div className='slider-wrapper'>
                                 <BarComponent className='audience-rating-bar' onChange={setMinRating} value={minRating} title='Minimum Audience Rating'/>
                                 <BarComponent className='gunnar-rating-bar' onChange={setGunnarsMinRating} value={gunnarsMinRating} title='Minimum Gunnar Rating'></BarComponent>
+                            </div>
+                            <div className='sort-by-wrapper'>
+                                <SortBySelectComponent value={selectedSortMethod} onChange={(option) => {
+                                    if (selectedSortMethod?.value === option?.value) {
+                                        setSelectedSortMethod(null);
+                                    }
+                                    else {
+                                        setSelectedSortMethod(option);
+                                    }
+                                }} ></SortBySelectComponent>
+                                <button className='sorting-direction-button' 
+                                    onClick={() => setSortingUp(prev => !prev)} 
+                                    style={{
+                                        backgroundImage: sortingUp ? "url('/UpArrow.png')" : "url('/DownArrow.png')",
+                                        width: '30px',
+                                        height: '30px',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                        padding: 0,
+                                        outline: 'none',
+                                        boxShadow: 'none',
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>

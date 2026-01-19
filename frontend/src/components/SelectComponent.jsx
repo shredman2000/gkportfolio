@@ -45,7 +45,7 @@ const MovieSelect = ({ value, onChange }) => {
         borderRadius: 8,
         border: 'none',
         boxShadow: 'none',
-        backgroundImage: "url('/Genre-button.png')", 
+        backgroundImage: "url('/Select-Component-Background.png')", 
         backgroundSize: 'cover',  
         overflow: 'hidden',
         backgroundRepeat: 'no-repeat',
@@ -53,17 +53,27 @@ const MovieSelect = ({ value, onChange }) => {
         backgroundPosition: 'center',
         cursor: 'pointer',
         padding: 0,
+
+
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: '#333',
+      color: '#A5C9CA',
+      fontSize: '2rem',
+      fontWeight: 'bold',
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: '#A5C9CA',
+      fontSize: '2rem',
+      fontWeight: 'bold',
     }),
     dropdownIndicator: (provided) => ({
       ...provided,
       display: 'none'
     }),
     indicatorSeparator: () => ({
-      display: 'none', // gets rid of vertical line
+      display: 'none', 
     }),
     option: (provided, state) => ({
       ...provided,
@@ -104,9 +114,9 @@ const MovieSelect = ({ value, onChange }) => {
       options={options}
       styles={customStyles}
       components={{ MenuList: CustomMenuList }}
-      placeholder=''
+      placeholder='Select Genre'
       isSearchable={false}
-      controlShouldRenderValue={false}
+
       menuPortalTarget={document.body}
     />
   );

@@ -152,6 +152,7 @@ body {
 .select-wrapper {
     position: relative;
     width: 250px;
+    margin-right: 20px;
 }
 
 .select-genre {
@@ -190,6 +191,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-right: 20px;
 }
 
 .audience-rating-bar {
@@ -295,5 +297,15 @@ body {
     font-weight: bold;
     color: white; /* Or whatever color shows best */
     text-align: center;
+}
+
+.sort-by-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.sort-by-select {
+    color: #395B64;
 }
 
