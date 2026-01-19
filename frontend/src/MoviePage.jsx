@@ -47,7 +47,7 @@ function MoviePage() {
 
     useEffect(() => {
         fetchMovies(1);
-    }, [selectedGenre, minRating, gunnarsMinRating]);
+    }, [selectedGenre, minRating, gunnarsMinRating, selectedSortMethod, sortingUp]);
 
     const fetchMovies = async (page = 1) => { 
         try {
@@ -61,7 +61,7 @@ function MoviePage() {
                     minRating: minRating,
                     gunnarsMinRating: gunnarsMinRating,
                     seed,
-                    selectedSortMethod,
+                    selectedSortMethod: selectedSortMethod?.value ?? null,
                     sortingUp,
                 })
             });
