@@ -1,121 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: auto;
+}
+
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 30vh auto 1fr;
+    grid-template-rows: auto auto auto auto 1fr auto; 
     height: 100vh;
     width: 100vw;
-    gap: 1rem;
+    gap: .25rem;
     box-sizing: border-box;
-    padding: 1rem;
+
 }
+
+.gk-logo {
+    width: 60px;
+    margin: 10px;
+}
+
+/*  Recently Watched  */
 
 .recent-watches-container {
     grid-column: 1/2;
-    grid-row: 2/3;
+    grid-row: 3/4;
     overflow: hidden;
     box-sizing: border-box;
+    padding: 8px;
+    display: flex;
+    align-items: center; 
+
 }
+.favorite-movies-text {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    text-align: left;
+    padding-left: 15px;
+    color: #A5C9CA;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    
+}
+
 .recent-watches-row {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    height: 100%;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    height: fit-content;
+}
+
+.recent-watches {
+    display: flex;
+    flex: 1;
+    gap: 0.5rem;
+    width: 100%; 
     box-sizing: border-box;
 }
-.recent-watches {
-    flex: 1;
-    display: flex;
-    gap: 0.75rem;
-    height: 100%;
-    min-width: 0; /* Critical for flexbox shrinking */
-}
 
-
-.search-movies-box {
-    grid-column: 1/3;
-    grid-row: 3/4;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto 1fr;
-}
-.search-movies-search-box {
-    grid-column: 1/3;
-    grid-row: 1/2;
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    width: 100%;
-
-
-}
 .movie-card {
-    aspect-ratio: 2 / 3;
-    flex: 1 1 0;
-    min-width: 0; /* Critical for flexbox shrinking */
-    height: 100%;
-    aspect-ratio: 2 / 3;
+    /* Each card is 1/6th of container width minus gaps */
+    width: calc((100% - 2.5rem) / 6); /* 5 gaps × 0.5rem = 2.5rem */
+    aspect-ratio: 2 / 3; 
+    flex-shrink: 0;
     border-radius: 4px;
     overflow: hidden;
     background-color: #333;
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .movie-card:hover {
     transform: scale(1.05);
 }
 
-
 .movie-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* makes image fill the card without stretching */
+    object-fit: cover;
     border-radius: 4px;
-}
-.movie-info p {
-    margin: 0.25rem 0 0;
-    font-size: 0.9rem;
-}
-.movie-page-title {
-    grid-column: 1/3;
-    grid-row: 1/2;
-    border-bottom: 4px outset #A5C9CA;
-    color: #A5C9CA;
-}
-
-.recently-watched-text {
-    text-align: left;
-    padding-left: 0px;
-    margin-top: 5px;
 }
 
 .right-arrow {
     flex-shrink: 0;
-    height: 100%; /* Match the card height */
-    width: auto; /* Let width calculate from aspect ratio */
+    max-height: 200px;
+    height: calc((((100vw - 2rem) / 2 - 2.5rem - 1rem) / 6) * 1.5); 
+    width: auto;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
-    object-fit: contain; /* Preserve the arrow's aspect ratio */
+    object-fit: contain;
 }
+.left-arrow {
+    flex-shrink: 0;
+    max-height: 200px;
+    height: calc((((100vw - 2rem) / 2 - 2.5rem - 1rem) / 6) * 1.5); 
+    width: auto;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    object-fit: contain;
+    transform: rotate(180deg);
+}
+/* ===== Search / Movies Section ===== */
+.search-movies-box {
+    grid-column: 1/3;
+    grid-row: 4/5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+}
+
+.search-movies-search-box {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    width: 100%;
+}
+
+.movie-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+}
+
+.movie-page-title {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    border-bottom: 4px outset #A5C9CA;
+    color: #A5C9CA;
+    justify-content: center;
+    align-items: center;
+}
+
+.recently-watched-text {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    text-align: left;
+    padding-left: 15px;
+    color: #A5C9CA;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+}
+
 .normal-text {
     color: #A5C9CA;
     margin: 0 0 0 0;
     text-align: left;
 }
 
+/*  Favorites Section  */
 .favorite-movies-container {
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 3/4;
     width: 100%;
-    padding: 16px;
-    overflow-x: hidden; 
-    overflow-y: visible;
+    padding: 8px;
+    overflow: hidden; 
+    box-sizing: border-box; 
+    display: flex;
+    align-items: center; 
 }
 
+/*  Select Boxes  */
 .select-wrapper {
     position: relative;
     width: 250px;
-    margin: 20px;
+    margin-right: 20px;
 }
+
 .select-genre {
     appearance: none;
     -webkit-appearance: none;
@@ -123,39 +189,42 @@
     border: none;
     width: 100%;
     height: 50px;
-    background: transparent; 
+    background: transparent;
     padding-right: 2.5rem;
 }
+
 .select-genre:focus {
     outline: none;
-    box-shadow:none;
+    box-shadow: none;
 }
+
 .select-button-custom {
     pointer-events: none;
     position: absolute;
     top: 0;
     right: 50%;
-    transform: translateY(-50%);
-    transform: translateX(50%);
+    transform: translateY(-50%) translateX(50%);
     height: 100%;
     width: 100%;
-
     background-size: contain;
 }
+
 .select-genre option {
     background-color: #E7F6F2;
 }
 
+/*  slider / rating bars */
 .slider-wrapper {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .audience-rating-bar {
     padding-bottom: 10px;
 }
+
 .inner-wrapper-search {
     grid-column: 2;
     display: flex;
@@ -164,35 +233,119 @@
     align-items: center;
 }
 
+/*  Movie Search Results  */
 .movie-search-results-box {
     grid-column: 1/3;
-    grid-row: 4/5;
+    grid-row: 5/6;
+    padding: 16px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    overflow: auto;      
+    scrollbar-width: none;   
+    -ms-overflow-style: none;  
 }
 
-.audience-score-img {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 32px !important;
-    height: 32px !important;
-    z-index: 10;
-    object-fit: contain; /* Add this */
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    width: 100%;
 }
+
+.search-result-card {
+    aspect-ratio: 2 / 3;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #333;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.search-result-card:hover {
+    transform: scale(1.05);
+}
+
+.page-container {
+    display: flex;
+    border-top: 4px outset #A5C9CA;
+    justify-content: center;
+}
+.page-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 5px;
+}
+
 .search-result-card {
     position: relative;
     aspect-ratio: 2 / 3;
-    width: 100%;
-
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #333;
+    transition: transform 0.2s;
+    cursor: pointer;
 }
 .search-result-movie-card {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    z-index: 9;
 }
-.search-results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
+
+.audience-score-wrapper {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.audience-score-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+}
+
+.audience-rating-on-img {
+    position: relative;
+    z-index: 11;
+    margin: 0;
+    font-size: 10px; 
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.sort-by-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.sort-by-select {
+    color: #395B64;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2C3333; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+.loading-animation {
+    width: 10%;
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 
-import './MoviePage2.css'
+import './MoviePage.css'
 import MovieSelect from './components/SelectComponent';
 import BarComponent from './components/BarComponent';
 import PageComponent from './components/PageComponent';
@@ -15,7 +15,9 @@ function MoviePage() {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
+    const [fetchLoading, setFetchLoading] = useState(true);
+    const [favoriteLoading, setFavoriteLoading] = useState(true);
+    const [recentlyLoading, setRecentlyLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [recentlyWatched, setRecentlyWatched] = useState([]);
     const [visibleRecentlyWatched, setVisibleRecentlyWatched] = useState([]);
@@ -32,6 +34,8 @@ function MoviePage() {
     const [selectedModalMovie, setSelectedModalMovie] = useState(null);
     const [selectedSortMethod, setSelectedSortMethod] = useState(null);
     const [sortingUp, setSortingUp] = useState(false);
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
     { id: 2, title: "Movie 2", year: 2025, gunnarsRating: 4, posterURL: "/MoviePoster.png" },
@@ -49,7 +53,8 @@ function MoviePage() {
         fetchMovies(1);
     }, [selectedGenre, minRating, gunnarsMinRating, selectedSortMethod, sortingUp]);
 
-    const fetchMovies = async (page = 1) => { 
+    const fetchMovies = async (page = 1) => {
+        const minDelay = delay(1000);
         try {
             const response = await fetch('/api/movies/searchmovies', {
                 method: "POST",
@@ -74,9 +79,15 @@ function MoviePage() {
         } catch (e) {
             console.error(e);
         }
+        finally {
+            await minDelay;
+            setFetchLoading(false);
+
+        }
     }
 
     const fetchRecentlyWatched = async () => {
+        const minDelay = delay(1000);
         try {
             const response = await fetch('/api/movies/recentlywatched', {
                 method: "GET"
@@ -89,6 +100,10 @@ function MoviePage() {
             setVisibleRecentlyWatched(result.results.slice(recentlyWatchedIndex, numberVisible));
         } catch (e) {
             console.error(e);
+        }
+        finally {
+            await minDelay;
+            setRecentlyLoading(false);
         }
     }
     const shuffleCardsRight = (items, setIndex, setVisible) => {
@@ -104,7 +119,19 @@ function MoviePage() {
         
     };
 
+    const shuffleCardsLeft = (items, setIndex, setVisible) => {
+        setIndex(prevIndex => {
+            const nextIndex = prevIndex - 1;
+            if (nextIndex >= 0) {
+                setVisible(items.slice(nextIndex, nextIndex + numberVisible));
+                return nextIndex;
+            }
+            return prevIndex;
+        });
+    };
+
     const fetchFavoriteMovies = async () => {
+        const minDelay = delay(1000);
         try {
             const response = await fetch('/api/movies/favoritemovies', {
                 method: "GET"
@@ -118,20 +145,31 @@ function MoviePage() {
         } catch (e) {
             console.error(e)
         }
+        finally {
+            await minDelay;
+            setFavoriteLoading(false);
+        }
     }
 
 
 
     return (
         <div>
+            {fetchLoading && favoriteLoading && recentlyLoading && (
+                <div className="loader-overlay">
+                    <img className='loading-animation' src={'./LoadingAnimation.gif'} alt="Loading..." />
+                </div>
+            )}
             <div className="grid">
                 <div className='movie-page-title'>
+                    <img className='gk-logo' src={'./LogoGK.png'}></img>
                     <h1>Gunnar's Movie Recs</h1>
                 </div>
 
                 <div className='recently-watched-text'>Recently Watched...</div>
                 <div className="recent-watches-container">
                     <div className='recent-watches-row'>
+                        <img className="left-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsLeft(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}/>
                         <div className="recent-watches">
                             {(visibleRecentlyWatched.length > 0 ? visibleRecentlyWatched : placeholderMovies).map(movie => (
                                 <div key={movie.id} className="movie-card" onClick={() => {
@@ -147,10 +185,11 @@ function MoviePage() {
 
                 </div>
 
-                <div className='favorite-movies-text'>My Favorites</div>             
+                <div className='favorite-movies-text'>My Favorites...</div>             
                 <div className='favorite-movies-container'>
 
                     <div className='recent-watches-row'>
+                        <img className="left-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsLeft(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}/>
                         <div className='recent-watches'>
                             {(visibleFavoriteMovies.length > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
                                 <div key={movie.id} className='movie-card' onClick={() => {
