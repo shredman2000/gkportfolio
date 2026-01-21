@@ -35,6 +35,10 @@ function MoviePage() {
     const [selectedSortMethod, setSelectedSortMethod] = useState(null);
     const [sortingUp, setSortingUp] = useState(false);
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    const canScrollRecentlyLeft = recentlyWatchedIndex > 0;
+    const canScrollRecentlyRight = recentlyWatchedIndex < recentlyWatched.length - numberVisible;
+    const canScrollFavoriteLeft = favoriteMoviesIndex > 0;
+    const canScrollFavoriteRight = favoriteMoviesIndex < favoriteMovies.length - numberVisible;
 
     const placeholderMovies = [
     { id: 1, title: "Movie 1", year: 2026, gunnarsRating: 5, posterURL: "/MoviePoster.png" },
@@ -169,7 +173,11 @@ function MoviePage() {
                 <div className='recently-watched-text'>Recently Watched...</div>
                 <div className="recent-watches-container">
                     <div className='recent-watches-row'>
-                        <img className="left-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsLeft(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}/>
+                        <img className="left-arrow" 
+                            src={'/rightarrow.png'} 
+                            onClick={() => shuffleCardsLeft(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}
+                            style={{opacity: canScrollRecentlyLeft ? 0.7 : 0.2, pointerEvents: canScrollRecentlyLeft ? "auto" : "none"}}
+                        />
                         <div className="recent-watches">
                             {(visibleRecentlyWatched.length > 0 ? visibleRecentlyWatched : placeholderMovies).map(movie => (
                                 <div key={movie.id} className="movie-card" onClick={() => {
@@ -180,7 +188,11 @@ function MoviePage() {
                                 </div> 
                             ))}
                         </div>
-                        <img className="right-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsRight(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}/>
+                        <img className="right-arrow" 
+                            src={'/rightarrow.png'}
+                            onClick={() => shuffleCardsRight(recentlyWatched, setRecentlyWatchedIndex, setVisibleRecentlyWatched)}
+                            style={{opacity: canScrollRecentlyRight ? 0.7 : 0.2, pointerEvents: canScrollRecentlyRight ? "auto" : "none"}}    
+                        />
                     </div>
 
                 </div>
@@ -189,7 +201,11 @@ function MoviePage() {
                 <div className='favorite-movies-container'>
 
                     <div className='recent-watches-row'>
-                        <img className="left-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsLeft(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}/>
+                        <img className="left-arrow" 
+                            src={'/rightarrow.png'} 
+                            onClick={() => shuffleCardsLeft(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}
+                            style={{opacity: canScrollFavoriteLeft ? 0.7 : 0.2, pointerEvents: canScrollFavoriteLeft ? "auto" : "none"}}
+                        />
                         <div className='recent-watches'>
                             {(visibleFavoriteMovies.length > 0 ? visibleFavoriteMovies : placeholderMovies).map(movie => (
                                 <div key={movie.id} className='movie-card' onClick={() => {
@@ -201,7 +217,11 @@ function MoviePage() {
                             ))}
 
                         </div>
-                        <img className="right-arrow" src={'/rightarrow.png'} onClick={() => shuffleCardsRight(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}/>
+                        <img className="right-arrow" 
+                            src={'/rightarrow.png'} 
+                            onClick={() => shuffleCardsRight(favoriteMovies, setFavoriteMoviesIndex, setVisibleFavoriteMovies)}
+                            style={{opacity: canScrollFavoriteRight ? 0.7 : 0.2, pointerEvents: canScrollFavoriteRight ? "auto" : "none"}}
+                            />
                     </div>
                 </div>
 
