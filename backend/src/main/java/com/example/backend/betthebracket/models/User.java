@@ -35,7 +35,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private double balance;
+    private Double balance;
 
     @JsonIgnore
     private String authToken;
@@ -51,7 +51,7 @@ public class User {
     }
 
     // Constructor with custom balance (for signup or admin creation)
-    public User(String username, String password, String email, int balance) {
+    public User(String username, String password, String email, Double balance) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -88,11 +88,11 @@ public class User {
         this.email = email;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -116,7 +116,7 @@ public class User {
         return "Username: " + username + " Password: " + password;
     }
 
-    public void deposit(double amount) {
+    public void deposit(Double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Deposit amount must be greater than zero.");
         }
@@ -124,7 +124,7 @@ public class User {
     }
 
     public void placeBet(Bet bet) {
-        double amount = bet.getAmount();
+        Double amount = bet.getAmount();
         if (amount <= 0) {
             throw new IllegalArgumentException("Bet amount must be greater than zero.");
         }

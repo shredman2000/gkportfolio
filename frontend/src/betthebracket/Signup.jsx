@@ -12,7 +12,7 @@ function Signup() {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
     //TODO: Update url for signup
-    const url = 'http://localhost:8080/api/users';
+    const url = '/api/betthebracket/users';
 
     const handleSignup = async (e) => {
         //stop automatic reload of the page

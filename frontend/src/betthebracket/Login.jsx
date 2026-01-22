@@ -19,6 +19,7 @@ function Login() {
 
         //send credentials to the database for verification
         try {
+            console.log('Logging in with:', { username, password });
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
