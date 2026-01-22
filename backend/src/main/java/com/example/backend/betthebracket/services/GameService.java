@@ -38,11 +38,11 @@ public class GameService {
             populateBracket();
         }
 
-        updateGamesFromApi();
+        //updateGamesFromApi();
 
-        updateWinners();
+        //updateWinners();
 
-        advanceTeams();
+        //advanceTeams();
 
         return gameRepository.findAll();
     }
@@ -55,8 +55,6 @@ public class GameService {
     public void populateBracket() {
         if (gameRepository.count() > 0 ) { return; } 
         //debugging
-
-        gameRepository.deleteAll();  
         List<Game> matchups = List.of(
             new Game(TournamentRound.ROUND_OF_64, "East", 1, "Duke Blue Devils", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Duke Blue Devils", "roundOf64", 1),
             new Game(TournamentRound.ROUND_OF_64, "East", 8, "Mississippi State Bulldogs", 9, "Baylor Bears", "TBD", "TBD", -120.0, 100.0, "Baylor Bears", "roundOf64", 2),
@@ -94,8 +92,9 @@ public class GameService {
             new Game(TournamentRound.ROUND_OF_64, "West", 7, "Kansas Jayhawks", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf64", 31),
             new Game(TournamentRound.ROUND_OF_64, "West", 2, "St. John's Red Storm", 15, "Omaha Mavericks", "TBD", "TBD", -3000.0, 1250.0, "St. John's Red Storm", "roundOf64", 32)
         );
-
+        System.out.println("Populating bracket, matchups count = " + matchups.size());
         gameRepository.saveAll(matchups);
+        System.out.println("Saved. DB count = " + gameRepository.count());
     }
 
 
