@@ -33,8 +33,9 @@ public class GameService {
      */
     @Transactional
     public List<Game> getGames() {
-
-        //populateBracket();
+        if (gameRepository.count() == 0) {
+            populateBracket();
+        }
 
         updateGamesFromApi();
 
