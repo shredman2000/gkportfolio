@@ -26,7 +26,7 @@ import com.example.backend.betthebracket.repository.UserRepository;
  */
 @CrossOrigin(origins = "*")  // Allow requests from any origin (useful for frontend integration)
 @RestController
-@RequestMapping("/api/bets")  // Base endpoint for all bet-related operations
+@RequestMapping("/api/betthebracket/bets")  // Base endpoint for all bet-related operations
 public class BetController {
 
     private final BetRepository betRepository;

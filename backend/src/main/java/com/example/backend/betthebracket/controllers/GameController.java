@@ -21,7 +21,7 @@ import com.example.backend.betthebracket.services.GameService;
  */
 @CrossOrigin(origins = "*")
 @RestController 
-@RequestMapping("/api/games")
+@RequestMapping("/api/betthebracket/games")
 public class GameController {
     private final GameRepository gameRepository;
     private final GameService gameService;

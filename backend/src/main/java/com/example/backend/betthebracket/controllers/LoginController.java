@@ -26,7 +26,7 @@ import com.example.backend.betthebracket.repository.UserRepository;
 */
 @CrossOrigin(origins = "*") // allows for requests coming from a different port
 @RestController // indicates this is taking requests
-@RequestMapping("/api/authentication") // api for all authentication requests
+@RequestMapping("/api/betthebracket/authentication") // api for all authentication requests
 public class LoginController {
 
     // need this userRepository object here for reference in dependency injection

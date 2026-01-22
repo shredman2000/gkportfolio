@@ -12,7 +12,7 @@ import java.util.List;
  * WIP - needs more methods for retrieving other info.
  */
 @RestController 
-@RequestMapping("/api/teams")
+@RequestMapping("/api/betthebracket/teams")
 public class TeamController {
     private final TeamRepository teamRepository;
     

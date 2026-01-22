@@ -11,7 +11,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     //url for api call
-    const url = '';
+    const url = '/api/betthebracket/authentication/login';
 
     const handleLogin = async (e) => {
         //stop automatic reload of the page
@@ -38,7 +38,7 @@ function Login() {
             }
             
             else {
-                navigate('home');
+                navigate('home'); //TODO: delete this bypasses
                 //alert("Login failed. Check your credentials and try again!");
             }
 

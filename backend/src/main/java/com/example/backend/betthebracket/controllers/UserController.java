@@ -35,7 +35,7 @@ import com.example.backend.betthebracket.services.UpdateBetsService;
  */
 @CrossOrigin(origins = "*") // allow requests from all origins for development, change to specific frontend url later
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/betthebracket/users")
 public class UserController {
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
