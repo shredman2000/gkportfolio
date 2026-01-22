@@ -58,103 +58,41 @@ public class GameService {
 
         gameRepository.deleteAll();  
         List<Game> matchups = List.of(
-            new Game("Round of 64", "East", 1, "Duke Blue Devils", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Duke Blue Devils", "roundOf64", 1),
-            new Game("Round of 64", "East", 8, "Mississippi State Bulldogs", 9, "Baylor Bears", "TBD", "TBD", -120.0, 100.0, "Baylor Bears", "roundOf64", 2),
-            new Game("Round of 64", "East", 5, "Oregon Ducks", 12, "Liberty Flames", "TBD", "TBD", -278.0, 225.0, "Oregon Ducks", "roundOf64", 3),
-            new Game("Round of 64", "East", 4, "Arizona Wildcats", 13, "Akron Zips", "TBD", "TBD", -450.0, 350.0, "Arizona Wildcats", "roundOf64", 4),
-            new Game("Round of 64", "East", 6, "BYU Cougars", 11, "VCU Rams", "TBD", "TBD", -180.0, 150.0, "BYU Cougars", "roundOf64", 5),
-            new Game("Round of 64", "East", 3, "Wisconsin Badgers", 14, "Montana Grizzlies", "TBD", "TBD", -650.0, 475.0, "Wisconsin Badgers", "roundOf64", 6),
-            new Game("Round of 64", "East", 7, "Saint Mary's Gaels", 10, "Vanderbilt Commodores", "TBD", "TBD", -135.0, 115.0, "Saint Mary's Gaels", "roundOf64", 7),
-            new Game("Round of 64", "East", 2, "Alabama Crimson Tide", 15, "Robert Morris Colonials", "TBD", "TBD", -5000.0, 1800.0, "Alabama Crimson Tide", "roundOf64", 8),
+            new Game(TournamentRound.ROUND_OF_64, "East", 1, "Duke Blue Devils", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Duke Blue Devils", "roundOf64", 1),
+            new Game(TournamentRound.ROUND_OF_64, "East", 8, "Mississippi State Bulldogs", 9, "Baylor Bears", "TBD", "TBD", -120.0, 100.0, "Baylor Bears", "roundOf64", 2),
+            new Game(TournamentRound.ROUND_OF_64, "East", 5, "Oregon Ducks", 12, "Liberty Flames", "TBD", "TBD", -278.0, 225.0, "Oregon Ducks", "roundOf64", 3),
+            new Game(TournamentRound.ROUND_OF_64, "East", 4, "Arizona Wildcats", 13, "Akron Zips", "TBD", "TBD", -450.0, 350.0, "Arizona Wildcats", "roundOf64", 4),
+            new Game(TournamentRound.ROUND_OF_64, "East", 6, "BYU Cougars", 11, "VCU Rams", "TBD", "TBD", -180.0, 150.0, "BYU Cougars", "roundOf64", 5),
+            new Game(TournamentRound.ROUND_OF_64, "East", 3, "Wisconsin Badgers", 14, "Montana Grizzlies", "TBD", "TBD", -650.0, 475.0, "Wisconsin Badgers", "roundOf64", 6),
+            new Game(TournamentRound.ROUND_OF_64, "East", 7, "Saint Mary's Gaels", 10, "Vanderbilt Commodores", "TBD", "TBD", -135.0, 115.0, "Saint Mary's Gaels", "roundOf64", 7),
+            new Game(TournamentRound.ROUND_OF_64, "East", 2, "Alabama Crimson Tide", 15, "Robert Morris Colonials", "TBD", "TBD", -5000.0, 1800.0, "Alabama Crimson Tide", "roundOf64", 8),
 
-            new Game("Round of 64", "Midwest", 1, "Houston Cougars", 16, "SIU Edwardsville Cougars", "TBD", "TBD", -10000.0, 3000.0, "Houston Cougars", "roundOf64", 9),
-            new Game("Round of 64", "Midwest", 8, "Gonzaga Bulldogs", 9, "Georgia Bulldogs", "TBD", "TBD", -110.0, -110.0, "Gonzaga Bulldogs", "roundOf64", 10),
-            new Game("Round of 64", "Midwest", 5, "Clemson Tigers", 12, "McNeese Cowboys", "TBD", "TBD", -250.0, 200.0, "McNeese Cowboys", "roundOf64", 11),
-            new Game("Round of 64", "Midwest", 4, "Purdue Boilermakers", 13, "High Point Panthers", "TBD", "TBD", -500.0, 375.0, "Purdue Boilermakers", "roundOf64", 12),
-            new Game("Round of 64", "Midwest", 6, "Illinois Fighting Illini", 11, "Texas Longhorns", "TBD", "TBD", -140.0, 120.0, "Illinois Fighting Illini", "roundOf64", 13),
-            new Game("Round of 64", "Midwest", 3, "Kentucky Wildcats", 14, "Troy Trojans", "TBD", "TBD", -700.0, 500.0, "Kentucky Wildcats", "roundOf64", 14),
-            new Game("Round of 64", "Midwest", 7, "UCLA Bruins", 10, "Utah State Aggies", "TBD", "TBD", -150.0, 130.0, "UCLA Bruins", "roundOf64", 15),
-            new Game("Round of 64", "Midwest", 2, "Tennessee Volunteers", 15, "Wofford Terriers", "TBD", "TBD", -3500.0, 1200.0, "Tennessee Volunteers", "roundOf64", 16),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 1, "Houston Cougars", 16, "SIU Edwardsville Cougars", "TBD", "TBD", -10000.0, 3000.0, "Houston Cougars", "roundOf64", 9),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 8, "Gonzaga Bulldogs", 9, "Georgia Bulldogs", "TBD", "TBD", -110.0, -110.0, "Gonzaga Bulldogs", "roundOf64", 10),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 5, "Clemson Tigers", 12, "McNeese Cowboys", "TBD", "TBD", -250.0, 200.0, "McNeese Cowboys", "roundOf64", 11),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 4, "Purdue Boilermakers", 13, "High Point Panthers", "TBD", "TBD", -500.0, 375.0, "Purdue Boilermakers", "roundOf64", 12),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 6, "Illinois Fighting Illini", 11, "Texas Longhorns", "TBD", "TBD", -140.0, 120.0, "Illinois Fighting Illini", "roundOf64", 13),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 3, "Kentucky Wildcats", 14, "Troy Trojans", "TBD", "TBD", -700.0, 500.0, "Kentucky Wildcats", "roundOf64", 14),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 7, "UCLA Bruins", 10, "Utah State Aggies", "TBD", "TBD", -150.0, 130.0, "UCLA Bruins", "roundOf64", 15),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 2, "Tennessee Volunteers", 15, "Wofford Terriers", "TBD", "TBD", -3500.0, 1200.0, "Tennessee Volunteers", "roundOf64", 16),
 
-            new Game("Round of 64", "South", 1, "Auburn Tigers", 16, "American Eagles", "TBD", "TBD", -10000.0, 3000.0, "Auburn Tigers", "roundOf64", 17),
-            new Game("Round of 64", "South", 8, "Louisville Cardinals", 9, "Creighton Bluejays", "TBD", "TBD", -140.0, 120.0, "Creighton Bluejays", "roundOf64", 18),
-            new Game("Round of 64", "South", 5, "Michigan Wolverines", 12, "UC San Diego Tritons", "TBD", "TBD", -150.0, 125.0, "Michigan Wolverines", "roundOf64", 19),
-            new Game("Round of 64", "South", 4, "Texas A&M Aggies", 13, "Yale Bulldogs", "TBD", "TBD", -300.0, 250.0, "Texas A&M Aggies", "roundOf64", 20),
-            new Game("Round of 64", "South", 6, "Ole Miss Rebels", 11, "North Carolina Tar Heels", "TBD", "TBD", -180.0, 150.0, "Ole Miss Rebels", "roundOf64", 21),
-            new Game("Round of 64", "South", 3, "Iowa State Cyclones", 14, "Montana Grizzlies", "TBD", "TBD", -2000.0, 950.0, "Iowa State Cyclones", "roundOf64", 22),
-            new Game("Round of 64", "South", 7, "Marquette Golden Eagles", 10, "New Mexico Lobos", "TBD", "TBD", -170.0, 145.0, "New Mexico Lobos", "roundOf64", 23),
-            new Game("Round of 64", "South", 2, "Michigan State Spartans", 15, "Bryant Bulldogs", "TBD", "TBD", -3500.0, 1200.0, "Michigan State Spartans", "roundOf64", 24),
+            new Game(TournamentRound.ROUND_OF_64, "South", 1, "Auburn Tigers", 16, "American Eagles", "TBD", "TBD", -10000.0, 3000.0, "Auburn Tigers", "roundOf64", 17),
+            new Game(TournamentRound.ROUND_OF_64, "South", 8, "Louisville Cardinals", 9, "Creighton Bluejays", "TBD", "TBD", -140.0, 120.0, "Creighton Bluejays", "roundOf64", 18),
+            new Game(TournamentRound.ROUND_OF_64, "South", 5, "Michigan Wolverines", 12, "UC San Diego Tritons", "TBD", "TBD", -150.0, 125.0, "Michigan Wolverines", "roundOf64", 19),
+            new Game(TournamentRound.ROUND_OF_64, "South", 4, "Texas A&M Aggies", 13, "Yale Bulldogs", "TBD", "TBD", -300.0, 250.0, "Texas A&M Aggies", "roundOf64", 20),
+            new Game(TournamentRound.ROUND_OF_64, "South", 6, "Ole Miss Rebels", 11, "North Carolina Tar Heels", "TBD", "TBD", -180.0, 150.0, "Ole Miss Rebels", "roundOf64", 21),
+            new Game(TournamentRound.ROUND_OF_64, "South", 3, "Iowa State Cyclones", 14, "Montana Grizzlies", "TBD", "TBD", -2000.0, 950.0, "Iowa State Cyclones", "roundOf64", 22),
+            new Game(TournamentRound.ROUND_OF_64, "South", 7, "Marquette Golden Eagles", 10, "New Mexico Lobos", "TBD", "TBD", -170.0, 145.0, "New Mexico Lobos", "roundOf64", 23),
+            new Game(TournamentRound.ROUND_OF_64, "South", 2, "Michigan State Spartans", 15, "Bryant Bulldogs", "TBD", "TBD", -3500.0, 1200.0, "Michigan State Spartans", "roundOf64", 24),
 
-            new Game("Round of 64", "West", 1, "Florida Gators", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Florida Gators", "roundOf64", 25),
-            new Game("Round of 64", "West", 8, "UConn Huskies", 9, "Oklahoma Sooners", "TBD", "TBD", -160.0, 135.0, "UConn Huskies", "roundOf64", 26),
-            new Game("Round of 64", "West", 5, "Memphis Tigers", 12, "Colorado State Rams", "TBD", "TBD", -140.0, 120.0, "Colorado State Rams", "roundOf64", 27),
-            new Game("Round of 64", "West", 4, "Maryland Terrapins", 13, "Grand Canyon Antelopes", "TBD", "TBD", -600.0, 450.0, "Maryland Terrapins", "roundOf64", 28),
-            new Game("Round of 64", "West", 6, "Missouri Tigers", 11, "Drake Bulldogs", "TBD", "TBD", -275.0, 220.0, "Drake Bulldogs", "roundOf64", 29),
-            new Game("Round of 64", "West", 3, "Texas Tech Red Raiders", 14, "UNC Wilmington Seahawks", "TBD", "TBD", -2000.0, 950.0, "Texas Tech Red Raiders", "roundOf64", 30),
-            new Game("Round of 64", "West", 7, "Kansas Jayhawks", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf64", 31),
-            new Game("Round of 64", "West", 2, "St. John's Red Storm", 15, "Omaha Mavericks", "TBD", "TBD", -3000.0, 1250.0, "St. John's Red Storm", "roundOf64", 32)
-        );
-
-        gameRepository.saveAll(matchups);
-    }
-
-    /**
-     * Initially creates all the matchups for the round of 32 with odds for games
-     * 
-    */
-    @Transactional
-    public void populateBracket2() {
-        if (gameRepository.count() > 0 ) { return; } 
-        //debugging
-
-        gameRepository.deleteAll();  
-        List<Game> matchups = List.of(
-            new Game("Round of 32", "East", 1, "Duke Blue Devils", 9, "Baylor Bears", "TBD", "TBD", -250.0, 210.0, "Duke Blue Devils", "roundOf32", 1),
-            new Game("Round of 32", "East", 4, "Arizona Wildcats", 5, "Oregon Ducks", "TBD", "TBD", -175.0, 145.0, "Arizona Wildcats", "roundOf32", 2),
-            new Game("Round of 32", "East", 3, "Wisconsin Badgers", 6, "BYU Cougars", "TBD", "TBD", -170.0, 150.0, "BYU Cougars", "roundOf32", 3),
-            new Game("Round of 32", "East", 2, "Alabama Crimson Tide", 7, "Saint Mary's Gaels", "TBD", "TBD", -235.0, 190.0, "Alabama Crimson Tide", "roundOf32", 4),
-
-            new Game("Round of 32", "Midwest", 1, "Houston Cougars", 8, "Gonzaga Bulldogs", "TBD", "TBD", -240.0, 200.0, "Houston Cougars", "roundOf32", 5),
-            new Game("Round of 32", "Midwest", 4, "Purdue Boilermakers", 12, "McNeese Cowboys", "TBD", "TBD", -258.0, 210.0, "Purdue Boilermakers", "roundOf32", 6),
-            new Game("Round of 32", "Midwest", 3, "Kentucky Wildcats", 6, "Illinois Fighting Illini", "TBD", "TBD", -240.0, 200.0, "Kentucky Wildcats", "roundOf32", 7),
-            new Game("Round of 32", "Midwest", 2, "Tennessee Volunteers", 7, "UCLA Bruins", "TBD", "TBD", -198.0, 164.0, "Tennessee Volunteers", "roundOf32", 8),
-
-            new Game("Round of 32", "South", 1, "Auburn Tigers", 9, "Creighton Bluejays", "TBD", "TBD", -250.0, 210.0, "Auburn Tigers", "roundOf32", 9),
-            new Game("Round of 32", "South", 4, "Texas A&M Aggies", 5, "Michigan Wolverines", "TBD", "TBD", 170.0, -200.0, "Michigan Wolverines", "roundOf32", 10),
-            new Game("Round of 32", "South", 3, "Iowa State Cyclones", 6, "Ole Miss Rebels", "TBD", "TBD", -220.0, 180.0, "Ole Miss Rebels", "roundOf32", 11),
-            new Game("Round of 32", "South", 2, "Michigan State Spartans", 10, "New Mexico Lobos", "TBD", "TBD", -175.0, 150.0, "Michigan State Spartans", "roundOf32", 12),
-
-            new Game("Round of 32", "West", 1, "Florida Gators", 8, "UConn Huskies", "TBD", "TBD", -210.0, 180.0, "Florida Gators", "roundOf32", 13),
-            new Game("Round of 32", "West", 4, "Maryland Terrapins", 12, "Colorado State Rams", "TBD", "TBD", -310.0, 250.0, "Maryland Terrapins", "roundOf32", 14),
-            new Game("Round of 32", "West", 3, "Texas Tech Red Raiders", 11, "Drake Bulldogs", "TBD", "TBD", -300.0, 240.0, "Texas Tech Red Raiders", "roundOf32", 15),
-            new Game("Round of 32", "West", 2, "St. John's Red Storm", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf32", 16)
-        );
-
-        gameRepository.saveAll(matchups);
-    }
-
-    /**
-     * Initially creates all the matchups for the sweet 16 with odds for games
-     * 
-    */
-    @Transactional
-    public void populateBracket3() {
-        if (gameRepository.count() > 0 ) { return; } 
-        //debugging
-
-        gameRepository.deleteAll();  
-        List<Game> matchups = List.of(
-            new Game("Sweet 16", "East", 1, "Duke Blue Devils", 4, "Arizona Wildcats", "TBD", "TBD", -510.0, 383.0, "Duke Blue Devils", "sweet16", 17),
-            new Game("Sweet 16", "East", 2, "Alabama Crimson Tide", 6, "BYU Cougars", "TBD", "TBD", -201.0, 167.0, "Alabama Crimson Tide", "sweet16", 18),
-
-            new Game("Sweet 16", "Midwest", 1, "Houston Cougars", 4, "Purdue Boilermakers", "TBD", "TBD", -446.0, 342.0, "Houston Cougars", "sweet16", 19),
-            new Game("Sweet 16", "Midwest", 2, "Tennessee Volunteers", 3, "Kentucky Wildcats", "TBD", "TBD", -207.0, 171.0, "Tennessee Volunteers", "sweet16", 20),
-
-            new Game("Sweet 16", "South", 1, "Auburn Tigers", 5, "Michigan Wolverines", "TBD", "TBD", -465.0, 350.0, "Auburn Tigers", "sweet16", 21),
-            new Game("Sweet 16", "South", 2, "Michigan State Spartans", 6, "Ole Miss Rebels", "TBD", "TBD", -180.0, 150.0, "Michigan State Spartans", "sweet16", 22),
-
-            new Game("Sweet 16", "West", 1, "Florida Gators", 4, "Maryland Terrapins", "TBD", "TBD", -305.0, 245.0, "Florida Gators", "sweet16", 23),
-            new Game("Sweet 16", "West", 3, "Texas Tech Red Raiders", 10, "Arkansas Razorbacks", "TBD", "TBD", -243.0, 198.0, "Texas Tech Red Raiders", "sweet16", 24)
+            new Game(TournamentRound.ROUND_OF_64, "West", 1, "Florida Gators", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Florida Gators", "roundOf64", 25),
+            new Game(TournamentRound.ROUND_OF_64, "West", 8, "UConn Huskies", 9, "Oklahoma Sooners", "TBD", "TBD", -160.0, 135.0, "UConn Huskies", "roundOf64", 26),
+            new Game(TournamentRound.ROUND_OF_64, "West", 5, "Memphis Tigers", 12, "Colorado State Rams", "TBD", "TBD", -140.0, 120.0, "Colorado State Rams", "roundOf64", 27),
+            new Game(TournamentRound.ROUND_OF_64, "West", 4, "Maryland Terrapins", 13, "Grand Canyon Antelopes", "TBD", "TBD", -600.0, 450.0, "Maryland Terrapins", "roundOf64", 28),
+            new Game(TournamentRound.ROUND_OF_64, "West", 6, "Missouri Tigers", 11, "Drake Bulldogs", "TBD", "TBD", -275.0, 220.0, "Drake Bulldogs", "roundOf64", 29),
+            new Game(TournamentRound.ROUND_OF_64, "West", 3, "Texas Tech Red Raiders", 14, "UNC Wilmington Seahawks", "TBD", "TBD", -2000.0, 950.0, "Texas Tech Red Raiders", "roundOf64", 30),
+            new Game(TournamentRound.ROUND_OF_64, "West", 7, "Kansas Jayhawks", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf64", 31),
+            new Game(TournamentRound.ROUND_OF_64, "West", 2, "St. John's Red Storm", 15, "Omaha Mavericks", "TBD", "TBD", -3000.0, 1250.0, "St. John's Red Storm", "roundOf64", 32)
         );
 
         gameRepository.saveAll(matchups);
@@ -246,7 +184,7 @@ public class GameService {
     private TournamentRound determineCurrentRound(List<Game> games) {
         return games.stream()
             .filter(g -> !"finished".equals(g.getStatus()))
-            .map(g -> TournamentRound.valueOf(g.getRound()))
+            .map(Game::getRound)
             .findFirst()
             .orElse(null);
     }
@@ -267,15 +205,15 @@ public class GameService {
                 String region = game.getRegion();
 
                 //////////////////////// ROUND OF 64 ->>> 32
-                if (game.getRound().equals("Round of 64")) {
+                if (game.getRound().equals(TournamentRound.ROUND_OF_64)) {
 
                     if (homeSeed == 1 || homeSeed == 16) { // would play 8 or 9 next
                         // check corresponding next matchup winner, is it set?
                         for (Game otherGame : allGames) {
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 64")) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_64)) {
                                 if (otherGame.getSeed1() == 8 || otherGame.getSeed2() == 9) {
 
-                                        createNewGame("Round of 32", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.ROUND_OF_32, region, game, otherGame, allGames, createdGameKeys);
                                 }
                             }
                         }
@@ -284,10 +222,10 @@ public class GameService {
             
                     if (homeSeed == 5 || homeSeed == 12) { // would play 4 or 13 next
                         for (Game otherGame : allGames) {
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 64")) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_64)) {
                                 if (otherGame.getSeed1() == 4 || otherGame.getSeed2() == 13) {
 
-                                        createNewGame("Round of 32", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.ROUND_OF_32, region, game, otherGame, allGames, createdGameKeys);
                                     
                                 }
                             }
@@ -296,10 +234,10 @@ public class GameService {
                     
                     if (homeSeed == 6 || homeSeed == 11) { // would play 3 or 14 next
                         for (Game otherGame : allGames) {
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 64")) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_64)) {
                                 if (otherGame.getSeed1() == 3 || otherGame.getSeed2() == 14) {
                                     
-                                        createNewGame("Round of 32", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.ROUND_OF_32, region, game, otherGame, allGames, createdGameKeys);
                                     
                                 }
                             }
@@ -308,10 +246,10 @@ public class GameService {
                     
                     if (homeSeed == 7 || homeSeed == 10) { // would play 2 or 15 next
                         for (Game otherGame : allGames) {
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 64")) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_64)) {
                                 if (otherGame.getSeed1() == 2 || otherGame.getSeed2() == 15) {
                                     
-                                        createNewGame("Round of 32", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.ROUND_OF_32, region, game, otherGame, allGames, createdGameKeys);
                                     
                                 }
                             }
@@ -324,7 +262,7 @@ public class GameService {
 
 
                 ////////////////////////ROUND OF 32 ->> ROUND OF 16
-                else if (game.getRound().equals("Round of 32")) {
+                else if (game.getRound().equals(TournamentRound.ROUND_OF_32)) {
 
 
                     if (homeSeed == 1 || homeSeed == 16 || homeSeed == 8 || homeSeed == 9) { // would play 5,12,4,13 next
@@ -333,9 +271,9 @@ public class GameService {
                         for (Game otherGame : allGames) {
                             int otherGameHomeSeed = otherGame.getSeed1();
                             int otherGameAwaySeed = otherGame.getSeed2();
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 32") && game.getId() < otherGame.getId()) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_32) && game.getId() < otherGame.getId()) {
                                 if (otherGameHomeSeed == 5 || otherGameHomeSeed == 12 || otherGameHomeSeed == 4 || otherGameHomeSeed == 13) {
-                                        createNewGame("Round of 16", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.SWEET_16, region, game, otherGame, allGames, createdGameKeys);
                                 }
                             }
                         }
@@ -346,9 +284,9 @@ public class GameService {
                         for (Game otherGame : allGames) {
                             int otherGameHomeSeed = otherGame.getSeed1();
                             int otherGameAwaySeed = otherGame.getSeed2();
-                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals("Round of 32") && game.getId() < otherGame.getId()) {
+                            if (otherGame.getRegion().equals(region) && otherGame.getRound().equals(TournamentRound.ROUND_OF_32) && game.getId() < otherGame.getId()) {
                                 if (otherGameHomeSeed == 7 || otherGameHomeSeed == 10 || otherGameHomeSeed == 2 || otherGameHomeSeed == 15) {
-                                        createNewGame("Round of 16", region, game, otherGame, allGames, createdGameKeys);
+                                        createNewGame(TournamentRound.SWEET_16, region, game, otherGame, allGames, createdGameKeys);
                                 }
                             }
                         }
@@ -358,21 +296,21 @@ public class GameService {
                 
                 
                 ///////////////////ROUND OF 16 ->>>>> ROUND Of 8
-                else if (game.getRound().equals("Round of 16")) {
+                else if (game.getRound().equals(TournamentRound.SWEET_16)) {
                     for (Game otherGame : allGames) {
-                        if (otherGame.getRound().equals("Round of 16") &&
+                        if (otherGame.getRound().equals(TournamentRound.SWEET_16) &&
                             otherGame.getRegion().equals(region) &&
                             game.getId() < otherGame.getId()) {
                 
                             // Same region, Round of 16, distinct games — try pairing
-                            createNewGame("Round of 8", region, game, otherGame, allGames, createdGameKeys);
+                            createNewGame(TournamentRound.ELITE_8, region, game, otherGame, allGames, createdGameKeys);
                         }
                     }
                 }
                 
-                else if (game.getRound().equals("Round of 8")) {
+                else if (game.getRound().equals(TournamentRound.ELITE_8)) {
                     for (Game otherGame : allGames) {
-                        if (otherGame.getRound().equals("Round of 8")) {
+                        if (otherGame.getRound().equals(TournamentRound.ELITE_8)) {
                             boolean southVsWest = (game.getRegion().equals("South") && otherGame.getRegion().equals("West"))
                                || (game.getRegion().equals("West") && otherGame.getRegion().equals("South"));
 
@@ -383,10 +321,10 @@ public class GameService {
                             
 
                             if (southVsWest && game.getId() < otherGame.getId()) {
-                                createNewGame("Final 4", "SouthVsWest", game, otherGame, allGames, createdGameKeys);
+                                createNewGame(TournamentRound.FINAL_4, "SouthVsWest", game, otherGame, allGames, createdGameKeys);
                             }
                             else if (eastVsMidwest && game.getId() < otherGame.getId()) {
-                                createNewGame("Final 4", "EastVsMidwest", game, otherGame, allGames, createdGameKeys);
+                                createNewGame(TournamentRound.FINAL_4, "EastVsMidwest", game, otherGame, allGames, createdGameKeys);
                             }
 
                         }
@@ -394,11 +332,11 @@ public class GameService {
                 
                 }
                 
-                else if (game.getRound().equals("Final 4")) {
+                else if (game.getRound().equals(TournamentRound.FINAL_4)) {
                     for (Game otherGame : allGames) {
-                        if (otherGame.getRound().equals("Final 4")) {
+                        if (otherGame.getRound().equals(TournamentRound.FINAL_4)) {
                             if (game.getId() < otherGame.getId()) {
-                                createNewGame("Championship", "championship", game, otherGame, allGames, createdGameKeys);
+                                createNewGame(TournamentRound.CHAMPIONSHIP, "championship", game, otherGame, allGames, createdGameKeys);
 
                             }
 
@@ -415,7 +353,7 @@ public class GameService {
     }
 
 
-    public void createNewGame(String nextRound, String region, Game game1, Game game2, List<Game> allGames, Set<String> createdGameKeys) {
+    public void createNewGame(TournamentRound nextRound, String region, Game game1, Game game2, List<Game> allGames, Set<String> createdGameKeys) {
         if (game1.getWinner() == null || game2.getWinner() == null) return;
     
         // Get winner names
@@ -455,7 +393,6 @@ public class GameService {
         // Assign seeds
         int seed1 = winner1.equals(game1.getHomeTeam()) ? game1.getSeed1() : game1.getSeed2();
         int seed2 = winner2.equals(game2.getHomeTeam()) ? game2.getSeed1() : game2.getSeed2();
-    
         // Create and save game
         Game newGame = new Game(
             nextRound, region,

@@ -113,7 +113,7 @@ public class FinishedGameResult {
 
     private String loadMockJson(TournamentRound round) throws IOException {
         return Files.readString(Paths.get(
-            "src/main/resources/static/" + switch (round) {
+            "betthebracket/resources/static/" + switch (round) {
                 case ROUND_OF_64 -> "roundof64mock.json";
                 case ROUND_OF_32 -> "Roundof32mock.json";
                 case SWEET_16 -> "Roundof16mock.json";

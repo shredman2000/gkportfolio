@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.betthebracket.models.Game;
+import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult.TournamentRound;
 /**
  * Parses JSON data from The Odds API and stores matchups in the Betting system.
  */
@@ -91,7 +92,7 @@ public class OddsAPIParser {
                         // Only add the matchup if both teams have valid odds
                         // NA and seed 1000 because they shouldnt be used.
                         if (homeOdds > 0 && awayOdds > 0) {
-                            Game gameObject = new Game("NA", "NA", 1000, homeTeam, 1000, awayTeam, gameStartTime.toLocalDate().toString(), gameStartTime.toLocalTime().toString(), homeOdds, awayOdds, null, -1);
+                            Game gameObject = new Game(TournamentRound.ROUND_OF_64, "NA", 1000, homeTeam, 1000, awayTeam, gameStartTime.toLocalDate().toString(), gameStartTime.toLocalTime().toString(), homeOdds, awayOdds, null, -1);
                             gamesList.add(gameObject);
                         }
                     }

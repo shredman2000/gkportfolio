@@ -1,7 +1,10 @@
 package com.example.backend.betthebracket.models;
 
+import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult.TournamentRound;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +20,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This is for auto incrementing values in for identities
     private Long id;
 
-    private String round;
+    @Enumerated
+    private TournamentRound round;
 
     private String region;
 
@@ -50,7 +54,7 @@ public class Game {
 
     public Game() {}
 
-    public Game(String round, String region, int seed1, String homeTeam, int seed2, String awayTeam, String date, String time, double homeOdds, double awayOdds, String winner, String bracketTag, int bracketNum) {
+    public Game(TournamentRound round, String region, int seed1, String homeTeam, int seed2, String awayTeam, String date, String time, double homeOdds, double awayOdds, String winner, String bracketTag, int bracketNum) {
         this.round = round;
         this.region = region;
         this.seed1 = seed1;
@@ -69,7 +73,7 @@ public class Game {
     
 
     // constructor for when there is no winner yet
-    public Game(String round, String region, int seed1, String homeTeam, int seed2, String awayTeam, String date, String time, double homeOdds, double awayOdds, String bracketTag, int bracketNum) {
+    public Game(TournamentRound round, String region, int seed1, String homeTeam, int seed2, String awayTeam, String date, String time, double homeOdds, double awayOdds, String bracketTag, int bracketNum) {
         this.round = round;
         this.region = region;
         this.seed1 = seed1;
@@ -141,7 +145,7 @@ public class Game {
         this.homeOdds = homeOdds;
     }
     
-    public String getRound() { 
+    public TournamentRound getRound() { 
         return round; 
     }
     
