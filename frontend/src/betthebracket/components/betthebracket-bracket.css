@@ -1,0 +1,52 @@
+/* Scoped to .betthebracket-root */
+
+.betthebracket-root .bracket-container {
+    overflow-x: auto;
+    padding-bottom: 2rem;
+}
+
+.betthebracket-root .bracket-grid {
+    display: grid;
+    grid-template-columns: repeat(11, auto);
+    gap: 2rem;
+    justify-content: center;
+    align-items: start;
+    position: relative;
+    min-width: max-content;
+}
+
+.betthebracket-root .bracket-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.betthebracket-root .bracket-game {
+    width: 100%;
+    max-width: 250px;
+}
+
+.betthebracket-root .bracket-column.round-64 .bracket-game {
+    margin: 1rem 0;
+}
+
+.betthebracket-root .bracket-column.round-32 .bracket-game:not(:first-child) {
+    margin-top: 6rem;
+}
+
+.betthebracket-root .bracket-column.round-16 .bracket-game:not(:first-child) {
+    margin-top: 12rem;
+}
+
+.betthebracket-root .bracket-column.round-8 .bracket-game:not(:first-child) {
+    margin-top: 24rem;
+}
+
+.betthebracket-root .bracket-column.final-four .bracket-game:not(:first-child) {
+    margin-top: 24rem;
+}
+
+.betthebracket-root .bracket-column.center .bracket-game {
+    margin-top: 12rem;
+}

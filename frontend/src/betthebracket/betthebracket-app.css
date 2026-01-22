@@ -1,0 +1,74 @@
+
+/* TODO - Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.betthebracket-root {
+    /* Color Palette */
+    --primary-color: #009CDE; /* Official NCAA Blue */
+    --background-color: #F9FAFB; /* Light background */
+    --surface-color: #FFFFFF; /* White card surfaces */
+    --border-color: #E0E0E0; /* Light gray for borders */
+    --text-color: #1F2937; /* Dark gray text */
+    --link-color: #1D4ED8; /* Blue links */
+    --hover-color: #2563EB; /* Hover blue */
+
+    /* Spacing */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 32px;
+
+    /* Font Sizes */
+    --font-small: 0.875rem;
+    --font-medium: 1rem;
+    --font-large: 1.5rem;
+    --font-xlarge: 2.5rem;
+
+    /* Border Radius */
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+.betthebracket-root h1,
+.betthebracket-root h2,
+.betthebracket-root h3,
+.betthebracket-root h4,
+.betthebracket-root h5,
+.betthebracket-root h6 {
+    color: var(--text-color);
+    margin-bottom: var(--spacing-small);
+}
+
+.betthebracket-root a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.betthebracket-root a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}
+
+.betthebracket-root button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing-small) var(--spacing-medium);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.betthebracket-root button:hover {
+    background-color: var(--hover-color);
+}
+
+.betthebracket-root .navbar {
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1050;
+}
