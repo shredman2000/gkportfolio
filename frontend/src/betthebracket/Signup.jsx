@@ -73,7 +73,7 @@ function Signup() {
                 <div>
                     <hr/>
                     <p>Already have an account?</p>
-                    <button onClick={() => navigate("")}>Login Here!</button>
+                    <button onClick={() => navigate('')}>Login Here!</button>
                 </div>
             </div>
         </div>

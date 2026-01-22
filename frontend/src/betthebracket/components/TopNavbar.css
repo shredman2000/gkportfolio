@@ -1,0 +1,66 @@
+.top-navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 8vh;
+    position: fixed;
+    background-color: var(--primary-color);
+}
+
+.navbar-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.betthebracket-logo {
+    height: 80%;
+    width: auto;
+    margin-left: 10px;
+}
+.betthebracket-logo:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: larger;
+    color: var(--background-color);
+    padding: 0;
+    margin: 0;
+}
+.top-navbar .nav-bar-button {
+    background-color: var(--primary-color); 
+    color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.top-navbar .nav-bar-button:hover {
+    background-color: var(--text-color);
+}
+.top-navbar .logout-button {
+    background-color: var(--background-color); 
+    color: var(--text-color);
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.top-navbar .logout-button:hover{
+    background-color: var(--hover-color);
+}

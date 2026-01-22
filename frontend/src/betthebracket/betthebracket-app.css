@@ -63,12 +63,4 @@
     background-color: var(--hover-color);
 }
 
-.betthebracket-root .navbar {
-    background-color: var(--primary-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1050;
-}
+

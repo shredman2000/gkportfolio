@@ -1,0 +1,450 @@
+[
+    {
+        "home_team": "Duke Blue Devils",
+        "away_team": "Norfolk State Spartans",
+        "scores": [
+            {
+                "name": "Duke Blue Devils",
+                "score": 93
+            },
+            {
+                "name": "Norfolk State Spartans",
+                "score": 49
+            }
+        ]
+    },
+    {
+        "home_team": "Mississippi State Bulldogs",
+        "away_team": "Baylor Bears",
+        "scores": [
+            {
+                "name": "Mississippi State Bulldogs",
+                "score": 72
+            },
+            {
+                "name": "Baylor Bears",
+                "score": 75
+            }
+        ]
+    },
+    {
+        "home_team": "Oregon Ducks",
+        "away_team": "Liberty Flames",
+        "scores": [
+            {
+                "name": "Oregon Ducks",
+                "score": 81
+            },
+            {
+                "name": "Liberty Flames",
+                "score": 52
+            }
+        ]
+    },
+    {
+        "home_team": "Arizona Wildcats",
+        "away_team": "Akron Zips",
+        "scores": [
+            {
+                "name": "Arizona Wildcats",
+                "score": 93
+            },
+            {
+                "name": "Akron Zips",
+                "score": 65
+            }
+        ]
+    },
+    {
+        "home_team": "BYU Cougars",
+        "away_team": "VCU Rams",
+        "scores": [
+            {
+                "name": "BYU Cougars",
+                "score": 80
+            },
+            {
+                "name": "VCU Rams",
+                "score": 71
+            }
+        ]
+    },
+    {
+        "home_team": "Wisconsin Badgers",
+        "away_team": "Montana Grizzlies",
+        "scores": [
+            {
+                "name": "Wisconsin Badgers",
+                "score": 85
+            },
+            {
+                "name": "Montana Grizzlies",
+                "score": 66
+            }
+        ]
+    },
+    {
+        "home_team": "Saint Mary's Gaels",
+        "away_team": "Vanderbilt Commodores",
+        "scores": [
+            {
+                "name": "Saint Mary's Gaels",
+                "score": 59
+            },
+            {
+                "name": "Vanderbilt Commodores",
+                "score": 56
+            }
+        ]
+    },
+    {
+        "home_team": "Alabama Crimson Tide",
+        "away_team": "Robert Morris Colonials",
+        "scores": [
+            {
+                "name": "Alabama Crimson Tide",
+                "score": 90
+            },
+            {
+                "name": "Robert Morris Colonials",
+                "score": 81
+            }
+        ]
+    },
+    {
+        "home_team": "Houston Cougars",
+        "away_team": "SIU Edwardsville Cougars",
+        "scores": [
+            {
+                "name": "Houston Cougars",
+                "score": 78
+            },
+            {
+                "name": "SIU Edwardsville Cougars",
+                "score": 40
+            }
+        ]
+    },
+    {
+        "home_team": "Gonzaga Bulldogs",
+        "away_team": "Georgia Bulldogs",
+        "scores": [
+            {
+                "name": "Gonzaga Bulldogs",
+                "score": 89
+            },
+            {
+                "name": "Georgia Bulldogs",
+                "score": 68
+            }
+        ]
+    },
+    {
+        "home_team": "Clemson Tigers",
+        "away_team": "McNeese Cowboys",
+        "scores": [
+            {
+                "name": "Clemson Tigers",
+                "score":67
+            },
+            {
+                "name": "McNeese Cowboys",
+                "score": 69
+            }
+        ]
+    },
+    {
+        "home_team": "Purdue Boilermakers",
+        "away_team": "High Point Panthers",
+        "scores": [
+            {
+                "name": "Purdue Boilermakers",
+                "score": 75
+            },
+            {
+                "name": "High Point Panthers",
+                "score": 63
+            }
+        ]
+    },
+    {
+        "home_team": "Illinois Fighting Illini",
+        "away_team": "Texas Longhorns",
+        "scores": [
+            {
+                "name": "Illinois Fighting Illini",
+                "score": 86
+            },
+            {
+                "name": "Texas Longhorns",
+                "score": 73
+            }
+        ]
+    },
+    {
+        "home_team": "Kentucky Wildcats",
+        "away_team": "Troy Trojans",
+        "scores": [
+            {
+                "name": "Kentucky Wildcats",
+                "score": 76
+            },
+            {
+                "name": "Troy Trojans",
+                "score": 57
+            }
+        ]
+    },
+    {
+        "home_team": "UCLA Bruins",
+        "away_team": "Utah State Aggies",
+        "scores": [
+            {
+                "name": "UCLA Bruins",
+                "score": 72
+            },
+            {
+                "name": "Utah State Aggies",
+                "score": 47
+            }
+        ]
+    },
+    {
+        "home_team": "Tennessee Volunteers",
+        "away_team": "Wofford Terriers",
+        "scores": [
+            {
+                "name": "Tennessee Volunteers",
+                "score": 77
+            },
+            {
+                "name": "Wofford Terriers",
+                "score": 62
+            }
+        ]
+    },
+    {
+        "home_team": "Auburn Tigers",
+        "away_team": "American Eagles",
+        "scores": [
+            {
+                "name": "Auburn Tigers",
+                "score": 83
+            },
+            {
+                "name": "American Eagles",
+                "score": 63
+            }
+        ]
+    },
+    {
+        "home_team": "Louisville Cardinals",
+        "away_team": "Creighton Bluejays",
+        "scores": [
+            {
+                "name": "Louisville Cardinals",
+                "score": 75
+            },
+            {
+                "name": "Creighton Bluejays",
+                "score": 89
+            }
+        ]
+    },
+    {
+        "home_team": "Michigan Wolverines",
+        "away_team": "UC San Diego Tritons",
+        "scores": [
+            {
+                "name": "Michigan Wolverines",
+                "score": 68
+            },
+            {
+                "name": "UC San Diego Tritons",
+                "score": 65
+            }
+        ]
+    },
+    {
+        "home_team": "Texas A&M Aggies",
+        "away_team": "Yale Bulldogs",
+        "scores": [
+            {
+                "name": "Texas A&M Aggies",
+                "score": 80
+            },
+            {
+                "name": "Yale Bulldogs",
+                "score": 71
+            }
+        ]
+    },
+    {
+        "home_team": "Ole Miss Rebels",
+        "away_team": "North Carolina Tar Heels",
+        "scores": [
+            {
+                "name": "Ole Miss Rebels",
+                "score": 71
+            },
+            {
+                "name": "North Carolina Tar Heels",
+                "score": 64
+            }
+        ]
+    },
+    {
+        "home_team": "Iowa State Cyclones",
+        "away_team": "Montana Grizzlies",
+        "scores": [
+            {
+                "name": "Iowa State Cyclones",
+                "score": 82
+            },
+            {
+                "name": "Montana Grizzlies",
+                "score": 55
+            }
+        ]
+    },
+    {
+        "home_team": "Marquette Golden Eagles",
+        "away_team": "New Mexico Lobos",
+        "scores": [
+            {
+                "name": "Marquette Golden Eagles",
+                "score": 66
+            },
+            {
+                "name": "New Mexico Lobos",
+                "score": 75
+            }
+        ]
+    },
+    {
+        "home_team": "Michigan State Spartans",
+        "away_team": "Bryant Bulldogs",
+        "scores": [
+            {
+                "name": "Michigan State Spartans",
+                "score": 87
+            },
+            {
+                "name": "Bryant Bulldogs",
+                "score": 62
+            }
+        ]
+    },
+    {
+        "home_team": "Florida Gators",
+        "away_team": "Norfolk State Spartans",
+        "scores": [
+            {
+                "name": "Florida Gators",
+                "score": 95
+            },
+            {
+                "name": "Norfolk State Spartans",
+                "score": 69
+            }
+        ]
+    },
+    {
+        "home_team": "UConn Huskies",
+        "away_team": "Oklahoma Sooners",
+        "scores": [
+            {
+                "name": "UConn Huskies",
+                "score": 67
+            },
+            {
+                "name": "Oklahoma Sooners",
+                "score": 59
+            }
+        ]
+    },
+    {
+        "home_team": "Memphis Tigers",
+        "away_team": "Colorado State Rams",
+        "scores": [
+            {
+                "name": "Memphis Tigers",
+                "score": 70
+            },
+            {
+                "name": "Colorado State Rams",
+                "score": 78
+            }
+        ]
+    },
+    {
+        "home_team": "Maryland Terrapins",
+        "away_team": "Grand Canyon Antelopes",
+        "scores": [
+            {
+                "name": "Maryland Terrapins",
+                "score": 81
+            },
+            {
+                "name": "Grand Canyon Antelopes",
+                "score": 49
+            }
+        ]
+    },
+    {
+        "home_team": "Missouri Tigers",
+        "away_team": "Drake Bulldogs",
+        "scores": [
+            {
+                "name": "Missouri Tigers",
+                "score": 57
+            },
+            {
+                "name": "Drake Bulldogs",
+                "score": 67
+            }
+        ]
+    },
+    {
+        "home_team": "Texas Tech Red Raiders",
+        "away_team": "UNC Wilmington Seahawks",
+        "scores": [
+            {
+                "name": "Texas Tech Red Raiders",
+                "score": 82
+            },
+            {
+                "name": "UNC Wilmington Seahawks",
+                "score": 72
+            }
+        ]
+    },
+    {
+        "home_team": "Kansas Jayhawks",
+        "away_team": "Arkansas Razorbacks",
+        "scores": [
+            {
+                "name": "Kansas Jayhawks",
+                "score": 72
+            },
+            {
+                "name": "Arkansas Razorbacks",
+                "score": 79
+            }
+        ]
+    },
+    {
+        "home_team": "St. John's Red Storm",
+        "away_team": "Omaha Mavericks",
+        "scores": [
+            {
+                "name": "St. John's Red Storm",
+                "score": 83
+            },
+            {
+                "name": "Omaha Mavericks",
+                "score": 53
+            }
+        ]
+    }
+]

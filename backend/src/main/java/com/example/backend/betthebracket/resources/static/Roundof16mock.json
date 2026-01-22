@@ -1,0 +1,67 @@
+[
+    {
+      "home_team": "Arizona Wildcats",
+      "away_team": "Duke Blue Devils",
+      "scores": [
+        { "name": "Arizona Wildcats", "score": 93 },
+        { "name": "Duke Blue Devils", "score": 100 }
+      ]
+    },
+    {
+      "home_team": "Alabama Crimson Tide",
+      "away_team": "BYU Cougars",
+      "scores": [
+        { "name": "Alabama Crimson Tide", "score": 113 },
+        { "name": "BYU Cougars", "score": 88 }
+      ]
+    },
+    {
+      "home_team": "Purdue Boilermakers",
+      "away_team": "Houston Cougars",
+      "scores": [
+        { "name": "Purdue Boilermakers", "score": 60 },
+        { "name": "Houston Cougars", "score": 62 }
+      ]
+    },
+    {
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "scores": [
+        { "name": "Tennessee Volunteers", "score": 78 },
+        { "name": "Kentucky Wildcats", "score": 65 }
+      ]
+    },
+    {
+      "home_team": "Michigan Wolverines",
+      "away_team": "Auburn Tigers",
+      "scores": [
+        { "name": "Michigan Wolverines", "score": 65 },
+        { "name": "Auburn Tigers", "score": 78 }
+      ]
+    },
+    {
+      "home_team": "Michigan State Spartans",
+      "away_team": "Ole Miss Rebels",
+      "scores": [
+        { "name": "Michigan State Spartans", "score": 73 },
+        { "name": "Ole Miss Rebels", "score": 70 }
+      ]
+    },
+    {
+      "home_team": "Maryland Terrapins",
+      "away_team": "Florida Gators",
+      "scores": [
+        { "name": "Maryland Terrapins", "score": 71 },
+        { "name": "Florida Gators", "score": 87 }
+      ]
+    },
+    {
+      "home_team": "Arkansas Razorbacks",
+      "away_team": "Texas Tech Red Raiders",
+      "scores": [
+        { "name": "Arkansas Razorbacks", "score": 83 },
+        { "name": "Texas Tech Red Raiders", "score": 85 }
+      ]
+    }
+  ]
+  

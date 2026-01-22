@@ -1,0 +1,35 @@
+[
+    {
+      "home_team": "Alabama Crimson Tide",
+      "away_team": "Duke Blue Devils",
+      "scores": [
+        { "name": "Alabama Crimson Tide", "score": 65 },
+        { "name": "Duke Blue Devils", "score": 85 }
+      ]
+    },
+    {
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Houston Cougars",
+      "scores": [
+        { "name": "Tennessee Volunteers", "score": 50 },
+        { "name": "Houston Cougars", "score": 69 }
+      ]
+    },
+    {
+      "home_team": "Michigan State Spartans",
+      "away_team": "Auburn Tigers",
+      "scores": [
+        { "name": "Michigan State Spartans", "score": 64 },
+        { "name": "Auburn Tigers", "score": 70 }
+      ]
+    },
+    {
+      "home_team": "Texas Tech Red Raiders",
+      "away_team": "Florida Gators",
+      "scores": [
+        { "name": "Texas Tech Red Raiders", "score": 79 },
+        { "name": "Florida Gators", "score": 84 }
+      ]
+    }
+  ]
+  

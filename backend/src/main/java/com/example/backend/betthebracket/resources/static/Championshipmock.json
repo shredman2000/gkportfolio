@@ -1,0 +1,10 @@
+[
+    {
+        "home_team": "Houston Cougars",
+        "away_team": "Florida Gators",
+        "scores": [
+          { "name": "Houston Cougars", "score": 63 },
+          { "name": "Florida Gators", "score": 65 }
+        ]
+    }
+]

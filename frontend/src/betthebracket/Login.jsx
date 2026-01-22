@@ -39,8 +39,8 @@ function Login() {
             }
             
             else {
-                navigate('home'); //TODO: delete this bypasses
-                //alert("Login failed. Check your credentials and try again!");
+
+                alert("Login failed. Check your credentials and try again!");
             }
 
         } catch (error) {

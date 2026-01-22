@@ -1,0 +1,18 @@
+[
+    {
+        "home_team": "Houston Cougars",
+        "away_team": "Duke Blue Devils",
+        "scores": [
+          { "name": "Houston Cougars", "score": 70 },
+          { "name": "Duke Blue Devils", "score": 67 }
+        ]
+    },
+    {
+        "home_team": "Florida Gators",
+        "away_team": "Auburn Tigers",
+        "scores": [
+          { "name": "Florida Gators", "score": 79 },
+          { "name": "Auburn Tigers", "score": 73 }
+        ]
+    }
+]

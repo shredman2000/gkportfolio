@@ -13,9 +13,10 @@ function Home() {
     const [selectedGame, setSelectedGame] = useState(null);
 
     useEffect(() => {
-        fetch('', { method: 'POST' })
-            .then(() => fetch(''))
-            .then(res => res.json())
+        fetch('/api/betthebracket/games')
+            .then(res =>  { 
+                if (!res.ok) { throw new Error("response not ok") }
+                return res.json() })
             .then(data => {
                 setGames(data);
                 setLoading(false);
