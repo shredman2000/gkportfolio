@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.backend.betthebracket.models.Game;
 import com.example.backend.betthebracket.repository.GameRepository;
 import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult;
+import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult.TournamentRound;
 
 @Service
 public class GameService {
@@ -52,7 +53,7 @@ public class GameService {
     */
     @Transactional
     public void populateBracket() {
-        //if (gameRepository.count() > 0 ) { return; } 
+        if (gameRepository.count() > 0 ) { return; } 
         //debugging
 
         gameRepository.deleteAll();  
@@ -210,11 +211,16 @@ public class GameService {
     public void updateWinners() {
         System.out.println("Advance to next round reached"); //debug stuff
         // see finished game result and ScoresParser
-        Map<String, String> winnersList = finishedGameResult.fetchScoresAndDetermineWinners(); 
+       
 
 
         List<Game> allGames = gameRepository.findAll();
-
+        TournamentRound currentRound = determineCurrentRound(allGames);
+        if (currentRound == null) {
+            System.out.println("Tournament complete");
+            return;
+        }
+        Map<String, String> winnersList = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
         for (Game game : allGames) {
 
             String home = game.getHomeTeam();
@@ -237,7 +243,13 @@ public class GameService {
         gameRepository.flush();
     }
 
-
+    private TournamentRound determineCurrentRound(List<Game> games) {
+        return games.stream()
+            .filter(g -> !"finished".equals(g.getStatus()))
+            .map(g -> TournamentRound.valueOf(g.getRound()))
+            .findFirst()
+            .orElse(null);
+    }
     @Transactional
     public void advanceTeams() {
         List<Game> allGames = gameRepository.findAll();

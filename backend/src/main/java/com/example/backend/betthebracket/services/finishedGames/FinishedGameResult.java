@@ -1,8 +1,11 @@
 package com.example.backend.betthebracket.services.finishedGames;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -34,36 +37,40 @@ public class FinishedGameResult {
 
 
     
-    public Map<String, String> fetchScoresAndDetermineWinners() {
+    public Map<String, String> fetchScoresAndDetermineWinners(boolean useMocks, TournamentRound round) {
         try {
-            
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(SCORES_URL))  // Set the URI to the odds URL
-                    .GET()  // Use the GET method
-                    .header("Accept", "application/json")  // Set the header to accept JSON response
-                    .build();
+            String json;
 
-            
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            
-
-            if (response.statusCode() == 200) {
-                return ScoresParser.parseScores(response.body());
+            if (useMocks) {
+                json = loadMockJson(round);
+                return ScoresParser.parseScores(json);
             }
             else {
-                System.err.println("Failed to fetch scores. Status code: " + response.statusCode());
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(SCORES_URL))  // Set the URI to the odds URL
+                        .GET()  // Use the GET method
+                        .header("Accept", "application/json")  // Set the header to accept JSON response
+                        .build();
+
+                
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                
+
+                if (response.statusCode() != 200) {
+                    return Map.of();
+                }
+                json = response.body();
             }
-            
             
             // Leave this for fixing errors in bracket
             //String json = Files.readString(Paths.get("src/main/resources/static/Championshipmock.json"));
-            //return ScoresParser.parseScores(json);
-         }
-    catch (Exception e){
-        e.printStackTrace();
-    }
-        // return empty map on failure
-        return Map.of(); 
+            return ScoresParser.parseScores(json);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+            // return empty map on failure
+            return Map.of(); 
     }
 
 
@@ -95,5 +102,27 @@ public class FinishedGameResult {
         }
     }
     
+    public enum TournamentRound {
+        ROUND_OF_64,
+        ROUND_OF_32,
+        SWEET_16,
+        ELITE_8,
+        FINAL_4,
+        CHAMPIONSHIP
+    }
+
+    private String loadMockJson(TournamentRound round) throws IOException {
+        return Files.readString(Paths.get(
+            "src/main/resources/static/" + switch (round) {
+                case ROUND_OF_64 -> "roundof64mock.json";
+                case ROUND_OF_32 -> "Roundof32mock.json";
+                case SWEET_16 -> "Roundof16mock.json";
+                case ELITE_8 -> "Roundof8mock.json";
+                case FINAL_4 -> "Roundof4mock.json";
+                case CHAMPIONSHIP -> "Championshipmock.json";
+            }
+        ));
+    }
 
 }
+
