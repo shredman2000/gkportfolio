@@ -40,9 +40,9 @@ public class GameService {
 
         //updateGamesFromApi();
 
-        //updateWinners();
+        updateWinners();
 
-        //advanceTeams();
+        advanceTeams();
 
         return gameRepository.findAll();
     }
