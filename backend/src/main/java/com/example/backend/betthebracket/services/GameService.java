@@ -38,11 +38,19 @@ public class GameService {
             populateBracket();
         }
 
+        boolean advanced = true;
+
+        while (advanced) {
+            updateWinners();
+            int before = (int) gameRepository.count();
+
+            advanceTeams();
+            int after = (int) gameRepository.count();
+
+            advanced = after > before;
+        }
+
         //updateGamesFromApi();
-
-        updateWinners();
-
-        advanceTeams();
 
         return gameRepository.findAll();
     }
