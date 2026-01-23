@@ -20,7 +20,7 @@ function HomePage() {
                 {/* <button className='navigate-projects-button' onClick={() => navigate('/projects')}>Projects</button> */}
                 <button className='navigate-movie-page-button' onClick={() => navigate('/movies')}>Movies</button>
 
-                <button className='navigate-bet-the-bracket-button' onClick={() => navigate('/betthebracket/')}>Bet the bracket</button>
+                <button className='navigate-bet-the-bracket-button' onClick={() => navigate('/betthebracket/login')}>Bet the bracket</button>
             </div>
         </div>
 

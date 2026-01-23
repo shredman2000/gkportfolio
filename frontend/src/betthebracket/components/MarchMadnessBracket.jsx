@@ -175,10 +175,6 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
     const { width, height } = useComponentSize(ref);
     const matches = formatData(games);
 
-    console.log(games);
-    console.log(matches);
-
-
     const svgWrapper = useCallback(
         ({ children, ...props}) => (
             <SVGViewer width={width} height={height} {...props}

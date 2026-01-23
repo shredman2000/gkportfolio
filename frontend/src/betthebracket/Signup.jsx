@@ -35,8 +35,8 @@ function Signup() {
                 const token = await response.json();
 
                 localStorage.setItem('token', token.token);
-
-                navigate('');
+                alert("Signup successful!")
+                navigate('/betthebracket/login');
             }
             
             else {
@@ -73,7 +73,7 @@ function Signup() {
                 <div>
                     <hr/>
                     <p>Already have an account?</p>
-                    <button onClick={() => navigate('')}>Login Here!</button>
+                    <button onClick={() => navigate('/betthebracket/login')}>Login Here!</button>
                 </div>
             </div>
         </div>

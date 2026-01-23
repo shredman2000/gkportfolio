@@ -34,8 +34,8 @@ function Login() {
 
                 localStorage.setItem('token', data.token);
                 //localStorage.setItem('userID', data.userID);
-
-                navigate('home');
+                
+                navigate('/betthebracket/home');
             }
             
             else {
@@ -70,7 +70,7 @@ function Login() {
                 <div>
                     <hr/>
                     <p>Don't have an account?</p>
-                    <button onClick={() => navigate("signup")}>Sign Up Here!</button>
+                    <button onClick={() => navigate('/betthebracket/signup')}>Sign Up Here!</button>
                 </div>
             </div>
         </div>
