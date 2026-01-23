@@ -47,7 +47,7 @@ function Home() {
         <div>
             <TopNavbar />
             <div style={{ padding: "1rem" }}>
-                <h1>Home</h1>
+                <h1>March Madness 2025 Bracket</h1>
                 <hr />
                 {loading ? (
                     <h3>Loading bracket...</h3>
