@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -112,16 +113,19 @@ public class FinishedGameResult {
     }
 
     private String loadMockJson(TournamentRound round) throws IOException {
-        return Files.readString(Paths.get(
-            "betthebracket/resources/static/" + switch (round) {
-                case ROUND_OF_64 -> "roundof64mock.json";
-                case ROUND_OF_32 -> "Roundof32mock.json";
-                case SWEET_16 -> "Roundof16mock.json";
-                case ELITE_8 -> "Roundof8mock.json";
-                case FINAL_4 -> "Roundof4mock.json";
-                case CHAMPIONSHIP -> "Championshipmock.json";
-            }
-        ));
+        String fileName = switch (round) {
+            case ROUND_OF_64 -> "roundof64mock.json";
+            case ROUND_OF_32 -> "roundof32mock.json";
+            case SWEET_16 -> "roundof16mock.json";
+            case ELITE_8 -> "roundof8mock.json";
+            case FINAL_4 -> "roundof4mock.json";
+            case CHAMPIONSHIP -> "championshipmock.json";
+        };
+
+        ClassPathResource resource =
+            new ClassPathResource("static/" + fileName);
+
+        return new String(resource.getInputStream().readAllBytes());
     }
 
 }
