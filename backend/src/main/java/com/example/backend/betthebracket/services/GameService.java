@@ -177,8 +177,12 @@ public class GameService {
             else if (winnersList.containsKey(key2)){
                 game.setWinner(winnersList.get(key2));
                 game.setStatus("finished");
-            }        
-}
+            }     
+            
+            if (game.getWinner() != null && !"finished".equals(game.getStatus())) {
+                game.setStatus("finished");
+            }
+        }
         
         gameRepository.saveAll(allGames);
         gameRepository.flush();
