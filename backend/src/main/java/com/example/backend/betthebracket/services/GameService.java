@@ -67,34 +67,34 @@ public class GameService {
             new Game(TournamentRound.ROUND_OF_64, "East", 2, "Alabama Crimson Tide", 15, "Robert Morris Colonials", "TBD", "TBD", -5000.0, 1800.0, "Alabama Crimson Tide", "roundOf64_E8", 8),
 
             // Midwest
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 1, "Houston Cougars", 16, "SIU Edwardsville Cougars", "TBD", "TBD", -10000.0, 3000.0, "Houston Cougars", "roundOf64_M1", 9),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 8, "Gonzaga Bulldogs", 9, "Georgia Bulldogs", "TBD", "TBD", -110.0, -110.0, "Gonzaga Bulldogs", "roundOf64_M2", 10),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 5, "Clemson Tigers", 12, "McNeese Cowboys", "TBD", "TBD", -250.0, 200.0, "McNeese Cowboys", "roundOf64_M3", 11),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 4, "Purdue Boilermakers", 13, "High Point Panthers", "TBD", "TBD", -500.0, 375.0, "Purdue Boilermakers", "roundOf64_M4", 12),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 6, "Illinois Fighting Illini", 11, "Texas Longhorns", "TBD", "TBD", -140.0, 120.0, "Illinois Fighting Illini", "roundOf64_M5", 13),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 3, "Kentucky Wildcats", 14, "Troy Trojans", "TBD", "TBD", -700.0, 500.0, "Kentucky Wildcats", "roundOf64_M6", 14),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 7, "UCLA Bruins", 10, "Utah State Aggies", "TBD", "TBD", -150.0, 130.0, "UCLA Bruins", "roundOf64_M7", 15),
-            new Game(TournamentRound.ROUND_OF_64, "Midwest", 2, "Tennessee Volunteers", 15, "Wofford Terriers", "TBD", "TBD", -3500.0, 1200.0, "Tennessee Volunteers", "roundOf64_M8", 16),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 1, "Houston Cougars", 16, "SIU Edwardsville Cougars", "TBD", "TBD", -10000.0, 3000.0, "Houston Cougars", "roundOf64_M1", 1),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 8, "Gonzaga Bulldogs", 9, "Georgia Bulldogs", "TBD", "TBD", -110.0, -110.0, "Gonzaga Bulldogs", "roundOf64_M2", 2),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 5, "Clemson Tigers", 12, "McNeese Cowboys", "TBD", "TBD", -250.0, 200.0, "McNeese Cowboys", "roundOf64_M3", 3),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 4, "Purdue Boilermakers", 13, "High Point Panthers", "TBD", "TBD", -500.0, 375.0, "Purdue Boilermakers", "roundOf64_M4", 4),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 6, "Illinois Fighting Illini", 11, "Texas Longhorns", "TBD", "TBD", -140.0, 120.0, "Illinois Fighting Illini", "roundOf64_M5", 5),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 3, "Kentucky Wildcats", 14, "Troy Trojans", "TBD", "TBD", -700.0, 500.0, "Kentucky Wildcats", "roundOf64_M6", 6),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 7, "UCLA Bruins", 10, "Utah State Aggies", "TBD", "TBD", -150.0, 130.0, "UCLA Bruins", "roundOf64_M7", 7),
+            new Game(TournamentRound.ROUND_OF_64, "Midwest", 2, "Tennessee Volunteers", 15, "Wofford Terriers", "TBD", "TBD", -3500.0, 1200.0, "Tennessee Volunteers", "roundOf64_M8", 8),
 
             // South
-            new Game(TournamentRound.ROUND_OF_64, "South", 1, "Auburn Tigers", 16, "American Eagles", "TBD", "TBD", -10000.0, 3000.0, "Auburn Tigers", "roundOf64_S1", 17),
-            new Game(TournamentRound.ROUND_OF_64, "South", 8, "Louisville Cardinals", 9, "Creighton Bluejays", "TBD", "TBD", -140.0, 120.0, "Creighton Bluejays", "roundOf64_S2", 18),
-            new Game(TournamentRound.ROUND_OF_64, "South", 5, "Michigan Wolverines", 12, "UC San Diego Tritons", "TBD", "TBD", -150.0, 125.0, "Michigan Wolverines", "roundOf64_S3", 19),
-            new Game(TournamentRound.ROUND_OF_64, "South", 4, "Texas A&M Aggies", 13, "Yale Bulldogs", "TBD", "TBD", -300.0, 250.0, "Texas A&M Aggies", "roundOf64_S4", 20),
-            new Game(TournamentRound.ROUND_OF_64, "South", 6, "Ole Miss Rebels", 11, "North Carolina Tar Heels", "TBD", "TBD", -180.0, 150.0, "Ole Miss Rebels", "roundOf64_S5", 21),
-            new Game(TournamentRound.ROUND_OF_64, "South", 3, "Iowa State Cyclones", 14, "Montana Grizzlies", "TBD", "TBD", -2000.0, 950.0, "Iowa State Cyclones", "roundOf64_S6", 22),
-            new Game(TournamentRound.ROUND_OF_64, "South", 7, "Marquette Golden Eagles", 10, "New Mexico Lobos", "TBD", "TBD", -170.0, 145.0, "New Mexico Lobos", "roundOf64_S7", 23),
-            new Game(TournamentRound.ROUND_OF_64, "South", 2, "Michigan State Spartans", 15, "Bryant Bulldogs", "TBD", "TBD", -3500.0, 1200.0, "Michigan State Spartans", "roundOf64_S8", 24),
+            new Game(TournamentRound.ROUND_OF_64, "South", 1, "Auburn Tigers", 16, "American Eagles", "TBD", "TBD", -10000.0, 3000.0, "Auburn Tigers", "roundOf64_S1", 1),
+            new Game(TournamentRound.ROUND_OF_64, "South", 8, "Louisville Cardinals", 9, "Creighton Bluejays", "TBD", "TBD", -140.0, 120.0, "Creighton Bluejays", "roundOf64_S2", 2),
+            new Game(TournamentRound.ROUND_OF_64, "South", 5, "Michigan Wolverines", 12, "UC San Diego Tritons", "TBD", "TBD", -150.0, 125.0, "Michigan Wolverines", "roundOf64_S3", 3),
+            new Game(TournamentRound.ROUND_OF_64, "South", 4, "Texas A&M Aggies", 13, "Yale Bulldogs", "TBD", "TBD", -300.0, 250.0, "Texas A&M Aggies", "roundOf64_S4", 4),
+            new Game(TournamentRound.ROUND_OF_64, "South", 6, "Ole Miss Rebels", 11, "North Carolina Tar Heels", "TBD", "TBD", -180.0, 150.0, "Ole Miss Rebels", "roundOf64_S5", 5),
+            new Game(TournamentRound.ROUND_OF_64, "South", 3, "Iowa State Cyclones", 14, "Montana Grizzlies", "TBD", "TBD", -2000.0, 950.0, "Iowa State Cyclones", "roundOf64_S6", 6),
+            new Game(TournamentRound.ROUND_OF_64, "South", 7, "Marquette Golden Eagles", 10, "New Mexico Lobos", "TBD", "TBD", -170.0, 145.0, "New Mexico Lobos", "roundOf64_S7", 7),
+            new Game(TournamentRound.ROUND_OF_64, "South", 2, "Michigan State Spartans", 15, "Bryant Bulldogs", "TBD", "TBD", -3500.0, 1200.0, "Michigan State Spartans", "roundOf64_S8", 8),
 
             // West
-            new Game(TournamentRound.ROUND_OF_64, "West", 1, "Florida Gators", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Florida Gators", "roundOf64_W1", 25),
-            new Game(TournamentRound.ROUND_OF_64, "West", 8, "UConn Huskies", 9, "Oklahoma Sooners", "TBD", "TBD", -160.0, 135.0, "UConn Huskies", "roundOf64_W2", 26),
-            new Game(TournamentRound.ROUND_OF_64, "West", 5, "Memphis Tigers", 12, "Colorado State Rams", "TBD", "TBD", -140.0, 120.0, "Colorado State Rams", "roundOf64_W3", 27),
-            new Game(TournamentRound.ROUND_OF_64, "West", 4, "Maryland Terrapins", 13, "Grand Canyon Antelopes", "TBD", "TBD", -600.0, 450.0, "Maryland Terrapins", "roundOf64_W4", 28),
-            new Game(TournamentRound.ROUND_OF_64, "West", 6, "Missouri Tigers", 11, "Drake Bulldogs", "TBD", "TBD", -275.0, 220.0, "Drake Bulldogs", "roundOf64_W5", 29),
-            new Game(TournamentRound.ROUND_OF_64, "West", 3, "Texas Tech Red Raiders", 14, "UNC Wilmington Seahawks", "TBD", "TBD", -2000.0, 950.0, "Texas Tech Red Raiders", "roundOf64_W6", 30),
-            new Game(TournamentRound.ROUND_OF_64, "West", 7, "Kansas Jayhawks", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf64_W7", 31),
-            new Game(TournamentRound.ROUND_OF_64, "West", 2, "St. John's Red Storm", 15, "Omaha Mavericks", "TBD", "TBD", -3000.0, 1250.0, "St. John's Red Storm", "roundOf64_W8", 32)
+            new Game(TournamentRound.ROUND_OF_64, "West", 1, "Florida Gators", 16, "Norfolk State Spartans", "TBD", "TBD", -10000.0, 3000.0, "Florida Gators", "roundOf64_W1", 1),
+            new Game(TournamentRound.ROUND_OF_64, "West", 8, "UConn Huskies", 9, "Oklahoma Sooners", "TBD", "TBD", -160.0, 135.0, "UConn Huskies", "roundOf64_W2", 2),
+            new Game(TournamentRound.ROUND_OF_64, "West", 5, "Memphis Tigers", 12, "Colorado State Rams", "TBD", "TBD", -140.0, 120.0, "Colorado State Rams", "roundOf64_W3", 3),
+            new Game(TournamentRound.ROUND_OF_64, "West", 4, "Maryland Terrapins", 13, "Grand Canyon Antelopes", "TBD", "TBD", -600.0, 450.0, "Maryland Terrapins", "roundOf64_W4", 4),
+            new Game(TournamentRound.ROUND_OF_64, "West", 6, "Missouri Tigers", 11, "Drake Bulldogs", "TBD", "TBD", -275.0, 220.0, "Drake Bulldogs", "roundOf64_W5", 5),
+            new Game(TournamentRound.ROUND_OF_64, "West", 3, "Texas Tech Red Raiders", 14, "UNC Wilmington Seahawks", "TBD", "TBD", -2000.0, 950.0, "Texas Tech Red Raiders", "roundOf64_W6", 6),
+            new Game(TournamentRound.ROUND_OF_64, "West", 7, "Kansas Jayhawks", 10, "Arkansas Razorbacks", "TBD", "TBD", -200.0, 170.0, "Arkansas Razorbacks", "roundOf64_W7", 7),
+            new Game(TournamentRound.ROUND_OF_64, "West", 2, "St. John's Red Storm", 15, "Omaha Mavericks", "TBD", "TBD", -3000.0, 1250.0, "St. John's Red Storm", "roundOf64_W8", 8)
         );
         System.out.println("Populating bracket, matchups count = " + matchups.size());
         gameRepository.saveAll(matchups);
