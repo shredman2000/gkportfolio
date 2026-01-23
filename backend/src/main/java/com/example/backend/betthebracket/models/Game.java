@@ -4,6 +4,7 @@ import com.example.backend.betthebracket.services.finishedGames.FinishedGameResu
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This is for auto incrementing values in for identities
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TournamentRound round;
 
     private String region;

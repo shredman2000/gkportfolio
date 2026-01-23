@@ -4,18 +4,27 @@ import GameCard from "./GameCard";
 import "./betthebracket-bracket.css";
 
 export default function MarchMadnessBracket({ games, onGameClick }) {
-    const rounds = ["Round of 64", "Round of 32", "Round of 16", "Round of 8"];
     const leftRegions = ["West", "South"];
     const rightRegions = ["East", "Midwest"];
 
     console.log(games);
 
-    const getGames = (round, regions) =>
-        games.filter(g => g.round === round && regions.includes(g.region));
+    const rounds = [
+        { key: "ROUND_64", label: "Round of 64" },
+        { key: "ROUND_32", label: "Round of 32" },
+        { key: "ROUND_16", label: "Round of 16" },
+        { key: "ROUND_8",  label: "Round of 8" },
+        { key: "FINAL_4", label: "Final Four" },
+        { key: "CHAMPIONSHIP", label: "Championship" }
+    ];
 
-    const getFinalFour = () => games.filter(g => g.round === "Final 4");
 
-    console.log(getFinalFour())
+    const getGames = (roundKey, regions) =>
+        games.filter(g => g.round === roundKey && regions.includes(g.region));
+
+    const getFinalFour = () => games.filter(g => g.round === "FINAL_4");
+
+    console.log("Final four: " + getFinalFour())
     const getChampionship = () => games.filter(g => g.round === "Championship");
 
     const finalFourLeft = getFinalFour().filter(g => g.region === "SouthVsWest");
@@ -29,9 +38,9 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
             <div className="bracket-grid">
                 {/* LEFT SIDE */}
                 {rounds.map(round => (
-                    <div className={`bracket-column round-${round.split(" ")[2]}`} key={`left-${round}`}>
-                        <h6 className="text-center">{round}</h6>
-                        {getGames(round, leftRegions).map(game => (
+                    <div className={`bracket-column round-${round.label.split(" ")[2]}`} key={`left-${round.key}`}>
+                        <h6 className="text-center">{round.label}</h6>
+                        {getGames(round.key, leftRegions).map(game => (
                             <div className="bracket-game" key={game.id}>
                                 <GameCard {...game} onClick={() => onGameClick(game)} tinyCard={true} />
                             </div>
@@ -71,9 +80,9 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
 
                 {/* RIGHT SIDE */}
                 {[...rounds].reverse().map(round => (
-                    <div className={`bracket-column round-${round.split(" ")[2]}`} key={`right-${round}`}>
-                        <h6 className="text-center">{round}</h6>
-                        {getGames(round, rightRegions).map(game => (
+                    <div className={`bracket-column round-${round.label.split(" ")[2]}`} key={`right-${round.key}`}>
+                        <h6 className="text-center">{round.label}</h6>
+                        {getGames(round.key, rightRegions).map(game => (
                             <div className="bracket-game" key={game.id}>
                                 <GameCard {...game} onClick={() => onGameClick(game)} tinyCard={true} />
                             </div>
