@@ -4,12 +4,16 @@ import { StyleSheetManager } from 'styled-components';
 import GameCard from "./GameCard";
 import useComponentSize from '@rehooks/component-size';
 import "./betthebracket-bracket.css";
-import { SingleEliminationBracket, Match as BaseMatch, SVGViewer, MATCH_STATES, createTheme } from '@g-loot/react-tournament-brackets'
+import teamColors from "../resources/teamColors.json";
+import { SingleEliminationBracket, SVGViewer, MATCH_STATES, createTheme } from '@g-loot/react-tournament-brackets'
 
 
 const theme = createTheme({
     textColor: { main: '#000000', highlighted: '#07090D', dark: '#3E414D' },
-    matchBackground: { wonColor: '#daebf9', lostColor: '#96c6da' },
+    matchBackground: {
+        wonColor: '#E6F2FF',
+        lostColor: '#F2F2F2',
+    },
     score: {
         background: { wonColor: '#87b2c4', lostColor: '#87b2c4' },
         text: { highlightedWonColor: '#7BF59D', highlightedLostColor: '#FB7E94' },
@@ -23,7 +27,8 @@ const theme = createTheme({
     connectorColorHighlight: '#da96c6',
     svgBackground: '#FAFAFA',
 })
-
+const getTeamColor = (teamName) => teamColors[teamName]?.primary || "#888";
+const getTeamSecondaryColor = (teamName) => teamColors[teamName]?.secondary || "#888";
 const getRoundLabel = (roundKey) => {
     switch (roundKey) {
         case "ROUND_OF_64":
@@ -55,31 +60,29 @@ const formatData = (games) => {
             : null,
         tournamentRoundText: getRoundLabel(g.round),
         startTime: g.status === "finished" ? "Final" : g.status,
-        state: g.status === "finished" ? "Done" : "Upcoming",
+        state: g.status === "finished"
+                ? MATCH_STATES.DONE
+                : MATCH_STATES.UPCOMING,
         participants: [
             {
                 id: `home-${g.id}`,
                 name: g.homeTeam,
                 resultText: g.winner === g.homeTeam ? "Won" : "",
                 isWinner: g.winner === g.homeTeam,
-                status: null
+                status: null,
             },
             {
                 id: `away-${g.id}`,
                 name: g.awayTeam,
                 resultText: g.winner === g.awayTeam ? "Won" : "",
                 isWinner: g.winner === g.awayTeam,
-                status: null
+                status: null,
             }
         ]
 
     }))
 }
 
-const Match = (props) => {
-    const { won, hovered, highlighted, ...rest } = props;
-    return <BaseMatch {...rest} />;
-};
 
 const rounds = [
     { key: "ROUND_OF_64", label: "Round of 64" },
@@ -191,10 +194,160 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
         <div ref={ref} className="bracket-wrapper" style={{ width: '100vw', height: '75vh' }}>
             <SingleEliminationBracket
                 matches={matches}
-                matchComponent={Match}
                 svgWrapper={svgWrapper}
-                theme={theme}
-            />
+                matchComponent={({
+                    match,
+                    onMatchClick,
+                    onPartyClick,
+                    onMouseEnter,
+                    onMouseLeave,
+                    topParty,
+                    bottomParty,
+                    topWon,
+                    bottomWon,
+                    topHovered,
+                    bottomHovered,
+                    topText,
+                    bottomText,
+                    teamNameFallback,
+                    resultFallback,
+                    }) => {
+                    const borderColor = (hovered) =>
+                        hovered ? '#FF8C00' : '#ccc';
+
+                    const matchBg = (won) =>
+                        won ? '#E8F5E9' : '#F5F5F5';
+
+                    const scoreBg = (won) =>
+                        won ? '#2E7D32' : '#BDBDBD';
+
+                    const textColor = (won) =>
+                        won ? '#fff' : '#000';
+                    const topColor = topParty?.color;
+                    const bottomColor = bottomParty?.color;
+                    const topPrimaryColor = getTeamColor(topParty.name);
+                    const bottomPrimaryColor = getTeamColor(bottomParty.name);
+
+                    const topBackground = topPrimaryColor 
+                        ? `linear-gradient(to right, #FFFFFF 30%, ${topPrimaryColor})`
+                        : "#FFFFFF";
+
+                    const bottomBackground = bottomPrimaryColor
+                        ? `linear-gradient(to right, #FFFFFF 30%, ${bottomPrimaryColor})`
+                        : "#FFFFFF";
+
+                    return (
+                        <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: '100%',
+                            fontFamily: 'sans-serif',
+                        }}
+                        onClick={() => onGameClick?.(match)}
+                        >
+                        {/* Top text */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ fontSize: 12 }}>{topText}</div>
+
+                            {(match.href || onMatchClick) && (
+                            <a
+                                href={match.href}
+                                onClick={(e) =>
+                                onMatchClick?.({ match, topWon, bottomWon, event: e })
+                                }
+                                style={{
+                                fontSize: 12,
+                                cursor: 'pointer',
+                                textDecoration: 'none',
+                                }}
+                            >
+                                Match Details
+                            </a>
+                            )}
+                        </div>
+
+                        {/* Match body */}
+                        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                            {/* Top side */}
+                            <div
+                            onMouseEnter={() => onMouseEnter(topParty.id)}
+                            onMouseLeave={onMouseLeave}
+                            onClick={() => onPartyClick?.(topParty, topWon)}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '6px 0 6px 12px',
+                                background: topBackground,
+                                borderLeft: `4px solid ${borderColor(topHovered)}`,
+                                borderRight: `4px solid ${borderColor(topHovered)}`,
+                                borderTop: `1px solid ${borderColor(topHovered)}`,
+                                cursor: 'pointer',
+                            }}
+                            >
+                            <div>{topParty?.name || teamNameFallback}</div>
+                            <div
+                                style={{
+                                width: 40,
+                                textAlign: 'center',
+                                background: scoreBg(topWon),
+                                color: textColor(topWon),
+                                }}
+                            >
+                                {topParty?.resultText ?? resultFallback(topParty)}
+                            </div>
+                            </div>
+
+                            {/* Divider */}
+                            <div
+                            style={{
+                                height: 1,
+                                background:
+                                topHovered || bottomHovered ? '#FF8C00' : '#ccc',
+                            }}
+                            />
+
+                            {/* Bottom side */}
+                            <div
+                            onMouseEnter={() => onMouseEnter(bottomParty.id)}
+                            onMouseLeave={onMouseLeave}
+                            onClick={() => onPartyClick?.(bottomParty, bottomWon)}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '6px 0 6px 12px',
+                                background: bottomBackground,
+                                borderLeft: `4px solid ${borderColor(bottomHovered)}`,
+                                borderRight: `4px solid ${borderColor(bottomHovered)}`,
+                                borderBottom: `1px solid ${borderColor(bottomHovered)}`,
+                                cursor: 'pointer',
+                            }}
+                            >
+                            <div>{bottomParty?.name || teamNameFallback}</div>
+                            <div
+                                style={{
+                                width: 40,
+                                textAlign: 'center',
+                                background: scoreBg(bottomWon),
+                                color: textColor(bottomWon),
+                                }}
+                            >
+                                {bottomParty?.resultText ?? resultFallback(bottomParty)}
+                            </div>
+                            </div>
+                        </div>
+
+                        {/* Bottom text */}
+                        <div style={{ fontSize: 12, marginTop: 4 }}>
+                            {bottomText ?? ' '}
+                        </div>
+                        </div>
+                    );
+                    }}
+
+                />
         </div>
     );
 }

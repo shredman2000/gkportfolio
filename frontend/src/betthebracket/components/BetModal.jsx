@@ -109,12 +109,12 @@ function BetModal(props) {
               </ToggleButton>
             </ButtonGroup>
             <Form.Control
-          type="number"
-          placeholder="Enter bet amount"
-          value={betAmount}
-          onChange={(e) => setBetAmount(e.target.value)}
-        />
-      </Modal.Body>
+            type="number"
+            placeholder="Enter bet amount"
+            value={betAmount}
+            onChange={(e) => setBetAmount(e.target.value)}
+          />
+        </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={props.onClose}>
           Close

@@ -14,16 +14,20 @@ function GameModal(props) {
         <Modal.Body>
           <p>{props.game.homeTeam + " ("}<strong>{props.game.seed1}</strong>{") vs. " + props.game.awayTeam + " ("}<strong>{props.game.seed2}</strong>{")"}</p>
           <p><strong>Round: </strong>{props.game.round}</p>
-          <p><strong>Date: </strong>{props.game.date}</p>
+          <p><strong>Date: </strong>{props.game.date === "TBD" ? "Finished" : "TBD"}</p>
           <p><strong>Region: </strong>{props.game.region}</p>
           <p><strong>Status: </strong>{(props.game.status === "finished") ? "Finished" : "Upcoming"}</p>
           {props.game.winner !== "TBD" && <p><strong>Winner: </strong>{props.game.winner}</p>}
         </Modal.Body>
         <Modal.Footer>
+          {(props.game.status === "finished") &&
+          <p>Match complete. Bets closed</p>
+          }
           <Button variant="secondary" onClick={props.onClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.onBet}>
+          <Button variant="primary" onClick={props.onBet}
+            style={{background: props.game.status === "finished" ? "red" : "blue"}}>
             Open Bet
           </Button>
         </Modal.Footer>

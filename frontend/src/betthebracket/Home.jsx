@@ -27,7 +27,8 @@ function Home() {
             });
     }, []);
 
-    const handleShow = (game) => {
+    const handleShow = (match) => {
+        const game = games.find(g => g.id === match.id);
         setSelectedGame(game);
         setShowGameModal(true);
     };
@@ -59,7 +60,7 @@ function Home() {
                     <GameModal
                         showGameModal={showGameModal}
                         onClose={handleGameClose}
-                        onBet={handleCloseAndOpenBet}
+                        onBet={selectedGame.status === "finished" ? null : handleCloseAndOpenBet}
                         game={selectedGame}
                     />}
                 {showBetModal &&
