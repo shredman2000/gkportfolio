@@ -172,6 +172,7 @@ public class GameService {
         List<GameResult> results = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
         for (Game game : allGames) {
 
+            if (game.getWinner() != null) continue;
             if (game.getRound() != currentRound) {
                 continue;
             }
