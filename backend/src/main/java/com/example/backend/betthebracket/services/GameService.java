@@ -183,31 +183,13 @@ public class GameService {
             String key2 = away + " vs " + home;
 
             for (GameResult result : results) {
-                boolean normal = result.getHomeTeam().equals(home) && result.getAwayTeam().equals(away);
-                boolean flipped = result.getHomeTeam().equals(away) && result.getAwayTeam().equals(home);
-
-                if (normal || flipped) {
-                    if (normal) {
-                        game.setHomeScore(result.getHomeScore());
-                        game.setAwayScore(result.getAwayScore());
-                    }
-                    else {
-                        game.setHomeScore(result.getAwayScore());
-                        game.setAwayScore(result.getHomeScore());
-                    }
-                }
-
-                /* 
                 if ((result.getHomeTeam().equals(home) && result.getAwayTeam().equals(away)) || (result.getHomeTeam().equals(away) && result.getAwayTeam().equals(home))) {
                     game.setWinner(result.getWinner());
                     game.setHomeScore(result.getHomeScore());
                     game.setAwayScore(result.getAwayScore());
                     game.setStatus("finished");
                     break;
-                }*/
-               game.setWinner(result.getWinner());
-               game.setStatus("finished"); 
-               break;
+                } 
             }
         }
         
