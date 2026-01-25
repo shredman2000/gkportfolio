@@ -70,7 +70,7 @@ const formatData = (games) => {
                 resultText: g.winner === g.homeTeam ? "Won" : "",
                 isWinner: g.winner === g.homeTeam,
                 status: null,
-                score: g.homeTeam.score
+                score: g.homeScore
             },
             {
                 id: `away-${g.id}`,
@@ -78,6 +78,7 @@ const formatData = (games) => {
                 resultText: g.winner === g.awayTeam ? "Won" : "",
                 isWinner: g.winner === g.awayTeam,
                 status: null,
+                score: g.awayScore
             }
         ]
 
@@ -294,7 +295,7 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
                                 color: textColor(topWon),
                                 }}
                             >
-                                {topParty?.resultText ?? resultFallback(topParty)}
+                                {topParty?.score}
                             </div>
                             </div>
 
@@ -333,7 +334,7 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
                                 color: textColor(bottomWon),
                                 }}
                             >
-                                {bottomParty?.resultText ?? resultFallback(bottomParty)}
+                                {bottomParty?.score}
                             </div>
                             </div>
                         </div>
