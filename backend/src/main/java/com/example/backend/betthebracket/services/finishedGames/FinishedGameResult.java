@@ -6,10 +6,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
+import com.example.backend.betthebracket.services.GameResult;
 
 /**
  * This class is responsible for fetching basketball game odds and scores from an API,
@@ -38,7 +41,7 @@ public class FinishedGameResult {
 
 
     
-    public Map<String, String> fetchScoresAndDetermineWinners(boolean useMocks, TournamentRound round) {
+    public List<GameResult> fetchScoresAndDetermineWinners(boolean useMocks, TournamentRound round) {
         try {
             String json;
 
@@ -58,7 +61,7 @@ public class FinishedGameResult {
                 
 
                 if (response.statusCode() != 200) {
-                    return Map.of();
+                    return List.of();
                 }
                 json = response.body();
             }
@@ -71,7 +74,7 @@ public class FinishedGameResult {
             e.printStackTrace();
         }
             // return empty map on failure
-            return Map.of(); 
+            return List.of(); 
     }
 
 

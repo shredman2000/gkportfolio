@@ -28,7 +28,7 @@ public class Game {
 
     private int seed1;
     private String homeTeam;
-    // private int homeTeamId;    
+    private int homeScore;    
     
     @Column(unique = true)
     private String bracketTag;
@@ -190,4 +190,16 @@ public class Game {
     public void setBracketNum() {
         this.bracketNum = bracketNum;
     }
+    public int getHomeScore() {
+        return homeScore;
+    }
+    public void setHomeScore(int homeScore) {
+        this.homeScore = homeScore;
+    }
+    public int getAwayScore() {
+        return awayScore;
+    }
+    public void setAwayScore(int awayScore) {
+        this.awayScore = awayScore;
+    } 
 }

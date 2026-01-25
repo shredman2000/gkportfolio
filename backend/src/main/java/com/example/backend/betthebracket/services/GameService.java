@@ -169,7 +169,7 @@ public class GameService {
             System.out.println("Tournament complete");
             return;
         }
-        Map<String, String> winnersList = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
+        List<GameResult> results = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
         for (Game game : allGames) {
 
             String home = game.getHomeTeam();
@@ -178,17 +178,12 @@ public class GameService {
             String key1 = home + " vs " + away;
             String key2 = away + " vs " + home;
 
-            if (winnersList.containsKey(key1)) {
-                game.setWinner(winnersList.get(key1));
-                game.setStatus("finished");
-            }
-            else if (winnersList.containsKey(key2)){
-                game.setWinner(winnersList.get(key2));
-                game.setStatus("finished");
-            }     
-            
-            if (game.getWinner() != null && !"finished".equals(game.getStatus())) {
-                game.setStatus("finished");
+            for (GameResult result : results) {
+                if ((result.getHomeTeam().equals(home) && result.getAwayTeam().equals(away)) || (result.getHomeTeam().equals(away) && result.getAwayTeam().equals(home))) {
+                    game.setWinner(result.getWinner());
+                    game.setHomeScore(result.getHomeScore());
+                    game.setAwayScore(result.getAwayScore());
+                } 
             }
         }
         

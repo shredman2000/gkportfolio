@@ -70,6 +70,7 @@ const formatData = (games) => {
                 resultText: g.winner === g.homeTeam ? "Won" : "",
                 isWinner: g.winner === g.homeTeam,
                 status: null,
+                score: g.homeTeam.score
             },
             {
                 id: `away-${g.id}`,
@@ -223,8 +224,6 @@ export default function MarchMadnessBracket({ games, onGameClick }) {
 
                     const textColor = (won) =>
                         won ? '#fff' : '#000';
-                    const topColor = topParty?.color;
-                    const bottomColor = bottomParty?.color;
                     const topPrimaryColor = getTeamColor(topParty.name);
                     const bottomPrimaryColor = getTeamColor(bottomParty.name);
 
