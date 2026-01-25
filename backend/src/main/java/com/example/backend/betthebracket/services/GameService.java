@@ -170,10 +170,11 @@ public class GameService {
             return;
         }
         List<GameResult> results = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
+        System.out.println("______GameResult ARRAY_________" + results);
         for (Game game : allGames) {
 
             if (game.getWinner() != null) continue;
-            if (game.getRound() != currentRound) {
+            if (game.getRound().equals(currentRound)) {
                 continue;
             }
 
