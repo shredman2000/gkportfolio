@@ -170,7 +170,9 @@ public class GameService {
             return;
         }
         List<GameResult> results = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
-        System.out.println("______GameResult ARRAY_________" + results);
+        for (GameResult r : results) {
+            System.out.println(r.getHomeTeam() + " vs " + r.getAwayTeam() + " -> " + r.getWinner());
+        }
         for (Game game : allGames) {
 
             String home = game.getHomeTeam();
@@ -184,7 +186,7 @@ public class GameService {
                     game.setWinner(result.getWinner());
                     game.setHomeScore(result.getHomeScore());
                     game.setAwayScore(result.getAwayScore());
-
+                    game.setStatus("finished");
                     break;
                 } 
             }
