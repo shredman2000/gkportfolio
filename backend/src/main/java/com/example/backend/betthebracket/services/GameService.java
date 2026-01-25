@@ -172,6 +172,10 @@ public class GameService {
         List<GameResult> results = finishedGameResult.fetchScoresAndDetermineWinners(true, currentRound); 
         for (Game game : allGames) {
 
+            if (game.getRound() != currentRound) {
+                continue;
+            }
+
             String home = game.getHomeTeam();
             String away = game.getAwayTeam();
 
@@ -183,6 +187,8 @@ public class GameService {
                     game.setWinner(result.getWinner());
                     game.setHomeScore(result.getHomeScore());
                     game.setAwayScore(result.getAwayScore());
+
+                    break;
                 } 
             }
         }
