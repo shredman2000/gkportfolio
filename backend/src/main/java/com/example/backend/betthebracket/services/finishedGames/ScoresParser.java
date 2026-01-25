@@ -59,8 +59,23 @@ public class ScoresParser {
                 // Ensure there are at least two scores (home and away)
                 if (scores.length() >= 2) {
                     // Retrieve the score for the home and away teams (with default -1 if missing or invalid)
-                    int homeScore = scores.optJSONObject(0).optInt("score", -1);
-                    int awayScore = scores.optJSONObject(1).optInt("score", -1);
+                    int homeScore = -1;
+                    int awayScore = -1;
+
+                    for (int j = 0; j < scores.length(); j++) {
+                        JSONObject scoreObj = scores.getJSONObject(j);
+                        String teamName = scoreObj.getString("name");
+                        int score = scoreObj.getInt("score");
+
+                        if (teamName.equals(homeTeam)){
+                            homeScore = score;
+                        }
+                        else if (teamName.equals(awayTeam)) {
+                            awayScore = score;
+                        }
+
+                    }
+
 
                     gameResult.setHomeScore(homeScore);
                     gameResult.setAwayScore(awayScore);

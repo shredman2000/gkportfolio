@@ -183,6 +183,12 @@ public class GameService {
             String key2 = away + " vs " + home;
 
             for (GameResult result : results) {
+
+                int homeScore = -1;
+                int awayScore = -1;
+
+                
+
                 if ((result.getHomeTeam().equals(home) && result.getAwayTeam().equals(away)) || (result.getHomeTeam().equals(away) && result.getAwayTeam().equals(home))) {
                     game.setWinner(result.getWinner());
                     game.setHomeScore(result.getHomeScore());
