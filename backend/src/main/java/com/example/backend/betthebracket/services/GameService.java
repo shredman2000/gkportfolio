@@ -173,11 +173,6 @@ public class GameService {
         System.out.println("______GameResult ARRAY_________" + results);
         for (Game game : allGames) {
 
-            if (game.getWinner() != null) continue;
-            if (game.getRound().equals(currentRound)) {
-                continue;
-            }
-
             String home = game.getHomeTeam();
             String away = game.getAwayTeam();
 
