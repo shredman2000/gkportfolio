@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.betthebracket.models.CBBGame;
 import com.example.backend.betthebracket.models.Game;
 import com.example.backend.betthebracket.repository.GameRepository;
 import com.example.backend.betthebracket.services.GameService;
@@ -53,16 +54,10 @@ public class GameController {
     }
 
     @GetMapping("/fetchCBB")
-    public String fetchGamesFromAPI() {
-        try {
-            gameService.getCBBGames();
-        } catch (Exception e) {
-            
-            e.printStackTrace(); 
-            return "Error while fetching and storing games.";
-        }
-    
-        return "Fetched and stored game data, now can be retrieved with GET";
+    public List<CBBGame> fetchGamesFromAPI() {
+
+        List<CBBGame> cbbGames = gameService.getCBBGames();
+        return cbbGames;
     }
     
 
