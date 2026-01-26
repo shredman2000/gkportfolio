@@ -59,6 +59,7 @@ public class ScoreFetcher {
                         .findFirst()
                         .orElse(null);
 
+                    // update existing games
                     if (game != null) {
 
                         JSONArray scoresArray = apiGame.optJSONArray("scores");
@@ -85,13 +86,29 @@ public class ScoreFetcher {
                                 }
                             }
                         }
+
+                        Boolean finished = apiGame.getBoolean("completed");
+                        if (finished) {
+                            game.setStatus("finished");
+                        }
+                        else {
+                            game.setStatus("scheduled");
+                        }
+                        if (finished) {
+                            if (homeScore > awayScore) {
+                                game.setWinner(apiGame.getString("home_team"));
+                            }
+                            else {
+                                game.setWinner(apiGame.getString("away_team"));
+                            }
+                        }
                         game.setHomeScore(homeScore);
                         game.setAwayScore(awayScore);
 
                         cbbGameRepository.save(game);
                     }
-                     
-                    else {// otherwise create a new game.
+                     // otherwise create a new game. 
+                    else {
                         Instant startTime = Instant.parse(apiGame.getString("commence_time"));
                         
                         JSONArray scoresArray = apiGame.optJSONArray("scores");
@@ -129,7 +146,22 @@ public class ScoreFetcher {
                                 awayScore
 
                         );
+                        Boolean finished = apiGame.getBoolean("completed");
+                        if (finished) {
+                            newGame.setStatus("finished");
+                        }
+                        else {
+                            newGame.setStatus("scheduled");
+                        }
 
+                        if (finished) {
+                            if (homeScore > awayScore) {
+                                newGame.setWinner(apiGame.getString("home_team"));
+                            }
+                            else {
+                                newGame.setWinner(apiGame.getString("away_team"));
+                            }
+                        }
                         cbbGameRepository.save(newGame);
 
                     }
