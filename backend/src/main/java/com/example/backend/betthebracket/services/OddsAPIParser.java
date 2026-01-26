@@ -1,5 +1,6 @@
 package com.example.backend.betthebracket.services;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,8 +25,8 @@ public class OddsAPIParser {
      * 
      * @param responseBody The raw JSON string returned by The Odds API.
      */
-    public List<Game> parseGames(String responseBody) {
-        List<Game> gamesList = new ArrayList<>();
+    public List<ParsedGameOdds> parseGames(String responseBody) {
+        List<ParsedGameOdds> gamesList = new ArrayList<>();
         
         // Convert the response body into a JSON array (list of games)
         JSONArray gamesArray = new JSONArray(responseBody);
@@ -43,7 +44,7 @@ public class OddsAPIParser {
 
             // Extract and convert game start time
             String startTime = game.getString("commence_time"); // Example: "2025-03-12T23:00:57Z"
-            LocalDateTime gameStartTime = LocalDateTime.parse(startTime.replace("Z", "")); // Remove 'Z' and convert to LocalDateTime
+            Instant gameStartTime = Instant.parse(startTime); // Remove 'Z' and convert to LocalDateTime
 
             // Create a Matchup object to check for duplicates
             Matchup matchup = new Matchup(homeTeam + " vs " + awayTeam, gameStartTime);
@@ -92,7 +93,7 @@ public class OddsAPIParser {
                         // Only add the matchup if both teams have valid odds
                         // NA and seed 1000 because they shouldnt be used.
                         if (homeOdds > 0 && awayOdds > 0) {
-                            Game gameObject = new Game(TournamentRound.ROUND_OF_64, "NA", 1000, homeTeam, 1000, awayTeam, gameStartTime.toLocalDate().toString(), gameStartTime.toLocalTime().toString(), homeOdds, awayOdds, null, -1);
+                            ParsedGameOdds gameObject = new ParsedGameOdds(homeTeam, awayTeam, Instant.parse(game.getString("commence_time")), homeOdds, awayOdds);
                             gamesList.add(gameObject);
                         }
                     }
@@ -107,7 +108,7 @@ public class OddsAPIParser {
      */
     public static class Matchup {
         private String matchup; // Example: "Baylor Bears vs Kansas St Wildcats"
-        private LocalDateTime startTime; // Start time of the game
+        private Instant startTime; // Start time of the game
 
         /**
          * Constructor to initialize a matchup object.
@@ -115,7 +116,7 @@ public class OddsAPIParser {
          * @param matchup   String representation of the matchup (e.g., "Team A vs Team B").
          * @param startTime The start time of the game.
          */
-        public Matchup(String matchup, LocalDateTime startTime) {
+        public Matchup(String matchup, Instant startTime) {
             this.matchup = matchup;
             this.startTime = startTime;
         }
@@ -153,4 +154,38 @@ public class OddsAPIParser {
    /* public static Betting getBettingSystem() {
         return bettingSystem;
     }*/
+
+    public class ParsedGameOdds {
+        private String homeTeam;
+        private String awayTeam;
+        private Instant startTime;
+        private Double homeOdds;
+        private Double awayOdds;
+        private Integer homeScore;
+        private Integer awayScore;
+
+        public ParsedGameOdds(String homeTeam, String awayTeam, Instant startTime, Double homeOdds, Double awayOdds) {
+            this.homeTeam = homeTeam;
+            this.awayTeam = awayTeam;
+            this.startTime = startTime;
+            this.homeOdds = homeOdds;
+            this.awayOdds = awayOdds;
+        }
+
+        public void setHomeTeam(String homeTeam) { this.homeTeam = homeTeam; }
+        public void setAwayTeam(String awayTeam) { this.awayTeam = awayTeam; }
+        public void setStartTime(Instant startTime) { this.startTime = startTime; }
+        public void setHomeOdds(Double homeOdds) { this.homeOdds = homeOdds; }
+        public void setAwayOdds(Double awayOdds) { this.awayOdds = awayOdds; }
+        public void setHomeScore(Integer homeScore) { this.homeScore = homeScore; }
+        public void setAwayScore(Integer awayScore) { this.awayScore = awayScore; }
+
+        public String getHomeTeam() { return homeTeam; }
+        public String getAwayTeam() { return awayTeam; }
+        public Instant getStartTime() { return startTime; }
+        public Double getHomeOdds() { return homeOdds; }
+        public Double getAwayOdds() { return awayOdds; }
+        public Integer getHomeScore() { return homeScore; }
+        public Integer getAwayScore() { return awayScore; }
+    }
 }

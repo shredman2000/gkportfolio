@@ -52,10 +52,10 @@ public class GameController {
         return "bracket populated";
     }
 
-    @PostMapping("/fetch")
+    @GetMapping("/fetchCBB")
     public String fetchGamesFromAPI() {
         try {
-            gameService.getGames();
+            gameService.getCBBGames();
         } catch (Exception e) {
             
             e.printStackTrace(); 

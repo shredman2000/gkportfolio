@@ -8,10 +8,13 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.backend.betthebracket.models.CBBGame;
 import com.example.backend.betthebracket.models.Game;
+import com.example.backend.betthebracket.repository.CBBGameRepository;
 import com.example.backend.betthebracket.repository.GameRepository;
 import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult;
 import com.example.backend.betthebracket.services.finishedGames.FinishedGameResult.TournamentRound;
+import com.example.backend.betthebracket.services.OddsAPIParser.ParsedGameOdds;
 
 @Service
 public class GameService {
@@ -19,12 +22,14 @@ public class GameService {
     private final OddsAPIParser oddsAPIParser;
     private final GameRepository gameRepository;
     private final FinishedGameResult finishedGameResult;
+    private final CBBGameRepository cbbGameRepository;
 
-    public GameService(OddsFetcher oddsFetcher, OddsAPIParser oddsAPIParser, GameRepository gameRepository, FinishedGameResult finishedGameResult) {
+    public GameService(OddsFetcher oddsFetcher, OddsAPIParser oddsAPIParser, GameRepository gameRepository, FinishedGameResult finishedGameResult, CBBGameRepository cbbGameRepository) {
         this.oddsFetcher = oddsFetcher;
         this.oddsAPIParser = oddsAPIParser;
         this.gameRepository = gameRepository;
         this.finishedGameResult = finishedGameResult;
+        this.cbbGameRepository = cbbGameRepository;
     }
 
     /**
@@ -53,6 +58,18 @@ public class GameService {
         //updateGamesFromApi();
 
         return gameRepository.findAll();
+    }
+
+    @Transactional
+    public List<CBBGame> getCBBGames() {
+        updateGamesFromApi("cbb");
+
+        List<CBBGame> cbbGames = cbbGameRepository.findAll();
+
+
+
+
+        return cbbGames;
     }
     
     /**
@@ -115,27 +132,38 @@ public class GameService {
      * 
      */
     @Transactional
-    public void updateGamesFromApi() {
+    public void updateGamesFromApi(String gameType) {
+        if (gameType == null) { return; }
+        if ("cbb".equals(gameType)) {
+            List<CBBGame> cbbGames = cbbGameRepository.findAll();
+            String JSON = oddsFetcher.fetchOddsData("cbb");
+            List<ParsedGameOdds> apiGames = oddsAPIParser.parseGames(JSON);
+        
+        
+            //List<Game> games = gameRepository.findAll();
 
-        List<Game> games = gameRepository.findAll();
-
-        String JSON = oddsFetcher.fetchOddsData();
-        List<Game> apiGames = oddsAPIParser.parseGames(JSON);
-
-
-        /**
-         * Iterate through the games retrieved from the api, and check whether they exist in the database already
-         * we only want to update games in the database since they are the March Madness games.
-         */
-        for (Game apiGame : apiGames) {
-            for (Game game : games) {
-                
-                boolean matchesNormal = game.getHomeTeam().equals(apiGame.getHomeTeam()) && game.getAwayTeam().equals(apiGame.getAwayTeam());
-
-                boolean matchesFlipped = game.getHomeTeam().equals(apiGame.getAwayTeam()) && game.getAwayTeam().equals(apiGame.getHomeTeam());
-                   
-                if (matchesNormal || matchesFlipped) {
-
+            /**
+             * Iterate through the games retrieved from the api, and check whether they exist in the database already
+             * we only want to update games in the database since they are the March Madness games.
+             */
+            for (ParsedGameOdds apiGame : apiGames) {
+                CBBGame game = cbbGames.stream()
+                    .filter(g -> (g.getHomeTeam().equals(apiGame.getHomeTeam()) && g.getAwayTeam().equals(apiGame.getAwayTeam())) ||
+                                (g.getHomeTeam().equals(apiGame.getAwayTeam()) && g.getAwayTeam().equals(apiGame.getHomeTeam())))
+                    .findFirst()
+                    .orElse(null);
+            
+                if (game == null) {
+                    game = new CBBGame(
+                        null,
+                        apiGame.getHomeTeam(),
+                        apiGame.getAwayTeam(),
+                        apiGame.getStartTime(),
+                        apiGame.getHomeOdds(),
+                        apiGame.getAwayOdds()
+                    );
+                } else {
+                    boolean matchesNormal = game.getHomeTeam().equals(apiGame.getHomeTeam()) && game.getAwayTeam().equals(apiGame.getAwayTeam());
                     if (matchesNormal) {
                         game.setHomeOdds(apiGame.getHomeOdds());
                         game.setAwayOdds(apiGame.getAwayOdds());
@@ -144,13 +172,16 @@ public class GameService {
                         game.setHomeOdds(apiGame.getAwayOdds());
                         game.setAwayOdds(apiGame.getHomeOdds());
                     }
-        
-                    game.setDate(apiGame.getDate());
-                    game.setTime(apiGame.getTime());
+                    game.setStartTime(apiGame.getStartTime());
                 }
-            }    
+
+    
+                game.setStartTime(apiGame.getStartTime());
+                cbbGameRepository.save(game);
+            } 
+            cbbGameRepository.saveAll(cbbGames);  
         }
-        gameRepository.saveAll(games);
+            
     }
 
     /*

@@ -5,23 +5,30 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OddsFetcher {
     // API key for authentication
-    private static final String API_KEY = "cdcf15d4f18fbc21fd5f3d575ddb884c";
-
+    @Value("${ODDS_Key}")
+    private String apiKey;
     // URL to fetch NCAA basketball game odds from The Odds API
-    private static final String URL = "https://api.the-odds-api.com/v4/sports/basketball_ncaab/odds/?apiKey=" + API_KEY
-            + "&commenceTimeFrom=2025-04-04T00:00:00Z" // Fetch games starting from March 12th, 2025
-            + "&commenceTimeTo=2025-04-07T23:59:59Z" // Until end of the day
-            + "&regions=us" // Get US-based sportsbooks
-            + "&markets=h2h"; // Get head-to-head odds (moneyline)
+
 
     private final HttpClient client = HttpClient.newBuilder().build();
 
-    public String fetchOddsData() {
+    public String fetchOddsData(String gameType) {
+        String URL = "";
+        switch (gameType) {
+            case "cbb":
+                URL = "https://api.the-odds-api.com/v4/sports/basketball_ncaab/odds/?apiKey=" + apiKey
+                    + "&daysFrom=1" // Fetch games starting from March 12th, 2025
+                    + "&regions=us" // Get US-based sportsbooks
+                    + "&markets=h2h"; // Get head-to-head odds (moneyline)
+        }
+                
+
         try {
             HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(URL))
