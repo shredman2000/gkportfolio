@@ -65,26 +65,26 @@ public class ScoreFetcher {
 
                         int homeScore = 0;
                         int awayScore = 0;
+                        if (scoresArray != null) {
+                            for (int j = 0; j < scoresArray.length(); j++) {
+                                JSONObject scoreOBJ = scoresArray.getJSONObject(j);
+                                String teamName = scoreOBJ.getString("name");
+                            
+                                String scoreStr = scoreOBJ.optString("score", null);
 
-                        for (int j = 0; j < scoresArray.length(); j++) {
-                            JSONObject scoreOBJ = scoresArray.getJSONObject(j);
-                            String teamName = scoreOBJ.getString("name");
-                        
-                            String scoreStr = scoreOBJ.optString("score", null);
+                                Integer score = null;
+                                if (scoreStr != null && !scoreStr.isEmpty()) {
+                                    score = Integer.parseInt(scoreStr);
+                                }
 
-                            Integer score = null;
-                            if (scoreStr != null && !scoreStr.isEmpty()) {
-                                score = Integer.parseInt(scoreStr);
-                            }
-
-                            if (teamName.equals(game.getHomeTeam())) {
-                                homeScore = score;
-                            }
-                            else if (teamName.equals(game.getAwayTeam())) {
-                                awayScore = score;
+                                if (teamName.equals(game.getHomeTeam())) {
+                                    homeScore = score;
+                                }
+                                else if (teamName.equals(game.getAwayTeam())) {
+                                    awayScore = score;
+                                }
                             }
                         }
-
                         game.setHomeScore(homeScore);
                         game.setAwayScore(awayScore);
 
