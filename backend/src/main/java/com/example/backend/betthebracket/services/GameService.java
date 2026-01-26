@@ -23,13 +23,15 @@ public class GameService {
     private final GameRepository gameRepository;
     private final FinishedGameResult finishedGameResult;
     private final CBBGameRepository cbbGameRepository;
+    private final ScoreFetcher scoreFetcher;
 
-    public GameService(OddsFetcher oddsFetcher, OddsAPIParser oddsAPIParser, GameRepository gameRepository, FinishedGameResult finishedGameResult, CBBGameRepository cbbGameRepository) {
+    public GameService(OddsFetcher oddsFetcher, ScoreFetcher scoreFetcher, OddsAPIParser oddsAPIParser, GameRepository gameRepository, FinishedGameResult finishedGameResult, CBBGameRepository cbbGameRepository) {
         this.oddsFetcher = oddsFetcher;
         this.oddsAPIParser = oddsAPIParser;
         this.gameRepository = gameRepository;
         this.finishedGameResult = finishedGameResult;
         this.cbbGameRepository = cbbGameRepository;
+        this.scoreFetcher = scoreFetcher;
     }
 
     /**
@@ -63,7 +65,7 @@ public class GameService {
     @Transactional
     public List<CBBGame> getCBBGames() {
         updateGamesFromApi("cbb");
-
+        updateScoresFromApi("cbb");
         List<CBBGame> cbbGames = cbbGameRepository.findAll();
 
 
@@ -182,6 +184,17 @@ public class GameService {
             cbbGameRepository.saveAll(cbbGames);  
         }
             
+    }
+
+    @Transactional
+    public void updateScoresFromApi(String gameType) {
+        if (gameType == null) { return; }
+        if ("cbb".equals(gameType)){
+            List<CBBGame> cbbGames = cbbGameRepository.findAll();
+            scoreFetcher.fetchScores("cbb");
+
+
+        }
     }
 
     /*

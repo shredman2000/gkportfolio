@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.example.backend.betthebracket.services.GameResult;
 
 /**
+ * IMPORTANT: ONLY WORKS WITH THE MARCH MADNESS BRACKET_________ USE SCORE FETCHER FOR OTHER SCORES
+ * 
  * This class is to parse the scores of finished games and sort them so we can use that information
  * for betting and team advancements in the MM tournament bracket
  */

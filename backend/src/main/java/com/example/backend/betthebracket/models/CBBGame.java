@@ -35,6 +35,21 @@ public class CBBGame {
 
     public CBBGame() {}
 
+    public CBBGame( 
+                String homeTeam, 
+                String awayTeam, 
+                Instant startTime, 
+                Integer homeScore, 
+                Integer awayScore
+            ) {
+                this.homeTeam = homeTeam;
+                this.awayTeam = awayTeam;
+                this.startTime = startTime;
+                this.homeScore = homeScore;
+                this.awayScore = awayScore;
+    }
+
+    // constructor for use in 
     public CBBGame(Long id, 
                 String homeTeam, 
                 String awayTeam,   
