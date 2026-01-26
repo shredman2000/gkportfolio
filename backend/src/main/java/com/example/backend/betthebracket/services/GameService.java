@@ -174,7 +174,9 @@ public class GameService {
                         // If the teams are flipped in the API, flip the odds too
                         game.setHomeOdds(apiGame.getAwayOdds());
                         game.setAwayOdds(apiGame.getHomeOdds());
+                        
                     }
+                    game.setExternalId(apiGame.getExternalId());
                     game.setStartTime(apiGame.getStartTime());
                 }
 
@@ -182,7 +184,6 @@ public class GameService {
                 game.setStartTime(apiGame.getStartTime());
                 cbbGameRepository.save(game);
             } 
-            cbbGameRepository.saveAll(cbbGames);  
         }
             
     }
