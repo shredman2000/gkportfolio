@@ -162,7 +162,8 @@ public class GameService {
                         apiGame.getAwayTeam(),
                         apiGame.getStartTime(),
                         apiGame.getHomeOdds(),
-                        apiGame.getAwayOdds()
+                        apiGame.getAwayOdds(),
+                        apiGame.getExternalId()
                     );
                 } else {
                     boolean matchesNormal = game.getHomeTeam().equals(apiGame.getHomeTeam()) && game.getAwayTeam().equals(apiGame.getAwayTeam());

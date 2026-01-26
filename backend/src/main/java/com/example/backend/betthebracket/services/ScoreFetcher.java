@@ -55,13 +55,15 @@ public class ScoreFetcher {
 
                     CBBGame game = cbbGames.stream()
                         .filter(g ->             
-                            (g.getHomeTeam().equals(apiGame.getString("home_team")) &&
-                            g.getAwayTeam().equals(apiGame.getString("away_team"))) ||
-                            (g.getHomeTeam().equals(apiGame.getString("away_team")) &&
-                            g.getAwayTeam().equals(apiGame.getString("home_team")))
+                                apiGame.getString("id").equals(g.getExternalId())
                         )
                         .findFirst()
                         .orElse(null);
+
+                    System.out.println(
+                        "API game " + apiGame.getString("id") +
+                        " matched DB game: " + (game != null ? game.getId() : "NONE")
+                    );
 
                     // update existing games
                     if (game != null) {
@@ -141,7 +143,8 @@ public class ScoreFetcher {
                                 apiGame.getString("away_team"),
                                 startTime,
                                 homeScore, 
-                                awayScore
+                                awayScore,
+                                apiGame.getString("id")
 
                         );
                         Boolean finished = apiGame.getBoolean("completed");
@@ -158,7 +161,18 @@ public class ScoreFetcher {
                             } else {
                                 newGame.setWinner(newGame.getAwayTeam());
                             }
-                        }   
+                        }
+
+                        System.out.println(
+                            "[ScoreFetcher][CREATE] " +
+                            "id=" + apiGame.getString("id") +
+                            " | " + apiGame.getString("home_team") + " vs " + apiGame.getString("away_team") +
+                            " | completed=" + finished +
+                            " | homeScore=" + homeScore +
+                            " | awayScore=" + awayScore +
+                            " | status=" + newGame.getStatus() +
+                            " | winner=" + newGame.getWinner()
+                        );
                         cbbGameRepository.save(newGame);
                         cbbGames.add(newGame);
 

@@ -2,6 +2,7 @@ package com.example.backend.betthebracket.models;
 
 import java.time.Instant;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,9 @@ public class CBBGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
+    private String externalId;
 
     private String homeTeam;
     private String awayTeam;
@@ -35,18 +39,21 @@ public class CBBGame {
 
     public CBBGame() {}
 
+
     public CBBGame( 
                 String homeTeam, 
                 String awayTeam, 
                 Instant startTime, 
                 Integer homeScore, 
-                Integer awayScore
+                Integer awayScore,
+                String externalId
             ) {
                 this.homeTeam = homeTeam;
                 this.awayTeam = awayTeam;
                 this.startTime = startTime;
                 this.homeScore = homeScore;
                 this.awayScore = awayScore;
+                this.externalId = externalId;
     }
 
     // constructor for use in 
@@ -55,7 +62,8 @@ public class CBBGame {
                 String awayTeam,   
                 Instant startTime, 
                 Double homeOdds, 
-                Double awayOdds 
+                Double awayOdds,
+                String externalId
             ) {
                 this.id = id;
                 this.homeTeam = homeTeam;
@@ -67,6 +75,7 @@ public class CBBGame {
                 this.awayOdds = awayOdds;
                 this.winner = null;
                 this.status = "scheduled";
+                this.externalId = externalId;
         }
 
 
@@ -149,4 +158,8 @@ public class CBBGame {
     public void setStatus(String status) {
         this.status = status;
     } 
+
+    public String getExternalId() {
+        return externalId;
+    }
 }

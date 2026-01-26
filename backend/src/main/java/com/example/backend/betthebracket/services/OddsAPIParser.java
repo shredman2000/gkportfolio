@@ -93,7 +93,7 @@ public class OddsAPIParser {
                         // Only add the matchup if both teams have valid odds
                         // NA and seed 1000 because they shouldnt be used.
                         if (homeOdds > 0 && awayOdds > 0) {
-                            ParsedGameOdds gameObject = new ParsedGameOdds(homeTeam, awayTeam, Instant.parse(game.getString("commence_time")), homeOdds, awayOdds);
+                            ParsedGameOdds gameObject = new ParsedGameOdds(homeTeam, awayTeam, Instant.parse(game.getString("commence_time")), homeOdds, awayOdds, game.getString("id"));
                             gamesList.add(gameObject);
                         }
                     }
@@ -163,13 +163,15 @@ public class OddsAPIParser {
         private Double awayOdds;
         private Integer homeScore;
         private Integer awayScore;
+        private String externalId;
 
-        public ParsedGameOdds(String homeTeam, String awayTeam, Instant startTime, Double homeOdds, Double awayOdds) {
+        public ParsedGameOdds(String homeTeam, String awayTeam, Instant startTime, Double homeOdds, Double awayOdds, String externalId) {
             this.homeTeam = homeTeam;
             this.awayTeam = awayTeam;
             this.startTime = startTime;
             this.homeOdds = homeOdds;
             this.awayOdds = awayOdds;
+            this.externalId = externalId;
         }
 
         public void setHomeTeam(String homeTeam) { this.homeTeam = homeTeam; }
@@ -179,7 +181,7 @@ public class OddsAPIParser {
         public void setAwayOdds(Double awayOdds) { this.awayOdds = awayOdds; }
         public void setHomeScore(Integer homeScore) { this.homeScore = homeScore; }
         public void setAwayScore(Integer awayScore) { this.awayScore = awayScore; }
-
+        public void setExternalId(String externalId) { this.externalId = externalId; }
         public String getHomeTeam() { return homeTeam; }
         public String getAwayTeam() { return awayTeam; }
         public Instant getStartTime() { return startTime; }
@@ -187,5 +189,6 @@ public class OddsAPIParser {
         public Double getAwayOdds() { return awayOdds; }
         public Integer getHomeScore() { return homeScore; }
         public Integer getAwayScore() { return awayScore; }
+        public String getExternalId() { return externalId; }
     }
 }
