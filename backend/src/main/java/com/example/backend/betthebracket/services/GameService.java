@@ -64,13 +64,10 @@ public class GameService {
 
     @Transactional
     public List<CBBGame> getCBBGames() {
-        updateGamesFromApi("cbb");
         updateScoresFromApi("cbb");
+        updateGamesFromApi("cbb");
+        
         List<CBBGame> cbbGames = cbbGameRepository.findAll();
-
-
-
-
         return cbbGames;
     }
     
@@ -140,13 +137,14 @@ public class GameService {
             List<CBBGame> cbbGames = cbbGameRepository.findAll();
             String JSON = oddsFetcher.fetchOddsData("cbb");
             List<ParsedGameOdds> apiGames = oddsAPIParser.parseGames(JSON);
-        
+            
+            System.out.println("IN UPDATEGAMESFROMAPI________________________________");
         
             //List<Game> games = gameRepository.findAll();
 
             /**
              * Iterate through the games retrieved from the api, and check whether they exist in the database already
-             * we only want to update games in the database since they are the March Madness games.
+             * we only want to update games in the database
              */
             for (ParsedGameOdds apiGame : apiGames) {
                 CBBGame game = cbbGames.stream()

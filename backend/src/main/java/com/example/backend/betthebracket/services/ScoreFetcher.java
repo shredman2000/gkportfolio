@@ -60,13 +60,16 @@ public class ScoreFetcher {
                         .findFirst()
                         .orElse(null);
 
-                    System.out.println(
-                        "API game " + apiGame.getString("id") +
-                        " matched DB game: " + (game != null ? game.getId() : "NONE")
-                    );
+                    System.out.println("[ScoreFetcher] Processing API game id=" + apiGame.getString("id"));
+                    System.out.println("[ScoreFetcher] Matched DB game: " + (game != null ? game.getExternalId() : "NONE"));
 
                     // update existing games
                     if (game != null) {
+                        System.out.println("[ScoreFetcher] Existing game before update: " +
+                            game.getHomeTeam() + " " + game.getAwayTeam() +
+                            " | status=" + game.getStatus() +
+                            " | homeScore=" + game.getHomeScore() + " awayScore=" + game.getAwayScore()
+                        );
 
                         JSONArray scoresArray = apiGame.optJSONArray("scores");
 
@@ -111,6 +114,7 @@ public class ScoreFetcher {
                         game.setAwayScore(awayScore);
 
                         cbbGameRepository.save(game);
+                        System.out.println("[ScoreFetcher] Updated game scores: home=" + game.getHomeScore() + " away=" + game.getAwayScore() + " winner=" + game.getWinner());
                     }
                      // otherwise create a new game. 
                     else {

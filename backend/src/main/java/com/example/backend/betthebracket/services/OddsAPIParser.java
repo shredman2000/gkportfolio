@@ -93,6 +93,7 @@ public class OddsAPIParser {
                         // Only add the matchup if both teams have valid odds
                         // NA and seed 1000 because they shouldnt be used.
                         if (homeOdds > 0 && awayOdds > 0) {
+                            System.out.println("[OddsAPIParser] Parsing game: " + homeTeam + " vs " + awayTeam + " | odds: home=" + homeOdds + " away=" + awayOdds);
                             ParsedGameOdds gameObject = new ParsedGameOdds(homeTeam, awayTeam, Instant.parse(game.getString("commence_time")), homeOdds, awayOdds, game.getString("id"));
                             gamesList.add(gameObject);
                         }
