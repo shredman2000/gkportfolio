@@ -61,7 +61,7 @@ public class ScoreFetcher {
 
                     if (game != null) {
 
-                        JSONArray scoresArray = apiGame.getJSONArray("scores");
+                        JSONArray scoresArray = apiGame.optJSONArray("scores");
 
                         int homeScore = 0;
                         int awayScore = 0;
