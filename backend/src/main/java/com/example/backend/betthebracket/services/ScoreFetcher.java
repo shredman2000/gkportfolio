@@ -54,8 +54,12 @@ public class ScoreFetcher {
                     JSONObject apiGame = gamesArray.getJSONObject(i);
 
                     CBBGame game = cbbGames.stream()
-                        .filter(g -> (g.getHomeTeam().equals(apiGame.getString("home_team")) && g.getAwayTeam().equals(apiGame.getString("away_team"))) ||
-                                (g.getHomeTeam().equals(apiGame.getString("away_team")) && g.getAwayTeam().equals(apiGame.getString("home_team"))))
+                        .filter(g ->             
+                            (g.getHomeTeam().equals(apiGame.getString("home_team")) &&
+                            g.getAwayTeam().equals(apiGame.getString("away_team"))) ||
+                            (g.getHomeTeam().equals(apiGame.getString("away_team")) &&
+                            g.getAwayTeam().equals(apiGame.getString("home_team")))
+                        )
                         .findFirst()
                         .orElse(null);
 
@@ -64,8 +68,8 @@ public class ScoreFetcher {
 
                         JSONArray scoresArray = apiGame.optJSONArray("scores");
 
-                        int homeScore = 0;
-                        int awayScore = 0;
+                        Integer homeScore = null;
+                        Integer awayScore = null;
                         if (scoresArray != null) {
                             for (int j = 0; j < scoresArray.length(); j++) {
                                 JSONObject scoreOBJ = scoresArray.getJSONObject(j);
@@ -87,19 +91,18 @@ public class ScoreFetcher {
                             }
                         }
 
-                        Boolean finished = apiGame.getBoolean("completed");
+                        boolean finished = apiGame.getBoolean("completed");
                         if (finished) {
                             game.setStatus("finished");
                         }
                         else {
                             game.setStatus("scheduled");
                         }
-                        if (finished) {
+                        if (finished && homeScore != null && awayScore != null) {
                             if (homeScore > awayScore) {
-                                game.setWinner(apiGame.getString("home_team"));
-                            }
-                            else {
-                                game.setWinner(apiGame.getString("away_team"));
+                                game.setWinner(game.getHomeTeam());
+                            } else {
+                                game.setWinner(game.getAwayTeam());
                             }
                         }
                         game.setHomeScore(homeScore);
@@ -122,13 +125,8 @@ public class ScoreFetcher {
                             for (int j = 0; j < scoresArray.length(); j++) {
                                 JSONObject scoreOBJ = scoresArray.getJSONObject(j);
                                 String teamName = scoreOBJ.getString("name");
-                                String scoreStr = scoreOBJ.optString("score", null);
+                                Integer score = Integer.valueOf(scoreOBJ.getString("score"));
 
-                                Integer score = null;
-
-                                if (scoreStr != null && !scoreStr.isEmpty()) {
-                                    score = Integer.parseInt(scoreStr);
-                                }
                                 if (teamName.equals(apiGame.getString("home_team"))) {
                                     homeScore = score;
                                 }
@@ -154,15 +152,15 @@ public class ScoreFetcher {
                             newGame.setStatus("scheduled");
                         }
 
-                        if (finished) {
+                        if (finished && homeScore != null && awayScore != null) {
                             if (homeScore > awayScore) {
-                                newGame.setWinner(apiGame.getString("home_team"));
+                                newGame.setWinner(newGame.getHomeTeam());
+                            } else {
+                                newGame.setWinner(newGame.getAwayTeam());
                             }
-                            else {
-                                newGame.setWinner(apiGame.getString("away_team"));
-                            }
-                        }
+                        }   
                         cbbGameRepository.save(newGame);
+                        cbbGames.add(newGame);
 
                     }
                 }
