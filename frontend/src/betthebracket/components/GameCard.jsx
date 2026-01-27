@@ -5,6 +5,7 @@ import GameModal from "./GameModal"
 export default function GameCard(props) {
 
     const [timeLeft, setTimeLeft] = useState(props.timestamp - Date.now());
+    
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,7 +23,7 @@ export default function GameCard(props) {
 
         return `${hours}:${minutes}:${seconds}`;
     }
-
+    const inProgress = timeLeft <= 0;
     return (
         <>
             <Card 
@@ -42,11 +43,39 @@ export default function GameCard(props) {
                     <hr />
                     <Card.Text>{props.round}</Card.Text>
                     <Card.Text><strong>Date: </strong>{props.displayDate}</Card.Text>
-                    {props.status === "scheduled" && 
-                        <Card.Text><strong>Tip-off in: </strong>{formatTime(timeLeft)}</Card.Text>
+                    {props.status === "scheduled" && !inProgress &&
+                        <>
+                            <Card.Text><strong>Tip-off in: </strong>{formatTime(timeLeft)}</Card.Text>
+                            <Card.Text><strong>{props.homeTeam + " Odds: "}</strong>{props.homeOdds}</Card.Text>
+                            <Card.Text><strong>{props.awayTeam + " Odds: "}</strong>{props.awayOdds}</Card.Text>
+                        </>
                     }
-                    <Card.Text><strong>{props.homeTeam + " Odds: "}</strong>{props.homeOdds}</Card.Text>
-                    <Card.Text><strong>{props.awayTeam + " Odds: "}</strong>{props.awayOdds}</Card.Text>
+                    {props.status === "scheduled" && inProgress &&
+                        <>
+                            <Card.Text>{props.homeTeam.split(" ").pop() + ": " + props.homeScore}</Card.Text>
+                            <Card.Text>{props.awayTeam.split(" ").pop() + ": " + props.awayScore}</Card.Text>
+                            <Card.Text><strong>{props.homeTeam + " Odds: "}</strong>{props.homeOdds}</Card.Text>
+                            <Card.Text><strong>{props.awayTeam + " Odds: "}</strong>{props.awayOdds}</Card.Text>
+                        </>
+                    }
+                    {props.status === "finished" &&
+                        <>  
+                            <Card.Text   style={{
+                                backgroundColor: props.winner === props.homeTeam ? "green" : "transparent",
+                                color: props.winner === props.homeTeam ? "white" : "inherit",
+                                padding: "2px 6px",
+                                borderRadius: "4px"
+                            }}>{props.homeTeam.split(" ").pop() + ": " + props.homeScore}</Card.Text>
+                            <Card.Text   style={{
+                                backgroundColor: props.winner === props.awayTeam ? "green" : "transparent",
+                                color: props.winner === props.awayTeam ? "white" : "inherit",
+                                padding: "2px 6px",
+                                borderRadius: "4px"
+                            }}>{props.awayTeam.split(" ").pop() + ": " + props.awayScore}</Card.Text>
+                            <Card.Text>Game Finished</Card.Text>
+                        </>
+                    }
+                    
                 </Card.Body>
                 }
             </Card>

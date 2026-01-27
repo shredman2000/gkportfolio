@@ -141,7 +141,7 @@ function Games() {
                     }
                     <hr></hr>
                 </Row>
-                <Row className='upcoming-row'>
+                <Row className='finished-row'>
                     <h3>Finished Games</h3>
                     <hr></hr>
                     {finishedGames ? finishedGames.map((game, index) => {
