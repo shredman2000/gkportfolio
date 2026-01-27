@@ -11,14 +11,26 @@ function GameModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>More Game Information</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <p>{props.game.homeTeam + " ("}<strong>{props.game.seed1}</strong>{") vs. " + props.game.awayTeam + " ("}<strong>{props.game.seed2}</strong>{")"}</p>
-          <p><strong>Round: </strong>{props.game.round}</p>
-          <p><strong>Date: </strong>{props.game.date === "TBD" ? "Finished" : "TBD"}</p>
-          <p><strong>Region: </strong>{props.game.region}</p>
-          <p><strong>Status: </strong>{(props.game.status === "finished") ? "Finished" : "Upcoming"}</p>
-          {props.game.winner !== "TBD" && <p><strong>Winner: </strong>{props.game.winner}</p>}
-        </Modal.Body>
+        {props.game.bracketTag ? ( // info to show for march madness games.
+          <Modal.Body>
+            <p>{props.game.homeTeam + " ("}<strong>{props.game.seed1}</strong>{") vs. " + props.game.awayTeam + " ("}<strong>{props.game.seed2}</strong>{")"}</p>
+            <p><strong>Round: </strong>{props.game.round}</p>
+            <p><strong>Date: </strong>{props.game.date === "TBD" ? "Finished" : "TBD"}</p>
+            <p><strong>Region: </strong>{props.game.region}</p>
+            <p><strong>Status: </strong>{(props.game.status === "finished") ? "Finished" : "Upcoming"}</p>
+            {props.game.winner !== "TBD" && <p><strong>Winner: </strong>{props.game.winner}</p>}
+          </Modal.Body>
+        ) : (
+          <Modal.Body>
+            <p>{props.game.homeTeam + " vs. " + props.game.awayTeam}</p>
+            <p><strong>Date: </strong>{props.game.displayDate}</p>
+            <p><strong>Status: </strong>{(props.game.status === "finished") ? "Finished" : "Upcoming"}</p>
+            {props.game.winner !== null && <p><strong>Winner: </strong>{props.game.winner}</p>}
+          </Modal.Body>
+        )}
+        
+
+
         <Modal.Footer>
           {(props.game.status === "finished") &&
           <p>Match complete. Bets closed</p>

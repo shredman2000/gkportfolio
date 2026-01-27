@@ -189,11 +189,13 @@ public class ScoreFetcher {
 
             } else {
                 // Print error if the response is not successful
-                throw new RuntimeException("Error fetching odds: HTTP " + response.statusCode());
+                System.err.println("Error fetching scores in ScoreFetcher: " + response.statusCode());
+                return;
             }
         } 
         catch (Exception e) {
-            throw new RuntimeException("Failed to fetch data", e);
+            System.err.println("Exception in ScoreFetcher, exception: " + e.getMessage());
+            return;
         
         }
     }

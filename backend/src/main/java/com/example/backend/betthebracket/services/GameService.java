@@ -135,8 +135,17 @@ public class GameService {
         if (gameType == null) { return; }
         if ("cbb".equals(gameType)) {
             List<CBBGame> cbbGames = cbbGameRepository.findAll();
-            String JSON = oddsFetcher.fetchOddsData("cbb");
-            List<ParsedGameOdds> apiGames = oddsAPIParser.parseGames(JSON);
+            String json = oddsFetcher.fetchOddsData("cbb");
+            if (json == null || json.isBlank()) {
+                System.out.println("Odds API Unavailable, check tokens, skipping odds update.");
+                return;
+            }
+
+            List<ParsedGameOdds> apiGames = oddsAPIParser.parseGames(json);
+            if (apiGames == null || apiGames.isEmpty()) {
+                System.out.println("Odds api returned no games");
+                return;
+            }
             
             System.out.println("IN UPDATEGAMESFROMAPI________________________________");
         

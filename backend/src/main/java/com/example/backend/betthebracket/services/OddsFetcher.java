@@ -46,11 +46,15 @@ public class OddsFetcher {
 
             } else {
                 // Print error if the response is not successful
-                throw new RuntimeException("Error fetching odds: HTTP " + response.statusCode());
+
+                System.err.println("Odds api failed with status: " + response.statusCode());
+                return null;
+                
             }
         } 
         catch (Exception e) {
-            throw new RuntimeException("Failed to fetch data", e);
+            System.err.println("Odds API exception: " + e.getMessage());
+            return null;
         
         }
 
