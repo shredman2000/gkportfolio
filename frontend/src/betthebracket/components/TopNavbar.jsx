@@ -27,7 +27,7 @@ export default function TopNavbar(props) {
                     <button onClick={() => navigate("/betthebracket/profile")} className="nav-bar-button">Profile</button>
                     
                 </div>
-                <button onClick={handleLogout} className="logout-button">Logout</button>
+                <button onClick={() => {handleLogout; navigate("/betthebracket/login")}} className="logout-button">Logout</button>
             </div>
         </nav>
     )}

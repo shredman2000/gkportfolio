@@ -1,5 +1,6 @@
 package com.example.backend.betthebracket.controllers;
 
+import java.lang.StackWalker.Option;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.betthebracket.controllers.UserController.BetReturnObject;
 import com.example.backend.betthebracket.models.Bet;
+import com.example.backend.betthebracket.models.CBBGame;
 import com.example.backend.betthebracket.models.Game;
 import com.example.backend.betthebracket.models.NBAGame;
 import com.example.backend.betthebracket.models.User;
+import com.example.backend.betthebracket.repository.CBBGameRepository;
 import com.example.backend.betthebracket.repository.GameRepository;
 import com.example.backend.betthebracket.repository.NBAGameRepository;
 import com.example.backend.betthebracket.repository.UserRepository;
@@ -41,12 +44,14 @@ public class UserController {
     private final GameRepository gameRepository;
     private final NBAGameRepository nbaGameRepository;
     private final UpdateBetsService updateBetsService;
+    private final CBBGameRepository cbbGameRepository;
     
-    public UserController(UserRepository userRepository, GameRepository gameRepository, NBAGameRepository nbaGameRepository, UpdateBetsService updateBetsService) {
+    public UserController(UserRepository userRepository, CBBGameRepository cbbGameRepository, GameRepository gameRepository, NBAGameRepository nbaGameRepository, UpdateBetsService updateBetsService) {
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.nbaGameRepository = nbaGameRepository;
         this.updateBetsService = updateBetsService;
+        this.cbbGameRepository = cbbGameRepository;
     }
 
     @GetMapping
@@ -213,10 +218,13 @@ public class UserController {
                     Optional<NBAGame> nbaGameOptional = nbaGameRepository.findById(bet.getGameId());
                     nbaGameOptional.ifPresent(game -> response.add(new BetReturnObject(bet, game)));
                     break;
-                case "CBB":
-                    Optional<Game> cbbGameOptional = gameRepository.findById(bet.getGameId());
-                    cbbGameOptional.ifPresent(game -> response.add(new BetReturnObject(bet, game)));
+                case "MARCHMADNESS":
+                    Optional<Game> mmGameOptional = gameRepository.findById(bet.getGameId());
+                    mmGameOptional.ifPresent(game -> response.add(new BetReturnObject(bet, game)));
                     break;
+                case "CBB":
+                    Optional<CBBGame> cbbGameOptional = cbbGameRepository.findById(bet.getGameId());
+                    cbbGameOptional.ifPresent(game -> response.add(new BetReturnObject(bet, game)));
                 case "default": 
                     continue;
             }
@@ -291,6 +299,25 @@ public class UserController {
             this.awayTeam = game.getAwayTeam();
             this.date = game.getDate();
             this.time = game.getTime();
+            this.winner = game.getWinner();
+            this.gameStatus = game.getStatus();
+        }
+        public BetReturnObject(Bet bet, CBBGame game) {
+            this.betId = bet.getId();
+            this.betType = bet.getBetType();
+            this.amount = bet.getAmount();
+            this.odds = bet.getOdds();
+            this.status = bet.getStatus();
+            this.isOpen = bet.isOpen();
+            this.timestamp = bet.getTimestamp();
+            this.teamPicked = bet.getTeamPicked();
+            this.potentialPay = bet.getPotentialPay();
+            this.openOrClosed = bet.getOpenOrClosed();
+            this.date = "";
+            this.gameId = game.getId();
+            this.homeTeam = game.getHomeTeam();
+            this.awayTeam = game.getAwayTeam();
+            this.time = game.getStartTime().toString();
             this.winner = game.getWinner();
             this.gameStatus = game.getStatus();
         }

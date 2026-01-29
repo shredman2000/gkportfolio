@@ -72,7 +72,7 @@ public class BetController {
             try {
                 currentUser.placeBet(newBet);  // Handles balance validation + deduction
                 userRepository.save(currentUser); // Save updated user
-                betRepository.save(newBet);       // Save the bet itself
+                //betRepository.save(newBet);       // Save the bet itself potentially causes duplicate bets being placed.
                 return ResponseEntity.ok(newBet);
             } catch (IllegalArgumentException | IllegalStateException e) {
                 return ResponseEntity.badRequest().body(e.getMessage());

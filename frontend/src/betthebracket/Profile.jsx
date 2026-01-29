@@ -14,8 +14,8 @@ function Profile() {
     const handleTransaction = async (type) => {
         // alter endpoint based on transaction type
         const endpoint = type === 'deposit'
-            ? 'http://localhost:8080/api/users/deposit'
-            : 'http://localhost:8080/api/users/withdraw';
+            ? '/api/betthebracket/users/deposit'
+            : '/api/betthebracket/users/withdraw';
 
         // submit transaction to backend via api call
         try {
@@ -36,7 +36,7 @@ function Profile() {
                 alert(message);
 
                 // Refresh balance after transaction
-                fetch('http://localhost:8080/api/users/getUsernameAndBalance', {
+                fetch('/api/betthebracket/users/getUsernameAndBalance', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ function Profile() {
         let authToken = localStorage.getItem('token');
         //console.log(authToken);
 
-        fetch('http://localhost:8080/api/users/getBets', {
+        fetch('/api/betthebracket/users/getBets', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ function Profile() {
     useEffect(() => {
         let authToken = localStorage.getItem('token');
 
-        fetch('http://localhost:8080/api/users/getUsernameAndBalance', {
+        fetch('/api/betthebracket/users/getUsernameAndBalance', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
