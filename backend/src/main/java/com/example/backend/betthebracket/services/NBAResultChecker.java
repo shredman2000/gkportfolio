@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.betthebracket.models.NBAGame;
@@ -16,12 +17,10 @@ public class NBAResultChecker {
     private final NBAGameRepository nbaGameRepository;
     private final ObjectMapper mapper = new ObjectMapper();
 
-    private static final String API_KEY = "cdcf15d4f18fbc21fd5f3d575ddb884c";
+    @Value("${ODDS_Key}")
+    private String apiKey;
 
-    private static final String NBA_SCORES_URL =
-        "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?" +
-        "apiKey=" + API_KEY +
-        "&daysFrom=3";
+
 
     public NBAResultChecker (NBAGameRepository nbaGameRepository) {
         this.nbaGameRepository = nbaGameRepository;
@@ -31,6 +30,11 @@ public class NBAResultChecker {
     * Parse the winners of past NBA games and check against the games in the db, update bets 
     */
     public void updateFinishedNBAGames() {
+        String NBA_SCORES_URL =
+            "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?" +
+            "apiKey=" + apiKey +
+            "&daysFrom=1";
+        
         try {
             JsonNode root = mapper.readTree(new URL(NBA_SCORES_URL));
             for (JsonNode gameNode : root) {
@@ -64,6 +68,8 @@ public class NBAResultChecker {
                     if (!"finished".equalsIgnoreCase(nbaGame.getStatus())) {
                         nbaGame.setWinner(winner);
                         nbaGame.setStatus("finished");
+                        nbaGame.setHomeScore(homeScore);
+                        nbaGame.setAwayScore(awayScore);
                         nbaGameRepository.save(nbaGame);
                         System.out.println("Updated game: " + homeTeam + " vs " + awayTeam + " — Winner: " + winner);
                     }

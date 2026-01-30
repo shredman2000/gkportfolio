@@ -35,7 +35,7 @@ function NbaGames() {
     };
 
     useEffect(() => {
-        fetch('http://localhost:8080/nba/odds', { method: 'GET' })
+        fetch('/api/betthebracket/nba/odds', { method: 'GET' })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Server error: ${response.status}`);
@@ -61,8 +61,6 @@ function NbaGames() {
     return (
         <div>
             <TopNavbar />
-            <h1>Games</h1>
-
             {showGameModal && (
                 <GameModal 
                     showGameModal={showGameModal} 
@@ -82,7 +80,7 @@ function NbaGames() {
                 />
             )}
 
-            <Container fluid>
+            <Container fluid style={{ marginTop: "10vh"}}>
                 <h3 className="mt-3 mb-3">Upcoming Games</h3>
                 <Row>
                     {!loading && upcomingGames.length > 0 ? (

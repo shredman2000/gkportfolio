@@ -14,6 +14,7 @@ import com.example.backend.betthebracket.models.CBBGame;
 import com.example.backend.betthebracket.models.Game;
 import com.example.backend.betthebracket.repository.GameRepository;
 import com.example.backend.betthebracket.services.GameService;
+import com.example.backend.betthebracket.services.UpdateBetsService;
 
 
 /**
@@ -26,11 +27,13 @@ import com.example.backend.betthebracket.services.GameService;
 public class GameController {
     private final GameRepository gameRepository;
     private final GameService gameService;
+    private final UpdateBetsService updateBetsService;
 
     
-    public GameController(GameRepository gameRepository, GameService gameService) {
+    public GameController(GameRepository gameRepository, UpdateBetsService updateBetsService, GameService gameService) {
         this.gameRepository = gameRepository;
         this.gameService = gameService;
+        this.updateBetsService = updateBetsService;
     }
 
 
@@ -55,10 +58,13 @@ public class GameController {
 
     @GetMapping("/fetchCBB")
     public List<CBBGame> fetchGamesFromAPI() {
-
+        updateBetsService.settleCBBBets();
         List<CBBGame> cbbGames = gameService.getCBBGames();
+
         return cbbGames;
     }
+
+    
     
 
     @PostMapping

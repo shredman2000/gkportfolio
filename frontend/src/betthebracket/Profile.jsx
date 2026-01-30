@@ -124,6 +124,7 @@ function Profile() {
                             <strong>Bet Type:</strong> {bet.betType} <br />
                             <strong>Odds:</strong> {bet.odds} <br />
                             <strong>Amount:</strong> ${bet.amount.toFixed(2)} <br />
+                            <strong>To Pay: </strong> ${bet.potentialPay.toFixed(2)}<br />
                             <strong>Status:</strong> {bet.status}
                         </Card.Text>
                     </Card.Body>
