@@ -7,6 +7,7 @@ import Signup from './Signup';
 import Games from './Games'
 import Profile from './Profile';
 import NbaGames from './NbaGames';
+import Slot from './Slot';
 
 //Renders the application and sets up routing between pages
 function BetTheBracketRoutes() {
@@ -23,6 +24,7 @@ function BetTheBracketRoutes() {
                 <Route path="games" element={token ? <Games /> : <Login setToken={setToken}/>} />
                 <Route path="profile" element={token ? <Profile /> : <Login setToken={setToken}/>} />
                 <Route path="nbagames" element={token ? <NbaGames/> : <Login setToken={setToken}/> } />
+                <Route path="slot" element={token ? <Slot/> : <Login setToken={setToken}/>} />
             </Routes>
     )
 }

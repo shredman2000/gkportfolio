@@ -24,6 +24,7 @@ export default function TopNavbar(props) {
                 <div className="nav-links">
                     <button onClick={() => navigate("/betthebracket/games")} className="nav-bar-button">NCAA Games</button>
                     <button onClick={() => navigate("/betthebracket/nbagames")} className="nav-bar-button">NBA</button>
+                    <button onClick={() => navigate("/betthebracket/slot")} className="nav-bar-button">Slots</button>
                     <button onClick={() => navigate("/betthebracket/profile")} className="nav-bar-button">Profile</button>
                     
                 </div>
