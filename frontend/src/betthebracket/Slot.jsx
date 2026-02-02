@@ -2,6 +2,12 @@ import TopNavbar from "./components/TopNavbar";
 import { useEffect, useRef, useState, useLayoutEffect, } from "react";
 import Select from 'react-select';
 import "./Slot.css";
+import BasketballSymbol from './assets/BasketballSymbol.png';
+import TwoPtSymbol from './assets/2pt-symbol.png';
+import ThreePtSymbol from './assets/3pt-symbol.png';
+import HoopSymbol from './assets/HoopSymbol.png';
+import Logo from './assets/LogoGK.png'
+
 
 export default function Slot() {
     const [reels, setReels] = useState([[], [], [], [], []]); 
@@ -27,6 +33,14 @@ export default function Slot() {
         ["A", "J", "Q", "J"],
         ["GK", "K", "J", "A"]
     ];
+
+    const SYMBOL_MAP = {
+        A: BasketballSymbol,
+        J: HoopSymbol,
+        Q: TwoPtSymbol,
+        K: ThreePtSymbol,   
+        GK: Logo,
+    };
 
     const options = [
         { value: 1, label: "$1" },
@@ -138,30 +152,37 @@ export default function Slot() {
 
     return (
         <div className="slot-page-wrapper">
-        <TopNavbar />
-        <div className="slot-wrapper">
-            <div className="reels-wrapper">
-            {reels.map((reelSymbols, idx) => (
-                <div className="reel" key={idx} ref={reelRefs[idx]}>
-                <div className="reel-strip">
-                    {reelSymbols.map((symbol, i) => (
-                    <div key={i} className="symbol">
-                        {symbol}
+
+            <TopNavbar />
+            <div className="slot-wrapper">
+                <div className="reels-wrapper">
+                {reels.map((reelSymbols, idx) => (
+                    <div className="reel" key={idx} ref={reelRefs[idx]}>
+                    <div className="reel-strip">
+                        {reelSymbols.map((symbol, i) => (
+                        <div key={i} className="symbol">
+                            {SYMBOL_MAP[symbol] ? (
+                                <img src={SYMBOL_MAP[symbol]} alt={symbol} className="slot-symbol-img"/>
+                            ) : ( symbol )}
+                        </div>
+                        ))}
                     </div>
-                    ))}
+                    </div>
+                ))}
                 </div>
+                <button onClick={spin} disabled={spinning} style={{ marginTop: '10px', width: '15%'}}>
+                    {spinning ? "Spinning..." : "Spin"}
+                </button>
+                <div className="slot-settings-div">
+                    <h2 style={{color: 'white'}}>Win: {showWin && spinWin}</h2>
+                    <h2 style={{color: 'white'}}>Balance: {displayedBalance?.toFixed(2)}</h2>
+                    <div style={{display: 'flex', gap: '10px'}}>
+                        <h2 style={{color: 'white'}}>Wager</h2>
+                        <Select options={options} menuPlacement="top" value={selectedWager} onChange={(option) => setSelectedWager(option)}></Select>
+                    </div>
+                    
                 </div>
-            ))}
             </div>
-            <button onClick={spin} disabled={spinning} style={{ marginTop: '10px', width: '15%'}}>
-                {spinning ? "Spinning..." : "Spin"}
-            </button>
-            <div className="slot-settings-div">
-                <h2>Win: {showWin && spinWin}</h2>
-                <h2>Balance: {displayedBalance?.toFixed(2)}</h2>
-                <Select options={options} menuPlacement="top" value={selectedWager} onChange={(option) => setSelectedWager(option)}></Select>
-            </div>
-        </div>
         
         </div>
     );
