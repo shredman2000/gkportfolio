@@ -183,7 +183,7 @@ public class GameService {
                         game.setAwayOdds(apiGame.getHomeOdds());
                         
                     }
-                    game.setExternalId(apiGame.getExternalId());
+                    //game.setExternalId(apiGame.getExternalId());
                     game.setStartTime(apiGame.getStartTime());
                 }
 

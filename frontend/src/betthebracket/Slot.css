@@ -13,6 +13,7 @@
   align-items: center;
   height: 95%;
   width: 100%;
+  margin-top: 5%;
 }
 
 .reels-wrapper {
@@ -43,4 +44,11 @@
   font-size: 4rem;
   border: 1px solid grey;
   box-sizing: border-box;
+}
+.slot-settings-div {
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

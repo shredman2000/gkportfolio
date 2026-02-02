@@ -233,6 +233,32 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/getBetStats")
+    public ResponseEntity<?> getBetStats(@RequestBody Map<String, String> request) {
+        System.out.println("getBetStats HIT");
+        String authToken = request.get("authToken");
+        if (authToken == null || authToken.isBlank()) {
+            return ResponseEntity.badRequest().body("invalid auth token");
+        }
+        Optional<User> userOpt = userRepository.findByAuthToken(authToken);
+        if (userOpt.isEmpty()) { 
+            return ResponseEntity.badRequest().body("Error retrieving user. Auth token is valid, issue is elsewhere");
+        }
+
+        User user = userOpt.get();
+
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("totalWagered", user.getTotalWagered());
+        response.put("totalProfit", user.getTotalProfit());
+        response.put("totalSlotWagered", user.getTotalSlotWagered());
+        response.put("totalSlotProfit", user.getTotalSlotProfit());
+        response.put("totalSpins", user.getSlotSpins());
+
+        return ResponseEntity.ok(response);
+
+    }
+
 
     /**
      * Object for creating a custom response for each of the users bets

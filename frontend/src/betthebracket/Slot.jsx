@@ -1,44 +1,80 @@
 import TopNavbar from "./components/TopNavbar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect, } from "react";
+import Select from 'react-select';
 import "./Slot.css";
 
 export default function Slot() {
     const [reels, setReels] = useState([[], [], [], [], []]); 
     const [symbolHeight, setSymbolHeight] = useState(0);
     const [spinning, setSpinning] = useState(false);
+    const [layoutReady, setLayoutReady] = useState(false);
     const reelRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
     const [authToken, setAuthToken] = useState();
     const visibleSymbols = 4;
     const spinDuration = 2000; 
+    const [data, setData] = useState(null);
+    const [pendingBalance, setPendingBalance] = useState(null);
+    const [displayedBalance, setDisplayedBalance] = useState(null);
+    const [spinWin, setSpinWin] = useState(null);
+    const [showWin, setShowSpinWin] = useState(false);
+    
+    
 
+    const placeHolderSymbols = [
+        ["A", "K", "GK", "K"],
+        ["J", "Q", "GK", "J"],
+        ["Q", "GK", "K", "K"],
+        ["A", "J", "Q", "J"],
+        ["GK", "K", "J", "A"]
+    ];
+
+    const options = [
+        { value: 1, label: "$1" },
+        { value: 2, label: "$2" },
+        { value: 5, label: "$5" },
+        { value: 10, label: "$10" },
+        { value: 50, label: "$50" },
+        { value: 100, label: "$100" },
+        { value: 250, label: "$250" },
+        { value: 500, label: "$500" },
+        { value: 1000, label: "$1000" },
+    ];
+    const [selectedWager, setSelectedWager] = useState(options[3]);
 
     // get auth token from local storage on mount
     useEffect(() => {
         setAuthToken(localStorage.getItem("token"));
+        setReels(placeHolderSymbols);
+
+        fetch('/api/betthebracket/users/getUsernameAndBalance', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ authToken: localStorage.getItem('token') })
+        })
+        .then(res => res.json())
+        .then(data => {setDisplayedBalance(data.balance)})
     }, []);
 
     // gets the height for each symbol so symbols fit in reels
     // depends on reels so we can update when new data is loaded
-    useEffect(() => {
-        const calculateSymbolHeight = () => {
-            if (!reelRefs[0].current) return;
-            const reelHeight = reelRefs[0].current.clientHeight;
-            const height = reelHeight / visibleSymbols;
-            setSymbolHeight(height);
+    // waits for page layout to be defined before calculating reel height.
+    useLayoutEffect(() => {
+        if (!reelRefs[0].current) return;
 
-                
-            reelRefs.forEach((ref) => {
-                if (!ref.current) return;
-                Array.from(ref.current.children[0].children).forEach((symbol) => {
+        const reelHeight = reelRefs[0].current.clientHeight;
+        const height = reelHeight / visibleSymbols;
+        setSymbolHeight(height);
+
+
+        reelRefs.forEach((ref) => {
+            if (!ref.current) return;
+            Array.from(ref.current.children[0].children).forEach((symbol) => {
                 symbol.style.height = `${height}px`;
                 symbol.style.flex = `0 0 ${height}px`;
-                });
             });
-        };
+        });
 
-        calculateSymbolHeight(); // initial calculation on page load
-        window.addEventListener("resize", calculateSymbolHeight); // recalculate when window resizes
-        return () => window.removeEventListener("resize", calculateSymbolHeight); 
+        setLayoutReady(true);
     }, [reels]);
 
 
@@ -46,17 +82,18 @@ export default function Slot() {
     const spin = async () => {
         if (!authToken || spinning) return;
         setSpinning(true);
-
+        setShowSpinWin(false);
         try {
-        const response = await fetch("/api/betthebracket/slot/spin", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ authToken, wager: 10 }),
-        });
-        if (!response.ok) throw new Error("Bad response from server");
-        const data = await response.json();
-
-        setReels(data.reels); 
+            const response = await fetch("/api/betthebracket/slot/spin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ authToken, wager: selectedWager.value }),
+            });
+            if (!response.ok) throw new Error("Bad response from server");
+            const data = await response.json();
+            setPendingBalance(data.userBalance);
+            setSpinWin(data.payout);
+            setReels(data.reels); 
         } catch (e) {
         console.error("Network error:", e);
         setSpinning(false);
@@ -89,9 +126,15 @@ export default function Slot() {
         });
 
 
-        const timeout = setTimeout(() => setSpinning(false), spinDuration);
+        const timeout = setTimeout(() => {
+            setSpinning(false);
+            if (pendingBalance !== null) {
+                setDisplayedBalance(pendingBalance);
+                setShowSpinWin(true);
+            }
+        }, spinDuration);
         return () => clearTimeout(timeout);
-    }, [reels, spinning]); // rerun when reels or spinning changes
+    }, [reels, spinning, symbolHeight]); // rerun when reels or spinning changes
 
     return (
         <div className="slot-page-wrapper">
@@ -110,9 +153,14 @@ export default function Slot() {
                 </div>
             ))}
             </div>
-            <button onClick={spin} disabled={spinning}>
-            {spinning ? "Spinning..." : "Spin"}
-        </button>
+            <button onClick={spin} disabled={spinning} style={{ marginTop: '10px', width: '15%'}}>
+                {spinning ? "Spinning..." : "Spin"}
+            </button>
+            <div className="slot-settings-div">
+                <h2>Win: {showWin && spinWin}</h2>
+                <h2>Balance: {displayedBalance?.toFixed(2)}</h2>
+                <Select options={options} menuPlacement="top" value={selectedWager} onChange={(option) => setSelectedWager(option)}></Select>
+            </div>
         </div>
         
         </div>

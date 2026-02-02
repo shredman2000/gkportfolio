@@ -39,6 +39,7 @@ public class UpdateBetsService {
                 if (nbaGame.getWinner().equalsIgnoreCase(bet.getTeamPicked())) {
                     bet.setStatus("won");
                     bet.getUser().setBalance(bet.getUser().getBalance() + bet.getPotentialPay());
+                    bet.getUser().setTotalProfit(bet.getUser().getTotalProfit() + bet.getPotentialPay());
                 }    
                 else {
                     bet.setStatus("lost");
@@ -64,6 +65,7 @@ public class UpdateBetsService {
                 if (cbbGame.getWinner().equalsIgnoreCase(bet.getTeamPicked())) {
                     bet.setStatus("won");
                     bet.getUser().setBalance(bet.getUser().getBalance() + bet.getPotentialPay());
+                    bet.getUser().setTotalProfit(bet.getUser().getTotalProfit() + bet.getPotentialPay());
                 }
                 else {
                     bet.setStatus("lost");

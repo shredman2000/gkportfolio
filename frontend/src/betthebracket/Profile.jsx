@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Col, Container, Row, Card, Button, ListGroup, Modal, Form } from "react-bootstrap";
+import { Col, Container, Row, Card, Button, ListGroup, Modal, Form, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 import TopNavbar from './components/TopNavbar';
 import './betthebracket-app.css';
 
@@ -9,6 +9,7 @@ function Profile() {
     const [showDepositModal, setShowDepositModal] = useState(false)
     const [showWithdrawModal, setShowWithdrawModal] = useState(false)
     const [transactionAmount, setTransactionAmount] = useState('')
+    const [userBetData, setUserBetData] = useState({});
 
     //Modal handler
     const handleTransaction = async (type) => {
@@ -104,6 +105,22 @@ function Profile() {
         });
     }, []); 
 
+    useEffect(() => {
+        let authToken = localStorage.getItem('token');
+        fetch('/api/betthebracket/users/getBetStats', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({authToken: authToken})
+        })
+        .then(response => response.json())
+        .then(data => { setUserBetData(data) })
+        .catch(error => {
+            console.error('error fetching users bet data: ',  error);
+        })
+    }, []);
+
     //Maps the bets fetched from the backend to a card component to display on the page
     const renderBetCard = (bet) => {
         let borderColor= 'border-warning'; // set border as yellow for open bets
@@ -162,7 +179,9 @@ function Profile() {
                         )}
                     </ListGroup>
                 </Col>
+                
 
+                {/* right column on profile, contains depo/withdrawal, bet stats, slot stats */}
                 <Col md={4}>
                     <Card className="mb-4 p-3 shadow-sm">
                         <Card.Body>
@@ -230,6 +249,16 @@ function Profile() {
                                 </>
                             )}
                         </Card.Body>
+                    </Card>
+                    <Card className="p-3 shadow-sm" style={{ marginTop: '25px'}}>
+                        <CardBody>
+                            <p style={{fontSize: '15pt'}}><strong>Total Wagered: </strong>${userBetData.totalWagered}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Total Profit: </strong>${userBetData.totalProfit}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Wagered: </strong>${userBetData.totalSlotWagered}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Profit: </strong>${userBetData.totalSlotProfit}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Spins: </strong>{userBetData.totalSpins}</p>
+                        </CardBody>
+
                     </Card>
                 </Col>
             </Row>

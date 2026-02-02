@@ -9,8 +9,8 @@ export default function TopNavbar(props) {
 
     //remove token from local storage and redirect to home page
     const handleLogout = () => {
-        localStorage.removeItem('token'); 
-        navigate('/betthebracket/'); 
+        localStorage.removeItem('token');
+        navigate("/betthebracket/login")
     };
 
 
@@ -28,7 +28,7 @@ export default function TopNavbar(props) {
                     <button onClick={() => navigate("/betthebracket/profile")} className="nav-bar-button">Profile</button>
                     
                 </div>
-                <button onClick={() => {handleLogout; navigate("/betthebracket/login")}} className="logout-button">Logout</button>
+                <button onClick={() => {handleLogout()}} className="logout-button">Logout</button>
             </div>
         </nav>
     )}
