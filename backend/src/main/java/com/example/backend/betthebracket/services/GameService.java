@@ -1,10 +1,13 @@
 package com.example.backend.betthebracket.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,9 +69,13 @@ public class GameService {
     public List<CBBGame> getCBBGames() {
         updateScoresFromApi("cbb");
         updateGamesFromApi("cbb");
-        
-        List<CBBGame> cbbGames = cbbGameRepository.findAll();
-        return cbbGames;
+        List<CBBGame> upcomingGames = cbbGameRepository.findByStatus("scheduled");
+        List<CBBGame> finishedGames = cbbGameRepository.findByStatus("finished", PageRequest.of(0,20, Sort.by(Sort.Direction.DESC, "startTime")));
+        List<CBBGame> result = new ArrayList<>();
+        result.addAll(upcomingGames);
+        result.addAll(finishedGames);
+
+        return result;
     }
     
     /**
