@@ -1,3 +1,4 @@
+version: "3.9"
 services:
   backend:
     build: ./backend
@@ -7,22 +8,19 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/websitedb
       SPRING_DATASOURCE_USERNAME: gunnar
       SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
       TMBD_KEY: f243c7df98509f0108668fb5705b2844
     depends_on:
       - db
 
   db:
     image: postgres:15
-    container_name: website-postgres
     environment:
       POSTGRES_DB: websitedb
       POSTGRES_USER: gunnar
       POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_dev:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  pgdata_dev:

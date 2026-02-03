@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Col, Container, Row, Card, Button, ListGroup, Modal, Form } from "react-bootstrap";
+import { Col, Container, Row, Card, Button, ListGroup, Modal, Form, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 import TopNavbar from './components/TopNavbar';
 import './betthebracket-app.css';
 
@@ -9,13 +9,14 @@ function Profile() {
     const [showDepositModal, setShowDepositModal] = useState(false)
     const [showWithdrawModal, setShowWithdrawModal] = useState(false)
     const [transactionAmount, setTransactionAmount] = useState('')
+    const [userBetData, setUserBetData] = useState({});
 
     //Modal handler
     const handleTransaction = async (type) => {
         // alter endpoint based on transaction type
         const endpoint = type === 'deposit'
-            ? 'http://localhost:8080/api/users/deposit'
-            : 'http://localhost:8080/api/users/withdraw';
+            ? '/api/betthebracket/users/deposit'
+            : '/api/betthebracket/users/withdraw';
 
         // submit transaction to backend via api call
         try {
@@ -36,7 +37,7 @@ function Profile() {
                 alert(message);
 
                 // Refresh balance after transaction
-                fetch('http://localhost:8080/api/users/getUsernameAndBalance', {
+                fetch('/api/betthebracket/users/getUsernameAndBalance', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -68,7 +69,7 @@ function Profile() {
         let authToken = localStorage.getItem('token');
         //console.log(authToken);
 
-        fetch('http://localhost:8080/api/users/getBets', {
+        fetch('/api/betthebracket/users/getBets', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +89,7 @@ function Profile() {
     useEffect(() => {
         let authToken = localStorage.getItem('token');
 
-        fetch('http://localhost:8080/api/users/getUsernameAndBalance', {
+        fetch('/api/betthebracket/users/getUsernameAndBalance', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -103,6 +104,22 @@ function Profile() {
             console.error('Error fetching user info:', error);
         });
     }, []); 
+
+    useEffect(() => {
+        let authToken = localStorage.getItem('token');
+        fetch('/api/betthebracket/users/getBetStats', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({authToken: authToken})
+        })
+        .then(response => response.json())
+        .then(data => { setUserBetData(data) })
+        .catch(error => {
+            console.error('error fetching users bet data: ',  error);
+        })
+    }, []);
 
     //Maps the bets fetched from the backend to a card component to display on the page
     const renderBetCard = (bet) => {
@@ -124,6 +141,7 @@ function Profile() {
                             <strong>Bet Type:</strong> {bet.betType} <br />
                             <strong>Odds:</strong> {bet.odds} <br />
                             <strong>Amount:</strong> ${bet.amount.toFixed(2)} <br />
+                            <strong>To Pay: </strong> ${bet.potentialPay.toFixed(2)}<br />
                             <strong>Status:</strong> {bet.status}
                         </Card.Text>
                     </Card.Body>
@@ -161,7 +179,9 @@ function Profile() {
                         )}
                     </ListGroup>
                 </Col>
+                
 
+                {/* right column on profile, contains depo/withdrawal, bet stats, slot stats */}
                 <Col md={4}>
                     <Card className="mb-4 p-3 shadow-sm">
                         <Card.Body>
@@ -229,6 +249,16 @@ function Profile() {
                                 </>
                             )}
                         </Card.Body>
+                    </Card>
+                    <Card className="p-3 shadow-sm" style={{ marginTop: '25px'}}>
+                        <CardBody>
+                            <p style={{fontSize: '15pt'}}><strong>Total Wagered: </strong>${userBetData.totalWagered}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Total Profit: </strong>${userBetData.totalProfit}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Wagered: </strong>${userBetData.totalSlotWagered}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Profit: </strong>${userBetData.totalSlotProfit}</p>
+                            <p style={{fontSize: '15pt'}}><strong>Slot Spins: </strong>{userBetData.totalSpins}</p>
+                        </CardBody>
+
                     </Card>
                 </Col>
             </Row>

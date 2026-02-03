@@ -37,12 +37,19 @@ public class User {
 
     private Double balance;
 
+    @Column(nullable = true, unique = true)
     @JsonIgnore
     private String authToken;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Bet> bets;
+
+    private Double totalWagered;
+    private Double totalProfit;
+    private Integer slotSpins;
+    private Double totalSlotWagered;
+    private Double totalSlotProfit;
 
     // Default constructor required by JPA
     public User() {
@@ -57,6 +64,11 @@ public class User {
         this.email = email;
         this.balance = balance;
         this.bets = new ArrayList<>();
+        this.totalWagered = 0.0;
+        this.totalProfit = 0.0;
+        this.slotSpins = 0;
+        this.totalSlotWagered = 0.0;
+        this.totalSlotProfit = 0.0;
     }
 
     // Getters and setters
@@ -134,10 +146,37 @@ public class User {
         this.balance -= amount;
         bet.setUser(this);
         this.bets.add(bet);
+        this.totalWagered += amount;
     }
 
     public void addBet(Bet bet) {
         bet.setUser(this);
         this.bets.add(bet);
+    }
+
+    public void addSlotSpin(Double wager, Double profit) {
+        this.totalWagered += wager;
+        this.totalSlotWagered += wager;
+        this.totalProfit += profit;
+        this.totalSlotProfit += profit;
+        this.slotSpins++;
+    }
+    public void setTotalProfit(Double profit) {
+        this.totalProfit += profit;
+    }
+    public Double getTotalProfit() {
+        return totalProfit;
+    }
+    public Double getTotalSlotProfit() {
+        return totalSlotProfit;
+    }
+    public Double getTotalWagered() {
+        return totalWagered;
+    }
+    public Double getTotalSlotWagered() {
+        return totalSlotWagered;
+    }
+    public int getSlotSpins() {
+        return slotSpins;
     }
 }

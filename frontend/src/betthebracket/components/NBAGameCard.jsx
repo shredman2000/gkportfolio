@@ -15,8 +15,12 @@ export default function NBAGameCard(props) {
                     <hr />
                     <Card.Text><strong>Date:</strong> {props.date}</Card.Text>
                     <Card.Text><strong>Time:</strong> {props.time}</Card.Text>
-                    <Card.Text><strong>{props.homeTeam + " Odds: "}</strong>{props.homeOdds}</Card.Text>
-                    <Card.Text><strong>{props.awayTeam + " Odds: "}</strong>{props.awayOdds}</Card.Text>
+                    {props.status !== "finished" && 
+                    <>
+                        <Card.Text><strong>{props.homeTeam + " Odds: "}</strong>{props.homeOdds}</Card.Text>
+                        <Card.Text><strong>{props.awayTeam + " Odds: "}</strong>{props.awayOdds}</Card.Text>
+                    </>
+                    }
                     <Card.Text><strong>Score:</strong> {props.awayTeam} {props.awayScore} – {props.homeTeam} {props.homeScore}</Card.Text>
                     <Card.Text><strong>Status:</strong> {props.status}</Card.Text>
                     {props.status === "finished" && (

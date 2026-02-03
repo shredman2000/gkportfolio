@@ -7,21 +7,14 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NBAGames {
 
-    private static final String API_KEY = "cdcf15d4f18fbc21fd5f3d575ddb884c";
-
-    private static final String NBA_ODDS_URL =
-        "https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?" +
-        "apiKey=" + API_KEY +
-        "&regions=us" +
-        "&markets=h2h" +
-        "&bookmakers=draftkings" +
-        "&oddsFormat=american" +
-        "&date=2025-04-19";
+    @Value("${ODDS_Key}")
+    private String apiKey;
 
 
     private final HttpClient client = HttpClient.newBuilder().build();
@@ -31,6 +24,14 @@ public class NBAGames {
      */
     public String fetchAndSaveNBAOdds() {
         try {
+                String NBA_ODDS_URL =
+                    "https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?" +
+                    "apiKey=" + apiKey +
+                    "&regions=us" +
+                    "&markets=h2h" +
+                    "&bookmakers=draftkings" +
+                    "&oddsFormat=american";
+
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(NBA_ODDS_URL))
                     .GET()

@@ -65,8 +65,8 @@ public class NBAOddsAPIParser {
                                     awayOdds, 
                                     gameStartTime.toLocalDate().toString(),
                                     gameStartTime.toLocalTime().toString(),
-                                    "No Winner Yet",
-                                    "Scheduled");
+                                    null,
+                                    "scheduled");
 
                                 gamesList.add(nbaGame);
                             }

@@ -1,5 +1,8 @@
 package com.example.backend.betthebracket.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,6 +10,7 @@ import com.example.backend.betthebracket.models.CBBGame;
 
 @Repository
 public interface CBBGameRepository extends JpaRepository<CBBGame, Long> {
-    
+    List<CBBGame> findByStatus(String status);
+    List<CBBGame> findByStatus(String status,  Pageable Pageable);
     
 }

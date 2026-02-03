@@ -5,7 +5,7 @@ import logo from './assets/LOGO.png'
 import './betthebracket-auth.css';
 
 //Provides a basic login form for the walking skeleton
-function Login() {
+function Login({ setToken }) {
     // State variables dynamically re-render the page when they are updated
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -33,6 +33,7 @@ function Login() {
                 const data = await response.json();
 
                 localStorage.setItem('token', data.token);
+                setToken(data.token);
                 //localStorage.setItem('userID', data.userID);
                 
                 navigate('/betthebracket/home');

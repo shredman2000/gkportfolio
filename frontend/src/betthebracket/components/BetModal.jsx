@@ -55,7 +55,7 @@ function BetModal(props) {
         betType: "h2h"
       };
     try {
-        const response = await fetch('http://localhost:8080/api/bets/place', {
+        const response = await fetch('/api/betthebracket/bets/place', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
