@@ -9,7 +9,7 @@ import HoopSymbol from './assets/HoopSymbol.png';
 import Logo from './assets/LogoGK.png'
 
 
-export default function Slot() {
+export default function Slot({ setToken }) {
     const [reels, setReels] = useState([[], [], [], [], []]); 
     const [symbolHeight, setSymbolHeight] = useState(0);
     const [spinning, setSpinning] = useState(false);
@@ -153,7 +153,7 @@ export default function Slot() {
     return (
         <div className="slot-page-wrapper">
 
-            <TopNavbar />
+            <TopNavbar setToken={setToken} />
             <div className="slot-wrapper">
                 <div className="reels-wrapper">
                 {reels.map((reelSymbols, idx) => (

@@ -8,7 +8,7 @@ import BetModal from './components/BetModal';
 import TopNavbar from './components/TopNavbar';
 import './betthebracket-app.css';
 
-function Games() {
+function Games({setToken}) {
     const [games, setGames] = useState([]);
     const [upcomingGames, setUpcomingGames] = useState([]);
     const [inProgressGames, setInProgressGames] = useState([]);
@@ -85,7 +85,7 @@ function Games() {
             display: "flex",
             flexDirection: "column"
         }}>
-            <TopNavbar/>
+            <TopNavbar setToken={setToken}/>
             {showGameModal && 
             <GameModal 
                 showGameModal={showGameModal} 

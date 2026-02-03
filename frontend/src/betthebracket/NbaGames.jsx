@@ -8,7 +8,7 @@ import BetModal from './components/NBABetModal';
 import TopNavbar from './components/TopNavbar';
 import './betthebracket-app.css';
 
-function NbaGames() {
+function NbaGames({ setToken }) {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showGameModal, setShowGameModal] = useState(false);
@@ -60,7 +60,7 @@ function NbaGames() {
 
     return (
         <div>
-            <TopNavbar />
+            <TopNavbar setToken={setToken}/>
             {showGameModal && (
                 <GameModal 
                     showGameModal={showGameModal} 
