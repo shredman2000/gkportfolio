@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/LOGO.png'
 import './TopNavbar.css'
-export default function TopNavbar(props) {
+export default function TopNavbar({ setToken }) {
 
     const navigate = useNavigate();
 
@@ -10,7 +10,9 @@ export default function TopNavbar(props) {
     //remove token from local storage and redirect to home page
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate("/betthebracket/login")
+        setToken(null);
+        navigate("/betthebracket/login");
+        console.log('authtoken: ', localStorage.getItem('token'))
     };
 
 

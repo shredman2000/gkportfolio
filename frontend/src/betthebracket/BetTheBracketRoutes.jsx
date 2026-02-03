@@ -19,12 +19,12 @@ function BetTheBracketRoutes() {
     return (
             <Routes>
                 <Route path="login" element={token ? <Navigate to="/betthebracket/home" replace /> : <Login setToken={setToken}/>} />
-                <Route path="home" element={token ? <Home /> : <Login setToken={setToken}/>} />
-                <Route path="signup" element={token ? <Home /> : <Signup/>} />
-                <Route path="games" element={token ? <Games /> : <Login setToken={setToken}/>} />
-                <Route path="profile" element={token ? <Profile /> : <Login setToken={setToken}/>} />
-                <Route path="nbagames" element={token ? <NbaGames/> : <Login setToken={setToken}/> } />
-                <Route path="slot" element={token ? <Slot/> : <Login setToken={setToken}/>} />
+                <Route path="home" element={token ? <Home setToken={setToken}/> : <Login setToken={setToken}/>} />
+                <Route path="signup" element={token ? <Home setToken={setToken}/> : <Signup/>} />
+                <Route path="games" element={token ? <Games setToken={setToken}/> : <Login setToken={setToken}/>} />
+                <Route path="profile" element={token ? <Profile setToken={setToken}/> : <Login setToken={setToken}/>} />
+                <Route path="nbagames" element={token ? <NbaGames setToken={setToken}/> : <Login setToken={setToken}/> } />
+                <Route path="slot" element={token ? <Slot setToken={setToken}/> : <Login setToken={setToken}/>} />
             </Routes>
     )
 }

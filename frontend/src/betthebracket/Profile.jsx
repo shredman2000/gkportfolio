@@ -3,7 +3,7 @@ import { Col, Container, Row, Card, Button, ListGroup, Modal, Form, CardBody, Ca
 import TopNavbar from './components/TopNavbar';
 import './betthebracket-app.css';
 
-function Profile() {
+function Profile( { setToken } ) {
     const [bets, setBets] = useState([]);
     const [userInfo, setUserInfo] = useState({});
     const [showDepositModal, setShowDepositModal] = useState(false)
@@ -155,7 +155,7 @@ function Profile() {
     const closedBets = bets.filter(bet => bet.openOrClosed == "closed");
     
     return <div>
-        <TopNavbar/>
+        <TopNavbar setToken={setToken}/>
         <h1>Bets</h1>
         <hr/>
         <Container fluid>

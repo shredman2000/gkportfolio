@@ -5,7 +5,7 @@ import BetModal from './components/BetModal';
 import MarchMadnessBracket from './components/MarchMadnessBracket';
 import './betthebracket-app.css';
 
-function Home() {
+function Home({setToken}) {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showGameModal, setShowGameModal] = useState(false);
@@ -46,7 +46,7 @@ function Home() {
 
     return (
         <div>
-            <TopNavbar />
+            <TopNavbar setToken={setToken}/>
             <div style={{ padding: "1rem" }}>
                 <h1>March Madness 2025 Bracket</h1>
                 <hr />
