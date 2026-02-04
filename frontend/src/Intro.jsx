@@ -87,7 +87,7 @@ function Intro() {
 
   return (
     <>
-      <div className='intro-page-wrapper'>
+      <div className='intro-page-wrapper intro-page-background'>
         <header className='intro-page-header'>
           <h5 className='header-text'>Full Stack Developer</h5>
         </header>

@@ -22,9 +22,6 @@
 }
 
 body {
-  background: linear-gradient(120deg, #1b1f24, #1f2027, #1c1f24, #22232a);
-  background-size: 400% 400%;
-  animation: waveFlow 20s ease infinite;
   margin: 0;
   padding: 0;
   color: white;
@@ -43,6 +40,14 @@ body {
   min-height: 70vh; 
   text-align: center; 
   margin: 0 auto; 
+}
+.intro-page-background {
+  background: linear-gradient(120deg, #1b1f24, #1f2027, #1c1f24, #22232a);
+  background-size: 400% 400%;
+  animation: waveFlow 20s ease infinite;
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 .intro-page-wrapper {
   height: 100vh;
