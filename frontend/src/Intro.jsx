@@ -109,7 +109,7 @@ function Intro() {
           <div className='interests-text-2'>focused on turning small projects into learning opportunities. </div>
         </div>
         <div className='faceshot-div'>
-          <img src='./public/Me.png'/>
+          <img src='/Me.png'/>
         </div>
         <div className='links-div'>
           <img src='/linkedinlogo.png'></img>
