@@ -112,8 +112,8 @@ function Intro() {
           <img src='./public/Me.png'/>
         </div>
         <div className='links-div'>
-          <img src='./public/linkedinlogo.png'></img>
-          <img src='./public/githublogo.png'></img>
+          <img src='/linkedinlogo.png'></img>
+          <img src='/githublogo.png'></img>
         </div>
       </div>
       
