@@ -6,7 +6,7 @@ import './HomePage.css';
 function HomePage() {
 
     const navigate = useNavigate();
-
+    
 
     return (
         <div className='home-page'>
@@ -18,7 +18,7 @@ function HomePage() {
             <div className='content'>
                 <p>HomePage</p>
                 {/* <button className='navigate-projects-button' onClick={() => navigate('/projects')}>Projects</button> */}
-                <button className='navigate-movie-page-button' onClick={() => navigate('/movies')}>Movies</button>
+                <button className='navigate-movie-page-button' onClick={() => navigate('/')}>Movies</button>
 
                 <button className='navigate-bet-the-bracket-button' onClick={() => navigate('/betthebracket/login')}>Bet the bracket</button>
             </div>

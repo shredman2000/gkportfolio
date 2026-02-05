@@ -156,7 +156,7 @@ function Profile( { setToken } ) {
     
     return <div>
         <TopNavbar setToken={setToken}/>
-        <h1>Bets</h1>
+        <h1 style={{marginTop: '9%'}}>Bets</h1>
         <hr/>
         <Container fluid>
             <Row>

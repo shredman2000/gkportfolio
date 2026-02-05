@@ -2,6 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import './Intro.css'
+import IntroModal from './components/IntroModal';
+
+
+
 
 const name_letters = [
   "G", "U", "N", "N" , "A", "R", " ", "K", "N", "O", "X"
@@ -81,8 +85,33 @@ function ObsfucatingLetter({ letter, index }) {
 }
 
 
+
 function Intro() {
+  const projectsRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
   const navigate = useNavigate();
+  
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: null,
+    origin: null
+  })
+
+  const openModal = (type, ref) => {
+    if (!ref.current === null) { return; }
+    const rect = ref.current.getBoundingClientRect();
+
+
+    setModalState({
+      isOpen: true,
+      type, 
+      origin: {
+        x: (rect.left + rect.width / 2),
+        y: (rect.top + rect.height / 2) 
+      }
+    })
+  }
 
 
   return (
@@ -92,9 +121,9 @@ function Intro() {
           <h5 className='header-text'>Full Stack Developer</h5>
         </header>
         <div className='intro-nav-container'>
-          <h3 className='intro-nav-text'>About Me</h3>
-          <h3 className='intro-nav-text' onClick={() => navigate('/home')}>Projects</h3>
-          <h3 className='intro-nav-text'>Contact</h3>
+          <h3 ref={aboutRef} onClick={() => openModal('about', aboutRef)} className='intro-nav-text'>About Me</h3>
+          <h3 className='intro-nav-text' onClick={() => navigate('/projects')}>Projects</h3>
+          <h3 className='intro-nav-text' >Contact</h3>
         </div>
         <h2 className='hi-im-text'>Hi! I'm...</h2>
         <div className='large-name-container'>
@@ -116,7 +145,8 @@ function Intro() {
           <img src='/githublogo.png'></img>
         </div>
       </div>
-      
+      <IntroModal {...modalState} onClose={() => setModalState({isOpen: false, type: null, origin: null })}/>
+          
     </>
 )}
 
