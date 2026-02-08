@@ -125,6 +125,11 @@ function ProjectsPage() {
                             tools={typing_tools}
                             navLink={'/typetest'}/>
                     </div>
+                    <div className='scroll-div'>
+                        <img className='scroll-div-img1' src='/scrollgif.gif'/>
+                        <h2 className='scroll-text'>Scroll</h2>
+                        <img className='scroll-div-img2' src='/scrollgif.gif'/>
+                    </div>
                 </div>
             </div>
         </>
