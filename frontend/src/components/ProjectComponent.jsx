@@ -5,6 +5,8 @@ import './ProjectComponent.css';
 function ProjectComponent({image, title, description, features, tools, navLink}) {
     const navigate = useNavigate();
 
+
+
     return (
         <div className='project-component-wrapper'>
             <div className='project-image-wrapper'>
@@ -26,11 +28,20 @@ function ProjectComponent({image, title, description, features, tools, navLink})
                     <div key={index} className='tool2'>{tool}</div>
                 ))}
             </div>
-            <div className='visit-site-button2' onClick={() => navigate(navLink)}>
-                <p className='visit-site-text2'>Visit Site</p>
-                <img src='/link-icon.png' className='link-image2'></img>
-            </div>
-
+            {navLink && (
+                <div className='visit-site-button2' onClick={() => navigate(navLink)}>
+                    <p className='visit-site-text2'>Visit Site</p>
+                    <img src='/link-icon.png' className='link-image2'></img>
+                </div>
+            )}
+            {!navLink && (
+                <div className='visit-site-button2'>
+                    <p style={{
+                        color: '#212121'
+                    }}>Currently Unavailable</p>
+                    <img src='/link-icon.png' className='link-image2'></img>
+                </div>
+            )}
         
         
         </div>

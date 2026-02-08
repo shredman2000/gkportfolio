@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './ProjectsPage.css'
 import ProjectComponent from './components/ProjectComponent';
+
 
 function ProjectsPage() {
     const btb_features = [
@@ -23,12 +24,65 @@ function ProjectsPage() {
         "WebSockets", "MySQL", "Java", "SpringBoot", "Docker", "Three.js", "JavaScript", "React", "PyTorch", "TensorFlow"
     ]
     const typing_features = [
-        "Leaderboard", "Rank"
+        "Leaderboard", "Rank", "Light-Dark Mode"
     ]
     const typing_tools = [
         "JavaScript", "RESTful API", "Java", "CSS", "SQL"
     ]
     const navigate = useNavigate();
+
+
+    // for left and right scrolling
+    const ref = useRef();
+    const target = useRef(0);
+    const animationRef = useRef(null);
+    const animate = () => {
+        if (!ref.current) return;
+
+        let diff = target.current - ref.current.scrollLeft;
+
+        // if difference is tiny, just jump to target and stop
+        if (Math.abs(diff) < 0.5) {
+            ref.current.scrollLeft = target.current;
+        } else {
+            // ease toward target
+            let step = diff * 0.08; // faster easing
+
+            // optional: ensure very small movements still move 1px
+            if (Math.abs(step) < 1) {
+                step = Math.sign(diff);
+            }
+
+            // don’t overshoot
+            if (Math.abs(step) > Math.abs(diff)) {
+                step = diff;
+            }
+
+            ref.current.scrollLeft += step;
+        }
+
+        animationRef.current = requestAnimationFrame(animate);
+    };
+    useEffect(() => {
+        animationRef.current = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationRef.current);
+    }, []);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        target.current = el.scrollLeft;
+        const wheel = (e) => {
+            e.preventDefault();
+            target.current += e.deltaY * 1;
+        };
+
+        el.addEventListener("wheel", wheel, { passive: false });
+
+        return () => el.removeEventListener("wheel", wheel);
+    }, []);
+
+
     return( 
         <>
             <div className='project-page-background'>
@@ -38,7 +92,7 @@ function ProjectsPage() {
 
 
 
-                    <div className='projects-wrapper'>
+                    <div className='projects-wrapper' ref={ref}>
 
                         <ProjectComponent
                             image={'/BTBBracketPage.png'}
@@ -62,14 +116,14 @@ function ProjectsPage() {
                             description={'EARLY WIP. Full Monopoly clone for playing with friends or against bots on browser. Planned improvements: Full UI rehaul, expand playable actions, finish training bot model and eventually, ranked play.'}
                             features={monopoly_features}
                             tools={monopoly_tools}
-                            navLink={'/movies'}/>
+                        />
                         <ProjectComponent 
                             image={'/MonopolyHomePage.png'} 
                             title={'Typing Test'} 
                             description={'Simple website for measuring typing speed.'}
-                            features={monopoly_features}
-                            tools={monopoly_tools}
-                            navLink={'/movies'}/>
+                            features={typing_features}
+                            tools={typing_tools}
+                            navLink={'/typetest'}/>
                     </div>
                 </div>
             </div>

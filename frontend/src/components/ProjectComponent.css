@@ -8,8 +8,10 @@
     box-shadow: 10px 10px rgba(0, 0, 0, .4);
     animation: slide-right 1s forwards, fade-in 1s forwards;
     position: relative;
-
+    margin-left: 4%;
+    margin-right: 4%;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    opacity: 0;
 }
 .project-component-wrapper:nth-child(1) {
     animation-delay: 0s, 0s;

@@ -139,7 +139,7 @@ function TypeTestPage() {
         <div>
 
             <p className='title'>Typing Test</p>
-            <button className="back-button" onClick={() => navigate('/home')}>
+            <button className="back-button" onClick={() => navigate('/')}>
                 <img src="/back-button.png" draggable="false" ></img>
             </button>
             <div className="timer">Time left: {timeLeft}s</div>
@@ -159,16 +159,16 @@ function TypeTestPage() {
                 })}
             </div>
 
-                {/*  silently handles input to update the text div */}
-                <input ref={inputRef} className="input" value={input} onChange={handleChange} />
+            {/*  silently handles input to update the text div */}
+            <input ref={inputRef} className="input" value={input} onChange={handleChange} />
         
             {showResults && (
                 <div className="resultsmodal">
                     <div className="modalcontent">
-                        <h2>Test Complete!</h2>
-                        <p>WPM: {Math.round(numWordsTyped)}</p>
-                        <p>Accuracy: {wpm}%</p>
-                        <p>You are in the top {rank}% of typists!</p>
+                        <h2 className='test-complete-text'>Test Complete!</h2>
+                        <p className='results-modal-text'>WPM: {Math.round(numWordsTyped)}</p>
+                        <p className='results-modal-text'>Accuracy: {wpm}%</p>
+                        <p className='results-modal-text'>You are in the top {rank}% of typists!</p>
                         <button className="reset-button-modal" onClick={(resetTest)}>Reset Test</button>
                     </div>
                 </div>
