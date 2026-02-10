@@ -28,6 +28,11 @@
     --transition-speed: 0.3s;
 }
 
+.betthebracket-root {
+    display: flex;
+    min-height: 100vh;
+}
+
 .betthebracket-root h1,
 .betthebracket-root h2,
 .betthebracket-root h3,

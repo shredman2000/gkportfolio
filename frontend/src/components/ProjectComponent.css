@@ -3,7 +3,8 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-    background-color: #3C404F;
+    background: rgba(38, 38, 150, 0.05);
+    border: 1px solid rgba(100, 80, 180, 0.6);
     border-radius: 12px;
     box-shadow: 10px 10px rgba(0, 0, 0, .4);
     animation: slide-right 1s forwards, fade-in 1s forwards;
