@@ -257,6 +257,45 @@ html, body {
   background: #00BFFF;
   border-radius: 3px;
 }
+.back-button-about-me {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  z-index: 1001;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: rgba(38, 38, 105, 0.6);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 20px;
+  transition: transform 0.2s ease;
+  max-height: 30px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.back-button-about-me-text {
+  align-items: center;
+}
+.resume-button {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  right: 20px;
+  top: 20px;
+  z-index: 1001;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: rgba(38, 38, 105, 0.6);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 20px;
+  transition: transform 0.2s ease;
+  color: white;
+  font-weight: 400;
+}
+.download-icon {
+  max-height: 30px;
+}
 @media (max-width: 768px) {
   .about-me-page-wrapper {
     overflow-x: hidden;
@@ -277,7 +316,7 @@ html, body {
   }
   
   .about-me-header {
-    width: 80%;
+    display: none;
   }
   
   .personal-info-container {
@@ -302,5 +341,9 @@ html, body {
   .tech-stack-widget {
     max-width: 110px;
     margin: 0 auto;
+  }
+  .resume-button {
+    max-height: 30px;
+  
   }
 }

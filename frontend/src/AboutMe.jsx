@@ -49,7 +49,7 @@ const gallery_images = [
 
 import './AboutMe.css';
 function AboutMe() {
-
+    const navigate = useNavigate();
     const [showStack, setShowStack] = useState(tech_stack);
     const [currentImage, setCurrentImage] = useState(0);
 
@@ -80,6 +80,15 @@ function AboutMe() {
 
     return (
         <>
+            <div className='back-button-about-me' onClick={() => navigate('/')}>
+                <div className='back-button-about-me-text'>Back</div>
+            </div>
+            <a href="/KnoxGunnarResume 2026.pdf" download>
+                <div className='resume-button'>
+                    <div className='resume-button-text'>Resume</div>
+                    <img src='/download-icon.png' className='download-icon'/>
+                </div>
+            </a>    
             <div className='about-me-header'>
                 <div className='about-me-education'>Education</div>
                 <div className='about-me-tech-stack'>Tech Stack</div>
@@ -89,7 +98,10 @@ function AboutMe() {
                 <div className='about-me-page-container'>
                     <div className='personal-info-container'>
                         <div className='personal-statement'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet est ac purus ornare convallis nec at velit. Curabitur euismod, nunc sed fermentum vehicula, ipsum justo aliquet augue, rutrum fermentum mi magna nec dui. Duis efficitur justo et dui fringilla cursus. Nulla nunc nibh, commodo et enim mattis, porttitor hendrerit mauris. Pellentesque dolor nunc, egestas id dignissim nec, molestie eget orci. Integer quis sapien ut risus fermentum venenatis vel a lacus. Mauris aliquam augue at suscipit eleifend. Cras elit erat, dignissim sit amet congue eu, porta quis orci. Aenean odio massa, hendrerit eu odio sit amet, finibus ultricies nisl. Vivamus a ex ac quam tincidunt congue. Nam sagittis porttitor mauris, ut tristique justo condimentum non. Cras eu mi bibendum, varius erat id, iaculis elit. Maecenas sit amet aliquet mauris. Vestibulum condimentum nulla justo, ac tincidunt est lacinia quis.
+                           I'm a full stack developer who enjoys building UX-driven, reliable, and interactive systems.
+                           I've worked on projects ranging from real-time multiplayer systems and API driven platforms to ML models.
+                           I'm currently focused on strengthening my skills in system design, state-management, and writing maintable code.
+                           <br/>Outside of coding I spend my time in the outdoors, snowboarding, taking trips up north, and pretty much any hobby that gets me moving.  
                         </div>
                         <div className='gallery-container'>
                             <img className='gallery-image' src={gallery_images[currentImage]}></img>
