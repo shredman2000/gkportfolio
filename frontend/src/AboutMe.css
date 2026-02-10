@@ -1,0 +1,231 @@
+.about-me-page-wrapper {
+  background: linear-gradient(120deg, #192D40, #0D1B2B, #242630);
+  background-size: 400% 400%;
+  animation: waveFlow 20s ease infinite;
+  margin: 0;
+  padding: 0;
+  color: white;
+  z-index: 1;
+
+  min-height: 100vh;
+  padding-bottom: 100px;
+
+}
+.about-me-header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 30%;
+  left: 50%;
+  top: 15px;
+  transform: translateX(-50%);
+  background: rgba(38, 38, 105, 0.6);
+  margin-top: 5px;
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  z-index: 1000;
+  
+}
+.about-me-tech-stack {
+  font-size: 3vh;
+}
+.about-me-education {
+  font-size: 3vh;
+}
+.about-me-page-container {
+  padding-top: 100px;
+  position: relative;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.personal-info-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 14px;
+  gap: 20px;
+  padding: 20px;
+
+
+}
+.personal-statement {
+  flex: 1;
+  width: 50%;
+  font-size: clamp(14px, 1.5vw, 20px);
+  text-align: left;
+}
+
+.gallery-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  max-width: 50%;
+  object-fit: contain;
+  max-height: 400px;
+  max-width: 400px;
+
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.education-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.education-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  padding: 18px 22px;
+  margin: 0 auto;
+  background: rgba(38, 38, 105, 0.05);
+  border-radius: 14px;
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  transition: transform 1s ease, box-shadow 0.2s ease;
+}
+.education-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+.education-block-text-flex {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 50%;
+}
+.school-text {
+  font-size: 16px;
+  opacity: 0.85;
+  
+}
+.uw-logo {
+  max-height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+.degree-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+.tech-stack-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0% auto;
+  background: rgba(38, 38, 105, 0.05);
+  border-radius: 14px;
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  justify-content: center;
+  overflow: hidden;
+}
+.tech-stack-text {
+  font-size: 22px;
+  font-weight: 700;
+  padding: 18px 22px 14px 22px;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.tech-stack-nav-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+
+}
+.tech-stack-nav-bar-option {
+  display: flex;
+  flex: 1; 
+  background: rgba(38, 38, 150, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 15px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 2%;
+  cursor: pointer;
+}
+.tech-stack-nav-bar-option:hover {
+  transform: scale(1.05);
+}
+.tech-stack-selected {
+  transform: scale(1.05);
+  background-color: #192D40;
+}
+.tech-stack-divider {
+  background: rgba(255,255,255,0.1);
+  height: 2px;
+  border: none;
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 1);
+}
+.tech-stack-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  margin: 20px;
+}
+
+.tech-stack-widget {
+  border-radius: 12px;
+  aspect-ratio: 1/1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 12px;
+
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tech-stack-widget:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+.tech-stack-widget img {
+  max-height: 55%;
+  width: auto;
+  object-fit: contain;
+}
+.tech-stack-tool-name {
+  font-size: 13px;
+  text-align: center;
+  color: white;  
+  opacity: 0.85;
+}
+.tech-stack-level-bar {
+  width: 80%;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  margin-top: 6px;
+}
+.tech-stack-level-fill {
+  height: 100%;
+  background: #00BFFF;
+  border-radius: 3px;
+}

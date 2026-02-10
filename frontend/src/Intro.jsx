@@ -132,7 +132,7 @@ function Intro() {
             <h5 className='header-text'>Full Stack Developer</h5>
           </header>
           <div className={`intro-nav-container ${switchingPages ? "intro-nav-container-leave-page": ""}`}>
-            <h3 ref={aboutRef} onClick={() => openModal('about', aboutRef)} className='intro-nav-text'>About Me</h3>
+            <h3 ref={aboutRef} onClick={() => navigate("/aboutme")} className='intro-nav-text'>About Me</h3>
             <h3 className='intro-nav-text' onClick={() => pageSwitch('/projects')}>Projects</h3>
             <h3 className='intro-nav-text' >Contact</h3>
           </div>

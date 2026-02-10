@@ -25,7 +25,7 @@ body {
   margin: 0;
   padding: 0;
   color: white;
-  overflow: hidden;
+  
 }
 @keyframes waveFlow {
   0% { background-position: 0% 50%; }
