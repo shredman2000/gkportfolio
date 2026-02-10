@@ -323,12 +323,13 @@ body {
       
     }
     .intro-nav-text {
-    color: white;
-    font-size: 12pt;
-    line-height: 1;      
-    margin: 0;          
-    padding: 0;         
-    white-space: nowrap;
+      color: white;
+      font-size: 12pt;
+      line-height: 1;      
+      margin: 0;          
+      padding: 0;         
+      white-space: nowrap;
+      animation: none;
     }
     .hi-im-text {
       grid-row: 2/3;
