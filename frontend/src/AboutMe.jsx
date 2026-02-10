@@ -53,6 +53,17 @@ function AboutMe() {
     const [showStack, setShowStack] = useState(tech_stack);
     const [currentImage, setCurrentImage] = useState(0);
 
+    // for hiding scrollbar
+    useEffect(() => {
+        document.documentElement.classList.add('hide-scrollbar'); // html element
+        document.body.classList.add('hide-scrollbar'); // body element
+        
+        return () => {
+            document.documentElement.classList.remove('hide-scrollbar');
+            document.body.classList.remove('hide-scrollbar');
+        };
+    }, []);
+
     // gallery function
     useEffect(() => {
         gallery_images.forEach(src => {

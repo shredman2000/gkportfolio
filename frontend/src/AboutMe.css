@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 .about-me-page-wrapper {
   background: linear-gradient(120deg, #192D40, #0D1B2B, #242630);
   background-size: 400% 400%;
@@ -9,7 +20,18 @@
 
   min-height: 100vh;
   padding-bottom: 100px;
+  scrollbar-width: none;
+}
+.about-me-page-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
 }
 .about-me-header {
   position: fixed;
@@ -36,12 +58,17 @@
 .about-me-page-container {
   padding-top: 100px;
   position: relative;
-  width: 100vw;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   gap: 50px;
+
+  
 }
+
+
+
 .personal-info-container {
   display: flex;
   flex-direction: row;
@@ -139,6 +166,7 @@
   border: 1px solid rgba(100, 80, 180, 0.3);
   justify-content: center;
   overflow: hidden;
+  padding: 18px 22px
 }
 .tech-stack-text {
   font-size: 22px;
@@ -228,4 +256,51 @@
   height: 100%;
   background: #00BFFF;
   border-radius: 3px;
+}
+@media (max-width: 768px) {
+  .about-me-page-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .about-me-page-container {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  
+  .personal-info-container,
+  .education-block,
+  .tech-stack-container {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .about-me-header {
+    width: 80%;
+  }
+  
+  .personal-info-container {
+    flex-direction: column;
+  }
+  
+  .personal-statement,
+  .gallery-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .tech-stack-divider,
+  .tech-stack-nav-bar {
+    width: 100%;
+  }
+  .tech-stack-tools {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    justify-content: center;
+    
+  }
+  .tech-stack-widget {
+    max-width: 110px;
+    margin: 0 auto;
+  }
 }
