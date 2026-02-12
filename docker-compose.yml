@@ -10,28 +10,25 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - /var/www/certbot:/var/www/certbot:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+    env_file:
+      - .env.production
     depends_on:
       - backend
+    
 
   backend:
     build: ./backend
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/websitedb
-      SPRING_DATASOURCE_USERNAME: gunnar
-      SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      TMBD_KEY: f243c7df98509f0108668fb5705b2844
+    env_file:
+      - .env.production
     depends_on:
       - db
 
   db:
     image: postgres:15
-    environment:
-      POSTGRES_DB: websitedb
-      POSTGRES_USER: gunnar
-      POSTGRES_PASSWORD: password
+    env_file:
+      - .env.postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
 
