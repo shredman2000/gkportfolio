@@ -1,0 +1,195 @@
+.contact-page-wrapper {
+    background: linear-gradient(120deg, #192D40, #0D1B2B, #242630);
+    background-size: 400% 400%;
+    animation: waveFlow 20s ease infinite;
+    margin: 0;
+    padding: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: overlay
+}
+
+.contact-page-wrapper::-webkit-scrollbar {
+    display: none;
+    background: transparent;
+}
+.back-button-contact-page {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-left: 10px;
+    margin-top: 10px;
+    background: rgba(38, 38, 105, 0.3);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.contact-page-content-wrapper {
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    margin-top: 10%;
+
+}
+.get-in-touch-text {
+    font-size: 3vh;
+    font-weight: 500;
+}
+.get-in-touch-underline {
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 3vh;
+    
+}
+.contact-me-text {
+    font-size: 2vh;
+    font-weight: 300;
+}
+.contact-type-wrapper {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.contact-container {
+    background: rgba(38, 38, 105, 0.05);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    grid-row: 1/2;
+    grid-column: 1/2;
+    height: 8vh;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    justify-self: center;
+    cursor: pointer;
+
+}
+.contact-container:hover {
+    transform: scale(1.05);
+}
+.contact-logo {
+    max-height: 60px;
+    object-fit: contain;
+}
+.contact-flex {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 10%;
+}
+.contact-type-text {
+    font-weight: 500;
+}
+.contact-method-text {
+    font-weight: 300;
+}
+.direct-contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 95%;
+    height: 50%;
+    margin-top: 5%;
+    background: rgba(38, 38, 105, 0.05);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    border-radius: 8px;
+
+}
+.direct-contact-title {
+    font-size: 2vh;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    border-radius: 8px;
+    margin: 8px;
+    align-items: center;
+}
+.name-input {
+    background: rgba(38, 38, 105, 0.2);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    width: 30%;
+    margin: 8px;
+    
+    height: 10%;
+    border-radius: 8px;
+    padding: 5px;
+    color: white;
+    font-weight: 100;
+    font-size: 1.5vh;
+}
+.message-input {
+    background: rgba(38, 38, 105, 0.2);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    max-width: 98%;
+    margin: 8px;
+    padding: 5px;
+    min-height: 0;
+    flex: 1;
+    color: white;
+    font-weight: 100;
+    font-size: 1.5vh;
+}
+.name-input:focus {
+    outline: none;
+    border: 1px solid rgba(140, 120, 255, 0.8);
+    box-shadow: 0 0 6px rgba(140, 120, 255, 0.5);
+}
+
+.message-input:focus {
+    outline: none;
+    border: 1px solid rgba(140, 120, 255, 0.8);
+    box-shadow: 0 0 6px rgba(140, 120, 255, 0.5);
+}
+.send-div {
+    max-height: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    width: fit-content;
+    bottom: 0px;
+    padding: 20px;
+    justify-content: left;
+    align-items: center;
+    background: rgba(38, 38, 105, 0.5);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    border-radius: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+}
+.send-div img {
+    object-fit: contain;
+    max-width: 30px;
+    margin-left: 8px;
+}
+
+@media (max-width: 786px) {
+    .contact-page-content-wrapper {
+        margin: 0 auto;
+        width: 90%;
+        height: auto;
+        margin-top: 10%;
+
+    }
+    .contact-type-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+
+    }
+    .contact-container {
+        margin: 0;
+        width: 95%;
+        font-size: 2vh;
+    }
+}

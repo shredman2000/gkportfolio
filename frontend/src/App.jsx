@@ -10,6 +10,7 @@ import MoviePage from './MoviePage.jsx';
 import BetTheBracketRoutes from './betthebracket/BetTheBracketRoutes.jsx';
 import BetTheBracketLayout from './betthebracket/BetTheBracketLayout.jsx';
 import AboutMe from './AboutMe.jsx';
+import ContactPage from './ContactPage.jsx';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/movies" element={<MoviePage/>} />
         <Route path="/aboutme" element={<AboutMe/>} />
+        <Route path="/contact" element={<ContactPage/>} />
         <Route path="/betthebracket/*" element={ 
           <BetTheBracketLayout>
             <BetTheBracketRoutes/>

@@ -134,7 +134,7 @@ function Intro() {
           <div className={`intro-nav-container ${switchingPages ? "intro-nav-container-leave-page": ""}`}>
             <h3 ref={aboutRef} onClick={() => navigate("/aboutme")} className='intro-nav-text'>About Me</h3>
             <h3 className='intro-nav-text' onClick={() => pageSwitch('/projects')}>Projects</h3>
-            <h3 className='intro-nav-text' >Contact</h3>
+            <h3 className='intro-nav-text' onClick={() => navigate('/contact')}>Contact</h3>
           </div>
           <h2 className={`hi-im-text  ${switchingPages ? "leave-page": ""}`}>Hi! I'm...</h2>
           <div className={`large-name-container  ${switchingPages ? "leave-page": ""}`}>
