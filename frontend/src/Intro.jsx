@@ -131,6 +131,13 @@ function Intro() {
           <header className='intro-page-header'>
             <h5 className='header-text'>Full Stack Developer</h5>
           </header>
+          <div className='open-to-work'>Looking for full-time opportunities</div>
+          <header className='location-header'>
+            <div className='location-header-inner'>
+              <img src='/location-icon.png'></img>
+              <h5 className='header-text'>Madison, WI</h5>
+            </div>
+          </header>
           <div className={`intro-nav-container ${switchingPages ? "intro-nav-container-leave-page": ""}`}>
             <h3 ref={aboutRef} onClick={() => navigate("/aboutme")} className='intro-nav-text'>About Me</h3>
             <h3 className='intro-nav-text' onClick={() => pageSwitch('/projects')}>Projects</h3>
@@ -152,8 +159,8 @@ function Intro() {
             <img src='/Me.png'/>
           </div>
           <div className={`links-div ${switchingPages ? "links-div-leave-page": ""}`}>
-            <img src='/linkedinlogo.png'></img>
-            <img src='/githublogo.png'></img>
+            <img src='/linkedinlogo.png' onClick={() => navigate("https://www.linkedin.com/in/gunnarknox/")} ></img>
+            <img src='/githublogo.png' onClick={() => navigate("https://github.com/shredman2000")}></img>
           </div>
         </div>
       </div>
