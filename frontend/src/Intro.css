@@ -59,33 +59,58 @@ body {
   grid-template-rows: auto auto auto 1fr auto;
 }
 .header-text {
-  padding: 8px;
+  display: flex;
+  padding: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-top: 1vh;
+  margin-left: 1vw;
   color: white;
   font-size: 1.5rem;
   grid-column: 1/2;
   grid-row: 1/2;
   text-align: left;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  
 }
 .location-header {
   display: flex;
+  top: 0px;
+  right: 0px;
   grid-row: 1/2;
   grid-column: 3/4;
-  justify-content: right;
-  padding-right: 8px;
-  margin-top: 3%;
-  height: 3vh;
+  justify-self: end;
+  align-items: center;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 12px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-top: 1vh;
+  margin-right: 1vw;
 }
 .location-header-inner {
   display: flex;
   height: 100%;
   flex-direction: row;
-  justify-content: center;
+  
   align-items: center;
   
 }
 .location-header img {
   height: 2.5vh;
 
+}
+.location-header-text {
+  font-size: 1.5rem;
 }
 
 /* nav links far right */
@@ -97,8 +122,10 @@ body {
   margin-right: 4%;
   justify-content: center;
   overflow: hidden;
+  align-items: flex-end;
 }
 .intro-nav-text {
+  display: flex;
   color: white;
   font-size: clamp(1rem, 2vw, 2rem);
   text-align: right;
@@ -109,6 +136,12 @@ body {
   cursor: pointer;
   overflow: hidden;
   opacity: 0;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  width: fit-content;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .intro-nav-text:nth-child(1){
   animation-delay: 0s,0s;
@@ -186,7 +219,7 @@ body {
 .interests-text-2 {
   position: relative;
   opacity: 0;
-  animation: fade-in 1s 5s forwards;
+  animation: fade-in 1s 4.7s forwards;
 }
 
 .faceshot-div {
@@ -208,10 +241,19 @@ body {
   grid-row: 5/6;
   grid-column: 1/4;
   align-items: center; 
-  justify-content: center;
+  justify-self: center;
   gap: 30px;
   margin-bottom: 1%;
   overflow: hidden;
+  width: fit-content;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  padding: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  
+  
 }
 .links-div img {
   max-width: 60px;
@@ -240,11 +282,18 @@ body {
   animation: slide-down .3s reverse, fade-out .3s forwards;
 }
 .open-to-work {
-  position: absolute;
-  left: 10px;
-  bottom: 0px;
+  grid-row: 4/5;
+  grid-column: 2/3;
+  text-align: left;
+  position: relative;
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  padding-top: 5%;
+  font-weight: 500;
   font-size: 2.5vh;
   margin-bottom: 1%;
+  opacity: 0%;
+  animation: fade-in 1s 6s forwards;
+  font-style: italic;
 }
 
 @keyframes slide-right {

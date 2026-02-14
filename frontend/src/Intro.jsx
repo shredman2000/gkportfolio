@@ -35,8 +35,8 @@ function ObsfucatingLetter({ letter, index }) {
     if (intervalRef.current) { clearInterval(intervalRef.current) }
 
     let step = 0;
-    const totalSteps = 15;
-    const intervalTime = 40;
+    const totalSteps = 12;
+    const intervalTime = 30;
 
       intervalRef.current = setInterval(() => {
     
@@ -131,11 +131,11 @@ function Intro() {
           <header className='intro-page-header'>
             <h5 className='header-text'>Full Stack Developer</h5>
           </header>
-          <div className='open-to-work'>Looking for full-time opportunities</div>
+          
           <header className='location-header'>
             <div className='location-header-inner'>
               <img src='/location-icon.png'></img>
-              <h5 className='header-text'>Madison, WI</h5>
+              <h5 className='location-header-text'>Madison, WI</h5>
             </div>
           </header>
           <div className={`intro-nav-container ${switchingPages ? "intro-nav-container-leave-page": ""}`}>
@@ -154,6 +154,7 @@ function Intro() {
           <div className={`interests-text-wrapper ${switchingPages ? "leave-page": ""}`}>
             <div className='interests-text-1'>I'm currently learning and growing as a web developer,</div>
             <div className='interests-text-2'>focused on turning small projects into learning opportunities. </div>
+            <div className='open-to-work' >Actively looking for full-time positions</div>
           </div>
           <div className={`faceshot-div ${switchingPages ? "leave-page": ""}`}>
             <img src='/Me.png'/>
