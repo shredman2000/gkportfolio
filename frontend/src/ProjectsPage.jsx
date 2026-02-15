@@ -30,56 +30,21 @@ function ProjectsPage() {
         "JavaScript", "RESTful API", "Java", "CSS", "SQL"
     ]
     const navigate = useNavigate();
+    const wrapperRef = useRef(null);
 
+    // new horizontal scroll with  mousewheel
+    useEffect(() => {
+        const wrapper = wrapperRef.current;
+        if (!wrapper) { return; }
 
-    // for left and right scrolling
-    const ref = useRef();
-    const target = useRef(0);
-    const animationRef = useRef(null);
-    const animate = () => {
-        if (!ref.current) return;
-
-        let diff = target.current - ref.current.scrollLeft;
-
-        // if difference is tiny, just jump to target and stop
-        if (Math.abs(diff) < 0.5) {
-            ref.current.scrollLeft = target.current;
-        } else {
-            // ease toward target
-            let step = diff * 0.08; // faster easing
-
-            // optional: ensure very small movements still move 1px
-            if (Math.abs(step) < 1) {
-                step = Math.sign(diff);
+        const onWheel = (e) => {
+            if (e.deltaY !== 0 && !e.ctrlKey) {
+                e.preventDefault();
+                wrapper.scrollLeft += e.deltaY;
             }
-
-            // don’t overshoot
-            if (Math.abs(step) > Math.abs(diff)) {
-                step = diff;
-            }
-
-            ref.current.scrollLeft += step;
         }
-
-        animationRef.current = requestAnimationFrame(animate);
-    };
-    useEffect(() => {
-        animationRef.current = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(animationRef.current);
-    }, []);
-
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        target.current = el.scrollLeft;
-        const wheel = (e) => {
-            e.preventDefault();
-            target.current += e.deltaY * 1;
-        };
-
-        el.addEventListener("wheel", wheel, { passive: false });
-
-        return () => el.removeEventListener("wheel", wheel);
+        wrapper.addEventListener('wheel', onWheel, { passive: false });
+        return () => wrapper.removeEventListener('wheel', onWheel);
     }, []);
 
 
@@ -88,11 +53,11 @@ function ProjectsPage() {
             <div className='project-page-background'>
 
                 <div className='page-content'>
-                    <span className='back-button-text' onClick={() => navigate('/')}>Back</span>
+                    <span className='back-button-project' onClick={() => navigate('/')}>Back</span>
 
 
 
-                    <div className='projects-wrapper' ref={ref}>
+                    <div className='projects-wrapper'  ref={wrapperRef}>
 
                         <ProjectComponent
                             image={'/BTBBracketPage.png'}

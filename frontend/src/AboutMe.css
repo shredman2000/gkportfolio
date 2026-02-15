@@ -64,7 +64,6 @@ html, body {
   flex-direction: column;
   gap: 50px;
 
-  
 }
 
 
@@ -296,6 +295,90 @@ html, body {
 .download-icon {
   max-height: 30px;
 }
+.soft-skills-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0% auto;
+  background: rgba(38, 38, 105, 0.05);
+  border-radius: 14px;
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  justify-content: center;
+  overflow: hidden;
+  padding: 18px 22px;
+  gap: 2vh;
+}
+.soft-skills-title {
+  font-size: 22px;
+  font-weight: 700;
+  padding: 18px 22px 14px 22px;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+.soft-skills-widget {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  width: 95%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 5px;
+}
+.soft-skills-widget-title {
+  display: flex;
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 1/1;
+  justify-content: center;
+  align-items: center;
+  background: rgba(38, 38, 105, .3);
+  border-radius: 14px;
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  mix-blend-mode: destination-out;
+  flex-wrap: wrap;
+  text-wrap: wrap;
+  font-size: .8rem;
+}
+.soft-skills-widget:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+.soft-skills-widget-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  margin-left: 2%;
+
+}
+.widget-content-part-explanation {
+
+}
+
+
+.personal-info-container,
+.education-container,
+.tech-stack-container,
+.soft-skills-container {
+  transform: translateY(-50px);
+  opacity: 0%;
+  animation: slide-up-about-me 0.8s forwards;
+}
+.personal-info-container { animation-delay: 0.1s; }
+.education-container { animation-delay: 0.3s; }
+.tech-stack-container { animation-delay: 0.5s; }
+.soft-skills-container { animation-delay: 0.7s; }
+
+@keyframes slide-up-about-me {
+    to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
   .about-me-page-wrapper {
     overflow-x: hidden;
@@ -345,5 +428,11 @@ html, body {
   .resume-button {
     max-height: 30px;
   
+  }
+  .soft-skills-container {
+    width: 100%;
+  }
+  .widget-content-part-explanation {
+    font-size: .5rem;
   }
 }

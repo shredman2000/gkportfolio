@@ -80,8 +80,8 @@ function AboutMe() {
 
     return (
         <>
-            <div className='back-button-about-me' onClick={() => navigate('/')}>
-                <div className='back-button-about-me-text'>Back</div>
+            <div className='back-button-project' onClick={() => navigate('/')}>
+                Back
             </div>
             <a href="/KnoxGunnarResume 2026.pdf" download>
                 <div className='resume-button'>
@@ -135,6 +135,34 @@ function AboutMe() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                    <div className='soft-skills-container'>
+                        <div className='soft-skills-title'>Soft Skills</div>
+                        <div className='soft-skills-widget'>
+                            <div className='soft-skills-widget-title'>Scrum/Agile Workflow</div>
+                            <div className='soft-skills-widget-content'>
+                                <h4 className='widget-content-part-explanation'>Participated in a semester-long Agile team project using sprint planning, daily stand-ups, and code reviews, also acted as Scrum Master.</h4>
+                            </div>
+                        </div>
+                        <div className='soft-skills-widget'>
+                            <div className='soft-skills-widget-title'>Team Collaboration</div>
+                            <div className='soft-skills-widget-content'>
+                                <h4 className='widget-content-part-explanation'>Collaborated on multiple projects by coordinating with team members on code reviews, planning, reviewing pull requests, and clear communication.</h4>
+                            </div>
+                        </div>
+                        <div className='soft-skills-widget'>
+                            <div className='soft-skills-widget-title'>UX Design</div>
+                            <div className='soft-skills-widget-content'>
+                                <h4 className='widget-content-part-explanation'>Focused on development with the user in mind. Emphasized clear flows and usability when implementing features.</h4>
+                            </div>
+                        </div>
+                        <div className='soft-skills-widget'>
+                            <div className='soft-skills-widget-title'>Systems Thinking</div>
+                            <div className='soft-skills-widget-content'>
+                                <h4 className='widget-content-part-explanation'>Considered architectual trade-offs, scalability, and edge cases when designing features.</h4>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

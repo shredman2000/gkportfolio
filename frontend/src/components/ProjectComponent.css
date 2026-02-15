@@ -145,3 +145,17 @@
     0% { box-shadow: 0 0 6px rgba(127, 255, 212, 0.4) }
     100% { box-shadow: 0 0 8px rgba(127, 255, 212, 0.6) }
 }
+@media (max-width: 768px) {
+
+  .project-component-wrapper {
+    flex: 0 0 80vw; 
+    height: 60vh; 
+    aspect-ratio: auto; 
+    margin: 0.5rem 0; 
+  }
+
+  .project-image2 {
+    width: 100%;
+    height: auto;
+  }
+}

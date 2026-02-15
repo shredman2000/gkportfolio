@@ -81,4 +81,15 @@
     }
 }
 
+@media (max-width: 768px) {
+  .projects-wrapper {
+    flex-wrap: nowrap; 
+    justify-content: center; 
+    gap: 1rem; 
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
 

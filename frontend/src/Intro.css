@@ -27,6 +27,7 @@ body {
   color: white;
   
 }
+
 @keyframes waveFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -38,7 +39,7 @@ body {
   flex-direction: column; 
   justify-content: center;
   align-items: center; 
-  min-height: 70vh; 
+
   text-align: center; 
   margin: 0 auto; 
 }
@@ -49,10 +50,12 @@ body {
   margin: 0;
   padding: 0;
   color: white;
+  min-height: 100dvh;
+
 }
 .intro-page-wrapper {
   position: relative;
-  height: 100vh;
+  min-height: 100dvh;
   width: 100vw;
   display: grid;
   grid-template-columns: 2fr 3fr 1fr;
@@ -349,6 +352,7 @@ body {
   }
 }
 
+
 #name {
   text-align: center;
   position: relative;
@@ -371,10 +375,25 @@ body {
   transform: scale(1.05);
   background-color: #a6b1e1; 
 }
-@media (max-width: 768px) {
-.header-text {
-  display: none;
+
+.back-button-project {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  margin: 10px;
+  color: white;
+  font-size: 2vh;
+  z-index: 1000;
+  background: rgba(38, 38, 105, 0.05);
+  border: 1px solid rgba(100, 80, 180, 0.3);
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
 }
+@media (max-width: 768px) {
+  .header-text {
+    display: none;
+  }
   .intro-page-wrapper {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto auto auto auto;
@@ -408,6 +427,10 @@ body {
     padding: 0;         
     white-space: nowrap;
     animation: none;
+    opacity: 1;
+    background-color: none;
+    border-radius: none;
+    border: 0px;
   }
   .hi-im-text {
     grid-row: 2/3;
@@ -442,5 +465,21 @@ body {
 
   .links-div {
     grid-row: 6/7;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    gap: 30px;
+    margin-bottom: 1%;
+    overflow: hidden;
+    width: fit-content;
+    background: rgba(38, 38, 105, 0.05);
+    border: 1px solid rgba(100, 80, 180, 0.3);
+    border-radius: 30px;
+    padding: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .location-header {
+    display: none;
   }
 }

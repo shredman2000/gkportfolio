@@ -8,7 +8,7 @@ function ContactPage() {
 
     return (
         <div className='contact-page-wrapper'>
-            <div className='back-button-contact-page' onClick={() => navigate("/")}>Back</div>
+            <div className='back-button-project' onClick={() => navigate("/")}>Back</div>
 
             <div className='contact-page-content-wrapper'>
                 <div className='get-in-touch-text'>Get In Touch <hr className='get-in-touch-underline'/></div>
