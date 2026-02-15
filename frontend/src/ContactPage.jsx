@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import './ContactPage.css'
 
 function ContactPage() {

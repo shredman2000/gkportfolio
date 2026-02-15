@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import './Intro.css'
-import IntroModal from './components/IntroModal';
+
 
 
 
@@ -173,7 +173,6 @@ function Intro() {
           </div>
         </div>
       </div>
-      <IntroModal {...modalState} onClose={() => setModalState({isOpen: false, type: null, origin: null })}/>
           
     </>
 )}

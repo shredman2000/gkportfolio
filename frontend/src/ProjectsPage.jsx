@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import './ProjectsPage.css'
 import ProjectComponent from './components/ProjectComponent';
 
