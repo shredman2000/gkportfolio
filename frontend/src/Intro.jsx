@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 import './Intro.css'
 import IntroModal from './components/IntroModal';
 
@@ -126,6 +126,14 @@ function Intro() {
 
   return (
     <>
+      <Helmet>
+        <title>Gunnar Knox | Full Stack Developer</title>
+        <meta
+          name="description"
+          content="Hi, I'm Gunnar Knox, a full stack web developer based in Madison, WI. Actively looking for full-time opportunities. Experienced with Java, React, Spring Boot, and building interactive web applications."
+        />
+      </Helmet>
+
       <div className='intro-page-background'>
         <div className={`intro-page-wrapper`}>
           <header className='intro-page-header'>

@@ -79,7 +79,14 @@ function AboutMe() {
 
 
     return (
-        <>
+        <>  <Helmet>
+                <title>About Me | Gunnar Knox</title>
+                <meta
+                    name="description"
+                    content="Learn more about Gunnar Knox, a full stack web developer from Madison, WI. Discover my skills, experience, and the technologies I work with, including React, Java, and Spring Boot."
+                />
+            </Helmet>
+
             <div className='back-button-project' onClick={() => navigate('/')}>
                 Back
             </div>

@@ -50,6 +50,14 @@ function ProjectsPage() {
 
     return( 
         <>
+            <Helmet>
+                <title>Projects | Gunnar Knox Portfolio</title>
+                <meta
+                    name="description"
+                    content="Explore projects by Gunnar Knox, including web apps, multiplayer games, and full stack development projects built with Java, React, Spring Boot, MySQL, and more."
+                />
+            </Helmet>
+
             <div className='project-page-background'>
 
                 <div className='page-content'>
