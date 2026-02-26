@@ -160,7 +160,7 @@ function MovieHomePage() {
             if (response.ok && data === true) {
                 console.log("admin login successful");
                 setAdminLoggingIn(false);
-                navigate('/admin');
+                navigate('admin');
             }
             else {
                 console.log("Invalid login");

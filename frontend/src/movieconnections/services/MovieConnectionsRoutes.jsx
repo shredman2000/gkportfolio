@@ -7,9 +7,9 @@ import MovieAdminPage from '../src/MovieAdminPage';
 function MovieConnectionsRoutes() {
   return (
     <Routes>
-      <Route path="homepage" element={<MovieHomePage />} />
-      <Route path="adminpage" element={<MovieAdminPage />} />
-      <Route path="*" element={<Navigate to="homepage" replace />} />
+      <Route path="/homepage" element={<MovieHomePage />} />
+      <Route path="/admin" element={<MovieAdminPage />} />
+      <Route path="" element={<MovieHomePage />}/>
     </Routes>
   )
 }

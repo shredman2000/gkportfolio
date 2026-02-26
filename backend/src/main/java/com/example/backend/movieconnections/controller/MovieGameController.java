@@ -33,7 +33,7 @@ import com.example.backend.movieconnections.repository.MovieGameRepository;
 public class MovieGameController {
     
     @Autowired
-    private MovieGameRepository gameRepository;
+    private MovieGameRepository movieGameRepository;
 
     @Value("${admin.user}")
     private String adminUser;
@@ -53,7 +53,7 @@ public class MovieGameController {
 
         LocalDate goLiveDate = LocalDate.parse(dateStr);
 
-        if (gameRepository.existsByDateToGoLive(goLiveDate)) {
+        if (movieGameRepository.existsByDateToGoLive(goLiveDate)) {
             return ResponseEntity.badRequest().body("A game is already scheduled for that date");
         }
 
@@ -75,7 +75,7 @@ public class MovieGameController {
             game.addMovie(movie);
         }
 
-        gameRepository.save(game);
+        movieGameRepository.save(game);
 
         return ResponseEntity.ok("Game Created");
 
@@ -89,11 +89,11 @@ public class MovieGameController {
 
         Optional<MovieGame> gameOpt;
         if (gameIdStr == null) {
-            gameOpt = gameRepository.findTopByOrderByGameIdDesc();
+            gameOpt = movieGameRepository.findTopByOrderByGameIdDesc();
         }
         else {
             Long gameId = Long.parseLong(gameIdStr);
-            gameOpt = gameRepository.findByGameId(gameId);
+            gameOpt = movieGameRepository.findByGameId(gameId);
         }
 
         if (gameOpt.isEmpty()) { 
