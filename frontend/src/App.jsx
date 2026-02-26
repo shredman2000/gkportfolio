@@ -11,6 +11,8 @@ import BetTheBracketRoutes from './betthebracket/BetTheBracketRoutes.jsx';
 import BetTheBracketLayout from './betthebracket/BetTheBracketLayout.jsx';
 import AboutMe from './AboutMe.jsx';
 import ContactPage from './ContactPage.jsx';
+import MovieConnectionsRoutes from './movieconnections/services/MovieConnectionsRoutes.jsx';
+
 
 function App() {
   return (
@@ -28,6 +30,9 @@ function App() {
             <BetTheBracketRoutes/>
           </BetTheBracketLayout>}
         />
+        <Route path="/movieconnections/*" element={
+          <MovieConnectionsRoutes/>
+        }/>
       </Routes>
     </Router>
   )

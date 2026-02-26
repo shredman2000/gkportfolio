@@ -89,6 +89,15 @@ function ProjectsPage() {
                             features={typing_features}
                             tools={typing_tools}
                             navLink={'/typetest'}/>
+                        <ProjectComponent 
+                            image={'/MonopolyHomePage.png'} 
+                            title={'Movie Connections'} 
+                            description={'Simple website for measuring typing speed.'}
+                            features={typing_features}
+                            tools={typing_tools}
+                            navLink={'/movieconnections'}
+                        />
+
                     </div>
                     <div className='scroll-div'>
                         <img className='scroll-div-img1' src='/scrollgif.gif'/>
