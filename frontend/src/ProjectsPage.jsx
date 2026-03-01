@@ -29,6 +29,12 @@ function ProjectsPage() {
     const typing_tools = [
         "JavaScript", "RESTful API", "Java", "CSS", "SQL"
     ]
+    const connections_features = [
+        "Admin Panel",
+    ]
+    const connections_tools = [
+        "JavaScript", "Java", "RESTful API", "CSS", "SQL", "Cloudinary"
+    ]
     const navigate = useNavigate();
     const wrapperRef = useRef(null);
 
@@ -66,15 +72,15 @@ function ProjectsPage() {
                             features={btb_features}
                             tools={btb_tools}
                             navLink={'/betthebracket/login'}
-                            />
+                        />
                         <ProjectComponent 
                             image={'/MoviePage.png'} 
                             title={'Movie Rec Website'} 
                             description={'Web app containing all the movies I`ve watched and rated. Users can sort by genre and rating to find movies that appeal to them. Incorporates external APIs for movie information.'}
                             features={movie_features}
                             tools={movie_tools}
-                            navLink={'/movies'}/>
-
+                            navLink={'/movies'}
+                        />
                         <ProjectComponent 
                             image={'/MonopolyHomePage.png'} 
                             title={'Online Monopoly'} 
@@ -83,20 +89,22 @@ function ProjectsPage() {
                             tools={monopoly_tools}
                         />
                         <ProjectComponent 
-                            image={'/MonopolyHomePage.png'} 
-                            title={'Typing Test'} 
-                            description={'Simple website for measuring typing speed.'}
-                            features={typing_features}
-                            tools={typing_tools}
-                            navLink={'/typetest'}/>
-                        <ProjectComponent 
-                            image={'/MonopolyHomePage.png'} 
+                            image={'/MovieConnectionsPage.png'} 
                             title={'Movie Connections'} 
-                            description={'Simple website for measuring typing speed.'}
-                            features={typing_features}
-                            tools={typing_tools}
+                            description={'Daily game like the NYT Connections game, but for movies. Planned features include: User accounts, leaderboard based on how many guesses it took, and hints.'}
+                            features={connections_features}
+                            tools={connections_tools}
                             navLink={'/movieconnections'}
                         />
+                        <ProjectComponent 
+                            image={'/TypingPage.png'} 
+                            title={'Typing Test'} 
+                            description={'Simple website for measuring typing speed. Basically a skeleton MVP, requires full UI overhaul.'}
+                            features={typing_features}
+                            tools={typing_tools}
+                            navLink={'/typetest'}
+                        />
+
 
                     </div>
                     <div className='scroll-div'>

@@ -1,4 +1,11 @@
 
+.typing-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
 .typing-box {
   display: flex;
   flex-direction: column;
@@ -117,11 +124,7 @@
   height: 40px;
 }
 
-.title {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+.typing-title {
   font-size: clamp(3rem, 6vw, 5rem);        
   font-weight: bold;
   text-align: center;                   

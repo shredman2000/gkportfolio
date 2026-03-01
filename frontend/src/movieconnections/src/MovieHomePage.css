@@ -39,7 +39,7 @@
   grid-template-rows: 1fr 1fr 1fr 1fr;
   border: 1px black outset;
   border-radius: 20px;
-  width: 100%;
+  width: 70%;
   aspect-ratio: 1/1;
   align-items: stretch;
   justify-items: stretch;

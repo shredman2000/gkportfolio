@@ -136,9 +136,9 @@ function TypeTestPage() {
 
 
     return (
-        <div>
+        <div className='typing-page-container'>
 
-            <p className='title'>Typing Test</p>
+            <p className='typing-title'>Typing Test</p>
             <button className="back-button" onClick={() => navigate('/')}>
                 <img src="/back-button.png" draggable="false" ></img>
             </button>
