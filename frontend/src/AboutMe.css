@@ -49,11 +49,9 @@ html, body {
   z-index: 1000;
   
 }
-.about-me-tech-stack {
+.about-me-header-text {
   font-size: 3vh;
-}
-.about-me-education {
-  font-size: 3vh;
+  cursor: pointer;
 }
 .about-me-page-container {
   padding-top: 100px;

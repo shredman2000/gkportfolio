@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -44,6 +44,7 @@ const gallery_images = [
     "/GalleryPhoto9.png",
     "/GalleryPhoto10.png",
     "/GalleryPhoto11.png",
+    "/GalleryPhoto12.png",
 
 ]
 
@@ -52,7 +53,9 @@ function AboutMe() {
     const navigate = useNavigate();
     const [showStack, setShowStack] = useState(tech_stack);
     const [currentImage, setCurrentImage] = useState(0);
-
+    const softSkillsRef = useRef(null);
+    const educationRef = useRef(null);
+    const techStackRef = useRef(null);
     // for hiding scrollbar
     useEffect(() => {
         document.documentElement.classList.add('hide-scrollbar'); // html element
@@ -76,6 +79,17 @@ function AboutMe() {
         return () => clearInterval(interval);
     }, []);
 
+    function scrollPageFromHeader(ref) {
+        if (ref.current) {
+            const top = ref.current.getBoundingClientRect().top + window.scrollY;
+            const center = top - window.innerHeight / 2 + ref.current.offsetHeight / 2;
+                window.scrollTo({
+                top: center,
+                behavior: 'smooth'
+            });
+        }
+    }
+
 
 
     return (
@@ -90,8 +104,9 @@ function AboutMe() {
                 </div>
             </a>    
             <div className='about-me-header'>
-                <div className='about-me-education'>Education</div>
-                <div className='about-me-tech-stack'>Tech Stack</div>
+                <div className='about-me-header-text' onClick={() => scrollPageFromHeader(educationRef)}>Education</div>
+                <div className='about-me-header-text' onClick={() => scrollPageFromHeader(techStackRef)}>Tech Stack</div>
+                <div className='about-me-header-text' onClick={() => scrollPageFromHeader(softSkillsRef)}>Soft Skills</div>
             </div>
             <div className='about-me-page-wrapper'>
                 
@@ -107,7 +122,7 @@ function AboutMe() {
                             <img className='gallery-image' src={gallery_images[currentImage]}></img>
                         </div>
                     </div>
-                    <div className='education-container'>
+                    <div className='education-container' ref={educationRef}>
                         <div className='education-block'>
                             <div className='education-block-text-flex'>
                                 <div className='degree-text'>B.S Computer Sciences</div>
@@ -116,7 +131,7 @@ function AboutMe() {
                             <img className='uw-logo' src='Uw-logo.png'></img>
                         </div>
                     </div>
-                    <div className='tech-stack-container'>
+                    <div className='tech-stack-container' ref={techStackRef}>
                         <div className='tech-stack-text'>Tech Stack</div>
                         <div className='tech-stack-nav-bar'>
                             <div className={`tech-stack-nav-bar-option ${showStack === tech_stack ? "tech-stack-selected" : ""}`} onClick={() => setShowStack(tech_stack)}>Languages</div>
@@ -136,7 +151,7 @@ function AboutMe() {
                             ))}
                         </div>
                     </div>
-                    <div className='soft-skills-container'>
+                    <div className='soft-skills-container' ref={softSkillsRef}>
                         <div className='soft-skills-title'>Soft Skills</div>
                         <div className='soft-skills-widget'>
                             <div className='soft-skills-widget-title'>Scrum/Agile Workflow</div>
