@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import ChatBot from './components/ChatBot';
 import './Intro.css'
 import IntroModal from './components/IntroModal';
 
@@ -95,6 +95,7 @@ function Intro() {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const navigate = useNavigate();
+  const [chatbotopen, setChatBotOpen] = useState(false);
   const [switchingPages, setSwitchingPages] = useState(false);
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -164,9 +165,13 @@ function Intro() {
             <img src='/githublogo.png' onClick={() => navigate("https://github.com/shredman2000")}></img>
           </div>
         </div>
+        
       </div>
       <IntroModal {...modalState} onClose={() => setModalState({isOpen: false, type: null, origin: null })}/>
-          
+      <ChatBot 
+        chatbotopen={chatbotopen} 
+        openChat={() => setChatBotOpen(true)}
+      />    
     </>
 )}
 
