@@ -29,11 +29,11 @@
     background-color: grey;
     margin: 10px;
 
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 .chat-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
+    display: none; 
 }
 .input-container {
     display: flex;

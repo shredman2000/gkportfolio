@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import './ChatBot.css';
 
 export default function ChatBot(props) {
+    const chatContainerRef = useRef(null);
+    const [input, setInput] = useState('');
     const [chathistory, setChatHistory] = useState([
         {sender: "bot", message: "Ask me a question!"},
         {sender: "user", message: "What is your favorite color and where did you go to school?"},
@@ -10,6 +12,29 @@ export default function ChatBot(props) {
         {sender: "bot", message: "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"}
     ]);
 
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [chathistory])
+
+
+    // add message to chat history, and submit to agent backend, then retrieve the agents response and add that to chat history.
+    function handleSubmit() {
+        setChatHistory(prev => [
+            ...prev,
+            {sender: 'user', message: input }
+        ]);
+
+        // fetch from backend
+
+
+
+
+        // cleanup
+        setInput('');
+
+    }
 
     return (
         <div className="chat-bot-container">
@@ -21,7 +46,7 @@ export default function ChatBot(props) {
 
             {props.chatbotopen && (
                 <div className='chat-bot-open'>
-                    <div className='chat-container'>
+                    <div className='chat-container' ref={chatContainerRef}>
                         {chathistory.map((item, index) => (
                             <div key={index} className={`${item.sender}`}>
                                 {item.message}
@@ -30,7 +55,18 @@ export default function ChatBot(props) {
                     
                     </div>
                     <div className='input-container'> 
-
+                        <input 
+                            type='text' 
+                            className='chat-input' 
+                            value={input} 
+                            placeholder='Ask away!' 
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSubmit();
+                                }
+                            }}
+                        ></input>
                     </div>
                 </div>
             )}       
